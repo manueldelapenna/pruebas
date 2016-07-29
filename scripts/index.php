@@ -2,7 +2,7 @@
 
 
 
-require("funciones.php");
+require("../functions/funciones.php");
 $personas = cargarDatos();
 foreach($personas as $aux){
   

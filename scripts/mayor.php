@@ -1,5 +1,5 @@
 <?php
-require("funciones.php");
+require("../functions/funciones.php");
 $personas = cargarDatos();
 
 $mayor = MayorDeEdad($personas);
