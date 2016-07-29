@@ -4,7 +4,7 @@ $personas = cargarDatos();
 
 $mayor = MayorDeEdad($personas);
 
-$mensaje = $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayor['edad'] . "años y es la persona mas grande del array";
+$mensaje = $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayor['edad'] . " años y es la persona mas grande del array";
 ?>
 
 <!DOCTYPE html>
