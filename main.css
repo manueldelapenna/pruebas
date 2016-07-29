@@ -1,0 +1,13 @@
+body{
+    background: #4933FF  ;
+    font-family: sans-serif;
+}
+#header{
+    background-color: #3384FF ;
+    width: 100%;
+    
+}
+
+button:hover{
+    background-color: #A3A4A4;
+}
