@@ -11,30 +11,31 @@ $mensaje = $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayor['eda
 
 <html>
     <head>
-
         <?php
-        $path = $_SERVER['DOCUMENT_ROOT'];
-        
-        $path .= '/pruebas/_partials/head.php';
+        $rootpath = $_SERVER['DOCUMENT_ROOT'];
+
+        $path = $rootpath . '/pruebas/_partials/head.php';
         include_once($path);
         ?>
     </head>
     <body>
-        <div>
-            <div id="header">
-                <h1 style="text-align: center">Tarea</h1>
-            </div>
-            <div class="btn-group" role="group" aria-label="..." style="margin-left: 350px">
-                <button type="button" class="btn btn-default" onClick="location.href = '../scripts/index.php'">Mostrar Datos</button>
-                <button type="button" class="btn btn-default" onclick="location.href = '../scripts/mayor.php'" >Mayor de Edad</button>
-                <button type="button" class="btn btn-default">Menor de Edad</button>
-            </div>
+
+        <?php
+            $path = $rootpath . '/pruebas/_partials/header.php';
+            include_once($path);
+
+            $path = $rootpath . '/pruebas/_partials/menu.php';
+            include_once($path);
+        ?>
+
+        <div class="jumbotron"> 
+            <?php echo $mensaje; ?>    
 
         </div>
-        <div> 
-<?php echo $mensaje; ?>    
-
-        </div>
-
+        
+        <?php
+            $path = $rootpath . '/pruebas/_partials/footer.php';
+            include_once($path);
+        ?>
     </body>
 </html>

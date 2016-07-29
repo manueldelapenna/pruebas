@@ -2,7 +2,7 @@ body{
     
     font-family: sans-serif;
 }
-#header{
+#header, footer{
     background-color: #3384FF ;
     width: 100%;
     
@@ -11,3 +11,4 @@ body{
 button:hover{
     background-color: #A3A4A4;
 }
+
