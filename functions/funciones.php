@@ -120,11 +120,13 @@ function MayorDeEdad($arreglo){
     return $mayor;
 }
 
-function MenorDeEdad(){
-    $menor = 0;
-    for($i=o;$i = count($personas); $i++){
-        if($menor > $personas[$i]['edad']){
-            $menor = $personas[$i]['edad'];
+function MenorDeEdad($arreglo){
+    $menor = [];
+    $menor['edad']= 100;
+    for($i=0;$i < count($arreglo); $i++){
+        if($menor['edad'] > $arreglo[$i]['edad']){
+            $menor = $arreglo[$i];
+           
         }
     }
     
