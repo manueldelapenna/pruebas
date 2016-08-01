@@ -1,9 +1,9 @@
+<?php session_start();?>
 <!DOCTYPE html>
 
 <html>
     <head>
         <?php
-        session_start();
         $rootpath = $_SERVER['DOCUMENT_ROOT'];
 
         $path = $rootpath . '/pruebas/_partials/head.php';
@@ -19,9 +19,27 @@
         $path = $rootpath . '/pruebas/_partials/menu.php';
         include_once($path);
 
+        if (isset($_SESSION['usuario'])) {
+            ?>
 
 
+            <p>Bienvenido <?php echo $_SESSION['usuario']; ?></p>
 
+        <?php } else { ?>
+            <br>
+            <div class="form-group container">
+                <?php
+                $path = $rootpath . '/pruebas/_partials/login.php';
+                include_once($path);
+                if (isset($_GET['error'])) {
+                    echo $_GET['error'];
+                }
+            }
+            ?> 
+             
+            </div>
+        
+        <?php
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);
         ?>

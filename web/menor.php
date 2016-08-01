@@ -1,7 +1,5 @@
 <?php session_start(); 
-if(!isset($_SESSION['usuario'])){
-    header("Location : login.php");
-}
+include("../scripts/acceso.php");
 require("../functions/funciones.php");
 $personas = cargarDatos();
 
