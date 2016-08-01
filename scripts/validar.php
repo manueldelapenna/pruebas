@@ -10,7 +10,12 @@ if($usuario == "" || $contrasena == ""){
     
 }
 
-if($usuario == "admin" && $contrasena == "admin"){
+
+
+
+
+if(($usuario == "user" && $contrasena == "user")||
+   ($usuario == "admin" && $contrasena == "admin")){
     session_start();
     $_SESSION['usuario'] = $usuario;
     header("Location: ../web/index.php");

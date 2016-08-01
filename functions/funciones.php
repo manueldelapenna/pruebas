@@ -15,9 +15,14 @@ function cargarDatos() {
     $persona["nombre"] = "Tomas";
     $persona["apellido"] = "Echague";
     $persona["edad"] = 21;
-    
-    
+        
     $personas[] = $persona;
+    
+    $personas[] = [
+        "nombre" => "Emiliano",
+        "apellido" => "Tierno",
+        "edad" => 32,
+    ];
 
     $persona["nombre"] = "Juan";
     $persona["apellido"] = "Perez";
@@ -151,6 +156,57 @@ function AñoDeNacimiento($edad){
     
     
     return $nacimiento;
+}
+
+
+
+function agregarUsuarios($usuario, $contrasena){
+    $user= array();
+    $users = obtenerUsuarios();            
+    
+    $user['nombre'] = $usuario;
+    $user['contrasena'] = $contrasena;
+    
+    $users[]= $user;
+    
+    return $users;
+    
+}
+
+function obtenerUsuarios(){
+    $users = array();
+    $user = [];
+    
+    $user['nombre']= "admin";
+    $user['contraseña'] = "admin";
+    
+    $users[]= $user;
+    
+    $user['nombre']= "user";
+    $user['contraseña'] = "user";
+    
+    $users[]= $user;
+    
+    return $users;
+}
+
+
+function verificarUsuario($usuario, $contrasena){
+
+        foreach(obtenerUsuarios() as $u){
+        
+        if($u['nombre'] == $usuario  && $u['contrasena'] == $contrasena){
+            return TRUE;
+        }
+        
+    }
+    
+    return FALSE;
+
+    
+    
+    
+    
 }
 
 ?>

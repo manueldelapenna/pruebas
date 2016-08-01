@@ -1,8 +1,9 @@
 <?php 
-include("../scripts/acceso.php");
-
+require("../scripts/acceso.php");
+$acceso = tieneAcceso("admin");
 require("../functions/funciones.php");
-$personas = cargarDatos();
+$aux = cargarDatos();
+        
 ?>
 
 <!DOCTYPE html>
