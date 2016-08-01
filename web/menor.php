@@ -1,4 +1,4 @@
-<?php session_start(); 
+<?php  
 include("../scripts/acceso.php");
 require("../functions/funciones.php");
 $personas = cargarDatos();

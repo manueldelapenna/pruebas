@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include("../scripts/acceso.php");
 require("../functions/funciones.php");
 $personas = cargarDatos();
