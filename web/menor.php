@@ -1,7 +1,8 @@
 <?php  
-include("../scripts/acceso.php");
-require("../functions/funciones.php");
+require_once("../scripts/acceso.php");
+require_once("../functions/funciones.php");
 $personas = cargarDatos();
+$usuarioAcceso = obtenerUsuarios();
 
 $menor = MenorDeEdad($personas);
 
@@ -31,7 +32,7 @@ $mensaje ="  " . $menor['nombre'] . " " . $menor['apellido'] . " tiene " . $meno
          <br/>
          <br/>
          
-        <div class="jumbotron"> 
+        <div class="jumbotron centered"> 
             <?php echo $mensaje; ?>    
 
         </div>

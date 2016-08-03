@@ -1,10 +1,11 @@
 <?php
 
-include("../scripts/acceso.php");
-require("../functions/funciones.php");
+require_once("../scripts/acceso.php");
+require_once("../functions/funciones.php");
 $personas = cargarDatos();
-
 $mayor = MayorDeEdad($personas);
+$acceso = tieneAcceso("admin");
+//$acceso = tieneAcceso("user");
 
 $mensaje ="  " . $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayor['edad'] . " años y es la persona mas grande del array";
 ?>
@@ -31,7 +32,7 @@ $mensaje ="  " . $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayo
         ?>
         <br/>
         <br/>
-        <div class="jumbotron"> 
+        <div class="jumbotron centered"> 
 <?php echo $mensaje; ?>    
 
         </div>

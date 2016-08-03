@@ -178,14 +178,26 @@ function obtenerUsuarios(){
     $user = [];
     
     $user['nombre']= "admin";
-    $user['contraseña'] = "admin";
+    $user['contrasena'] = "admin";
     
     $users[]= $user;
     
     $user['nombre']= "user";
-    $user['contraseña'] = "user";
+    $user['contrasena'] = "user";
     
     $users[]= $user;
+    
+    $user['nombre']= "pepito";
+    $user['contrasena'] = "pepito";
+    
+    $users[]= $user;
+    
+    $user['nombre']= "marcelo";
+    $user['contrasena'] = "tinelli";
+    
+    $users[]= $user;
+    
+    
     
     return $users;
 }

@@ -21,10 +21,10 @@
 
         if (isset($_SESSION['usuario'])) {
             ?>
+            <div class="jumbotron">
 
-
-            <p>Bienvenido <?php echo $_SESSION['usuario']; ?></p>
-
+            <p class="centered">Bienvenido <?php echo $_SESSION['usuario']; ?></p>
+            </div>
         <?php } else { ?>
             <br>
             <div class="form-group container">

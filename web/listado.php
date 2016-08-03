@@ -1,8 +1,8 @@
 <?php 
 require("../scripts/acceso.php");
 $acceso = tieneAcceso("admin");
-require("../functions/funciones.php");
-$aux = cargarDatos();
+require_once("../functions/funciones.php");
+$personas = cargarDatos();
         
 ?>
 
