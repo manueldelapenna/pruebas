@@ -4,8 +4,9 @@ require_once("../scripts/acceso.php");
 require_once("../functions/funciones.php");
 $personas = cargarDatos();
 $mayor = MayorDeEdad($personas);
-$acceso = tieneAcceso("admin");
-//$acceso = tieneAcceso("user");
+$accesos = array("admin", "user");
+tieneAcceso($accesos);
+
 
 $mensaje ="  " . $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayor['edad'] . " años y es la persona mas grande del array";
 ?>

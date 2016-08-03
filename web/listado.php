@@ -1,6 +1,8 @@
 <?php 
 require("../scripts/acceso.php");
-$acceso = tieneAcceso("admin");
+$accesos = array("admin");
+tieneAcceso($accesos);
+
 require_once("../functions/funciones.php");
 $personas = cargarDatos();
         

@@ -2,7 +2,9 @@
 require_once("../scripts/acceso.php");
 require_once("../functions/funciones.php");
 $personas = cargarDatos();
-$usuarioAcceso = obtenerUsuarios();
+$accesos = array("admin", "user");
+tieneAcceso($accesos);
+
 
 $menor = MenorDeEdad($personas);
 
