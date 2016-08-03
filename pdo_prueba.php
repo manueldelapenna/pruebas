@@ -2,10 +2,10 @@
 /* Conectar a una base de datos de MySQL invocando al controlador */
 $dsn = 'mysql:dbname=prueba;host=127.0.0.1';
 $usuario = 'root';
-$contraseña = '';
+$contrasena = '';
 
 try {
-    $pdo = new PDO($dsn, $usuario, $contraseña);
+    $pdo = new PDO($dsn, $usuario, $contrasena);
 	
 	$nombre = 'admin';
 	
@@ -16,7 +16,7 @@ try {
 	
 	var_dump($result);
 } catch (PDOException $e) {
-    echo 'Falló la conexión: ' . $e->getMessage();
+    echo 'Fallï¿½ la conexiï¿½n: ' . $e->getMessage();
 }
 
 ?>
