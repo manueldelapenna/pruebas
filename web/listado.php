@@ -51,8 +51,8 @@ require_once("../functions/funciones.php");
                         <tr>
                             <td>  <?php echo $usuario['nombre']; ?> </td>
                             <td> <?php echo $usuario['apellido']; ?> </td>
-                            <td> <?php echo $usuario['edad']; ?></td>
-                            <td> <?php echo AñoDeNacimiento($usuario['edad']); ?></td>
+                            <td> <?php echo edad($usuario['fecha_nacimiento']) ?></td>
+                            <td> <?php echo formatearFechaNacimiento($usuario['fecha_nacimiento']); ?></td>
                             <td> <?php echo $usuario['dni']; ?></td>
                         
 

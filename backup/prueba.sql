@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-08-2016 a las 14:43:25
+-- Tiempo de generación: 05-08-2016 a las 16:12:09
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -31,6 +31,14 @@ CREATE TABLE `grupos` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `grupos`
+--
+
+INSERT INTO `grupos` (`id`, `name`) VALUES
+(1, 'admin'),
+(2, 'user');
+
 -- --------------------------------------------------------
 
 --
@@ -54,6 +62,18 @@ CREATE TABLE `permisos` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`id`, `name`) VALUES
+(4, 'personas_agregar'),
+(5, 'personas_editar'),
+(6, 'personas_eliminar'),
+(1, 'personas_listar'),
+(2, 'personas_mayor'),
+(3, 'personas_menor');
+
 -- --------------------------------------------------------
 
 --
@@ -64,31 +84,31 @@ CREATE TABLE `personas` (
   `dni` int(8) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
-  `edad` int(3) NOT NULL
+  `fecha_nacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `personas`
 --
 
-INSERT INTO `personas` (`dni`, `nombre`, `apellido`, `edad`) VALUES
-(0, 'nicolas', 'grasso', 19),
-(3846092, 'facundo', 'ares', 21),
-(19874290, 'ramiro', 'echague', 51),
-(21114708, 'monica gabriela', 'percow', 37),
-(25847389, 'marcela viviana ', 'percow', 40),
-(25984024, 'santiago', 'coraggio', 27),
-(27987304, 'lucas', 'gomez', 27),
-(28874924, 'roberto', 'sarmiento', 49),
-(34765384, 'manuel', 'delapenna', 29),
-(37846528, 'luciano', 'bianchi', 21),
-(38706974, 'tomas', 'echague', 21),
-(38726395, 'martin', 'lucena', 21),
-(38729994, 'ignacion', 'guglielmino', 22),
-(38765209, 'matias', 'grasso', 21),
-(39847204, 'juan pablo', 'alvarez', 20),
-(43897298, 'martina', 'arguiano', 15),
-(47874278, 'bautista', 'echague', 11);
+INSERT INTO `personas` (`dni`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
+(0, 'nicolas', 'grasso', '1986-02-07'),
+(3846092, 'facundo', 'ares', '1986-02-07'),
+(19874290, 'ramiro', 'echague', '1986-02-07'),
+(21114708, 'monica gabriela', 'percow', '1986-02-07'),
+(25847389, 'marcela viviana ', 'percow', '1986-02-07'),
+(25984024, 'santiago', 'coraggio', '1986-02-07'),
+(27987304, 'lucas', 'gomez', '1986-02-07'),
+(28874924, 'roberto', 'sarmiento', '1988-08-05'),
+(34765384, 'manuel', 'delapenna', '1986-02-07'),
+(37846528, 'luciano', 'bianchi', '1986-02-07'),
+(38706974, 'tomas', 'echague', '1995-02-05'),
+(38726395, 'martin', 'lucena', '1986-02-07'),
+(38729994, 'ignacion', 'guglielmino', '1986-02-07'),
+(38765209, 'matias', 'grasso', '1986-02-07'),
+(39847204, 'juan pablo', 'alvarez', '1986-02-07'),
+(43897298, 'martina', 'arguiano', '1986-02-07'),
+(47874278, 'bautista', 'echague', '1986-02-07');
 
 -- --------------------------------------------------------
 
@@ -99,18 +119,20 @@ INSERT INTO `personas` (`dni`, `nombre`, `apellido`, `edad`) VALUES
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `fecha_alta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ultimo_logueo` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `username`, `password`) VALUES
-(1, 'admin', 'admin'),
-(2, 'user', 'user'),
-(3, 'pepito', 'pepito'),
-(4, 'marcelo', 'tinelli');
+INSERT INTO `usuarios` (`id`, `username`, `password`, `fecha_alta`, `ultimo_logueo`) VALUES
+(1, 'admin', 'admin', '2016-08-05 09:52:53', '2016-08-05 09:52:53'),
+(2, 'user', 'user', '2016-08-05 09:52:53', '2016-08-05 09:52:53'),
+(3, 'pepito', 'pepito', '2016-08-05 09:52:53', '2016-08-05 09:52:53'),
+(4, 'marcelo', 'tinelli', '2016-08-05 09:52:53', '2016-08-05 09:52:53');
 
 -- --------------------------------------------------------
 
@@ -199,7 +221,7 @@ ALTER TABLE `usuarios_permisos`
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `grupos_permisos`
 --
@@ -209,7 +231,7 @@ ALTER TABLE `grupos_permisos`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --

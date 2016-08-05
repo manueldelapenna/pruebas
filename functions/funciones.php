@@ -48,13 +48,15 @@ function Promedio() {
     return $promedio;
 }
 
-function AñoDeNacimiento($edad) {
+function edad($fechaNacimiento) {
 
-    $nacimiento = date("Y") - $edad;
-
-
-    return $nacimiento;
-}
+$datetime1 = new DateTime($fechaNacimiento);
+$datetime2 = new DateTime("now");
+$interval = $datetime1->diff($datetime2);
+return $interval->format('%Y');
+    
+    
+} 
 
 function agregarUsuarios($dni,$nombre,$apellido,$edad) {
    $pdo = conectar();
@@ -88,6 +90,14 @@ function verificarUsuario($usuario, $contrasena) {
     }
 
     return FALSE;
+}
+
+function formatearFechaNacimiento($fechaNacimiento) {
+
+    $objeto = new DateTime($fechaNacimiento);
+    
+     $fechaNacimiento = $objeto->format("d/m/Y");
+    return $fechaNacimiento;
 }
 
 ?>
