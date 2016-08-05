@@ -4,7 +4,7 @@ $accesos = array("admin");
 tieneAcceso($accesos);
 
 require_once("../functions/funciones.php");
-$personas = cargarDatos();
+
         
 ?>
 
@@ -17,6 +17,7 @@ $personas = cargarDatos();
 
         $path = $rootpath . '/pruebas/_partials/head.php';
         include_once($path);
+        
         ?>
     </head>
     <body>
@@ -27,6 +28,8 @@ $personas = cargarDatos();
 
         $path = $rootpath . '/pruebas/_partials/menu.php';
         include_once($path);
+        $path = $rootpath . '/pruebas/functions/funciones.php';
+        include_once($path);
         ?>
 
         <div> 
@@ -36,22 +39,25 @@ $personas = cargarDatos();
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Edad</th>
-                        <th>Año Nacimiento</th>
+                       <th>Año Nacimiento</th>
+                       <th>Dni</th>
                     </tr>
                 </thead>    
                 <tbody> 
 
                     <?php
-                    foreach ($personas as $aux) {
+                      foreach(listarPersonas() as $usuario){
                         ?>
                         <tr>
-                            <td>  <?php echo $aux['nombre']; ?> </td>
-                            <td> <?php echo $aux['apellido']; ?> </td>
-                            <td> <?php echo $aux['edad']; ?></td>
-                            <td> <?php echo AñoDeNacimiento($aux['edad']); ?></td>
-                        <?php } ?>
+                            <td>  <?php echo $usuario['nombre']; ?> </td>
+                            <td> <?php echo $usuario['apellido']; ?> </td>
+                            <td> <?php echo $usuario['edad']; ?></td>
+                            <td> <?php echo AñoDeNacimiento($usuario['edad']); ?></td>
+                            <td> <?php echo $usuario['dni']; ?></td>
+                        
 
                     </tr>  
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

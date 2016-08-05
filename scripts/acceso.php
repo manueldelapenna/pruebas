@@ -2,8 +2,6 @@
 
 session_start();
 require("../functions/funciones.php");
-$usuarios = obtenerUsuarios();
-
 function tieneAcceso($usernameArray) {
 
     if (!isset($_SESSION['usuario'])) {
@@ -14,8 +12,11 @@ function tieneAcceso($usernameArray) {
         $tieneAcceso = in_array($_SESSION['usuario'], $usernameArray);
         
          if (!$tieneAcceso) {
-            die("El usuario no tiene acceso para acceder al contenido");
+            $error = "El usuario no tiene acceso";
+            header("Location: ../web/error.php/error=$error");
+            return FALSE;
         }
+         return TRUE;
     }
 }
 

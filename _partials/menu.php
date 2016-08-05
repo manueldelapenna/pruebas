@@ -1,10 +1,11 @@
 <?php if (isset($_SESSION['usuario'])) { ?>
     <div class="container">
-        <div class="btn-group" role="group" aria-label="..." data-toggle="collapse" style="margin-left: 220px;">
+        <div class="btn-group center-block" role="group" aria-label="..." data-toggle="collapse" style="margin-left: 220px;">
 
             <button type="button" class="btn btn-default" data-toggle="collapse" onClick="location.href = '../web/index.php'">Inicio</button>
             <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
                 <button type="button" class="btn btn-default" data-toggle="collapse" onClick="location.href = '../web/listado.php'">Mostrar Datos</button>
+                <button type="button" class="btn btn-default" data-toggle="collapse" onClick="location.href = '../web/formAgregarPersona.php'">Agregar Persona</button>
             <?php } ?> 
            
              <?php if (in_array($_SESSION['usuario'], ['admin', 'user'])) { ?>

@@ -1,14 +1,4 @@
-<?php
-require_once("../scripts/acceso.php");
-require_once("../functions/funciones.php");
-$mayor = MayorDeEdad(listarPersonas());
-$accesos = array("admin", "user");
-tieneAcceso($accesos);
-
-
-$mensaje ="  " . $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayor['edad'] . " años y es la persona mas grande de la base de datos";
-?>
-
+<?php session_start();?>
 <!DOCTYPE html>
 
 <html>
@@ -28,17 +18,19 @@ $mensaje ="  " . $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayo
 
         $path = $rootpath . '/pruebas/_partials/menu.php';
         include_once($path);
-        ?>
-        <br/>
-        <br/>
-        <div class="jumbotron centered"> 
-<?php echo $mensaje; ?>    
 
-        </div>
+       
+            ?>
+            <div class="jumbotron">
 
+            <p class="centered"><?php echo $_GET['error']; ?></p>
+            </div>
+        
         <?php
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);
         ?>
+
+
     </body>
 </html>
