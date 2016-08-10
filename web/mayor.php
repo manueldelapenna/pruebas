@@ -1,12 +1,12 @@
 <?php
 require_once("../scripts/acceso.php");
 require_once("../functions/funciones.php");
-$mayor = MayorDeEdad(listarPersonas());
+$mayorPersona = MayorDeEdad(listarPersonas());
 $accesos = array("admin", "user");
 tieneAcceso($accesos);
 
 
-$mensaje ="  " . $mayor['nombre'] . " " . $mayor['apellido'] . " tiene " . $mayor['edad'] . " años y es la persona mas grande de la base de datos";
+$mensaje ="  " . $mayorPersona['nombre'] . " " . $mayorPersona['apellido'] . " tiene " . $mayorPersona['anios'] . " años y es la persona mas grande de la base de datos";
 ?>
 
 <!DOCTYPE html>

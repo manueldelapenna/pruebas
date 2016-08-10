@@ -6,7 +6,7 @@ $accesos = array("admin", "user");
 tieneAcceso($accesos);
 $menor = MenorDeEdad(listarPersonas());
 
-$mensaje ="  " . $menor['nombre'] . " " . $menor['apellido'] . " tiene " . $menor['edad'] . " años y es la persona mas chica de la base de datos";
+$mensaje ="  " . $menor['nombre'] . " " . $menor['apellido'] . " tiene " . $menor['anios'] . " años y es la persona mas chica de la base de datos";
 ?>
 
 <!DOCTYPE html>

@@ -3,7 +3,7 @@
 include '../config/database.php';
 
 function listarPersonas() {
-    
+
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT * FROM personas");
     $statement->execute();
@@ -15,25 +15,33 @@ function listarPersonas() {
 function MayorDeEdad($arreglo) {
 
     $mayor = [];
-    $mayor['edad'] = -1;
-    for ($i = 0; $i < count($arreglo); $i++) {
-        if ($mayor['edad'] < $arreglo[$i]['edad']) {
-            $mayor = $arreglo[$i];
+    $mayor['anios'] = -1;
+
+    foreach ($arreglo as $edadPersona) {
+        $funEdad = edad($edadPersona['fecha_nacimiento']);
+        if ($mayor['anios'] < $funEdad) {
+
+            $mayor = $edadPersona;
+            $mayor['anios'] = $funEdad;
         }
     }
-
+    
     return $mayor;
 }
 
 function MenorDeEdad($arreglo) {
     $menor = [];
-    $menor['edad'] = 100;
-    for ($i = 0; $i < count($arreglo); $i++) {
-        if ($menor['edad'] > $arreglo[$i]['edad']) {
-            $menor = $arreglo[$i];
+    $menor['anios'] = 100;
+
+    foreach ($arreglo as $edadPersona) {
+        $funEdad = edad($edadPersona['fecha_nacimiento']);
+        if ($menor['anios'] > $funEdad) {
+
+            $menor = $edadPersona;
+            $menor['anios'] = $funEdad;
         }
     }
-
+    
     return $menor;
 }
 
@@ -50,29 +58,26 @@ function Promedio() {
 
 function edad($fechaNacimiento) {
 
-$datetime1 = new DateTime($fechaNacimiento);
-$datetime2 = new DateTime("now");
-$interval = $datetime1->diff($datetime2);
-return $interval->format('%Y');
-    
-    
-} 
+    $datetime1 = new DateTime($fechaNacimiento);
+    $datetime2 = new DateTime("now");
+    $interval = $datetime1->diff($datetime2);
+    return $interval->format('%Y');
+}
 
-function agregarUsuarios($dni,$nombre,$apellido,$edad) {
-   $pdo = conectar();
-  
+function agregarUsuarios($dni, $nombre, $apellido, $edad) {
+    $pdo = conectar();
+
     $statement = $pdo->prepare("INSERT INTO usuarios(dni,nombre,apellido,edad) VALUE (:dni,:nombre, :apellido, :edad)");
-    $statement->bindParam(':dni',$dni);
-    $statement->bindParam(':nombre',$nombre);
-    $statement->bindParam(':apellido',$apellido);
-    $statement->bindParam(':edad',$edad);
+    $statement->bindParam(':dni', $dni);
+    $statement->bindParam(':nombre', $nombre);
+    $statement->bindParam(':apellido', $apellido);
+    $statement->bindParam(':edad', $edad);
     $statement->execute();
-    
 }
 
 function obtenerUsuarios() {
-   $pdo = conectar();
-  
+    $pdo = conectar();
+
     $statement = $pdo->prepare("SELECT * FROM usuarios");
     $statement->execute();
     $result = $statement->fetchAll();
@@ -95,9 +100,15 @@ function verificarUsuario($usuario, $contrasena) {
 function formatearFechaNacimiento($fechaNacimiento) {
 
     $objeto = new DateTime($fechaNacimiento);
-    
-     $fechaNacimiento = $objeto->format("d/m/Y");
+
+    $fechaNacimiento = $objeto->format("d/m/Y");
     return $fechaNacimiento;
+}
+
+function validarFecha($date, $format = 'd-m-Y')
+{
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
 }
 
 ?>
