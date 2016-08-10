@@ -105,10 +105,76 @@ function formatearFechaNacimiento($fechaNacimiento) {
     return $fechaNacimiento;
 }
 
-function validarFecha($date, $format = 'd-m-Y')
+function validarFecha($date)
 {
-    $d = DateTime::createFromFormat($format, $date);
-    return $d && $d->format($format) == $date;
+   
+ $arregloFecha = explode('/', $date);
+
+ if(count($arregloFecha) == 3){
+     
+     if(strlen($arregloFecha[0]) == 2 && 
+        strlen($arregloFecha[1]) == 2 && 
+        strlen($arregloFecha[2]) == 4){
+         
+         return TRUE;
+     }
+ }
+ 
+ return FALSE;  
+   
+}
+
+
+
+function validarPersona($dni,$nombre,$apellido,$nacimiento){
+    
+$errores = array();    
+//validacion dni
+if (is_numeric($dni) != 1 || strlen($dni) > 8) {
+   
+    $errores[] = "Dni incorrecto";
+    
+}
+//fin validacion dni
+//
+//validacion nombre y apellido
+if(!soloLetras($nombre) || !soloLetras($apellido)) {
+
+    $errores[] = "Solo se permiten letras en el nombre y apellido";
+   
+}
+
+if(strlen($nombre) == 0 || strlen($apellido) == 0){
+    $errores[] = "Nombre y apellido son campos obligatorios";
+}
+
+//fin validacion nombre y apellido
+//
+//validacion del año de nacimiento
+if (validarFecha($nacimiento)) {
+    
+    list($dia,$mes,$anio) = explode('/', $nacimiento);
+    $nacimiento = $anio."-".$mes."-".$dia;
+    
+     $edad = edad($nacimiento);
+    if ($edad < 18) {    
+        $errores[]= "La persona debe ser mayor a 18 años";
+        
+        
+    }
+} else {
+    
+    $errores[] = "Fecha de nacimiento incorrecta ej: dd/mm/aaaa";
+   
+}
+//fin validacion año de nacimiento
+return $errores;
+}
+
+
+function soloLetras($in){
+  if(preg_match('/^([a-z ñáéíóú]{2,255})$/i',$in)) return TRUE;
+  else return FALSE;
 }
 
 ?>
