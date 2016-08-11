@@ -132,20 +132,27 @@ $errores = array();
 //validacion dni
 if (is_numeric($dni) != 1 || strlen($dni) > 8) {
    
-    $errores[] = "Dni incorrecto";
+    $errores['dni'] = "Dni incorrecto";
     
 }
 //fin validacion dni
 //
 //validacion nombre y apellido
-if(!soloLetras($nombre) || !soloLetras($apellido)) {
 
-    $errores[] = "Solo se permiten letras en el nombre y apellido";
-   
+if(strlen($nombre) == 0){
+    $errores['nombre'] = "Nombre es un campo obligatorio";
+}else{
+    if(!soloLetras($nombre)){
+        $errores['nombre'] = "Solo se permiten letras en el campo nombre";
+    }
 }
 
-if(strlen($nombre) == 0 || strlen($apellido) == 0){
-    $errores[] = "Nombre y apellido son campos obligatorios";
+if(strlen($apellido) == 0){
+    $errores['apellido'] = "Apellido es un campo obligatorio";
+}else{
+    if(!soloLetras($apellido)){
+        $errores['apellido'] = "Solo se permiten letras en el campo apellido";
+    }
 }
 
 //fin validacion nombre y apellido
@@ -155,16 +162,13 @@ if (validarFecha($nacimiento)) {
     
     list($dia,$mes,$anio) = explode('/', $nacimiento);
     $nacimiento = $anio."-".$mes."-".$dia;
-    
-     $edad = edad($nacimiento);
+    $edad = edad($nacimiento);
     if ($edad < 18) {    
-        $errores[]= "La persona debe ser mayor a 18 años";
-        
-        
+        $errores['nacimiento']= "La persona debe ser mayor a 18 años";
     }
 } else {
     
-    $errores[] = "Fecha de nacimiento incorrecta ej: dd/mm/aaaa";
+    $errores['nacimiento'] = "Fecha de nacimiento incorrecta ej: dd/mm/aaaa";
    
 }
 //fin validacion año de nacimiento

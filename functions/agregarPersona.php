@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'funciones.php';
 
 $pdo = conectar();
@@ -21,6 +21,20 @@ $statement->execute();
 $mensaje = "La persona ha sido agregada satisfactoriamente";
 header("Location: ../web/exito.php?mensaje=$mensaje");
 }else{
+    if(!isset($errores['nombre'])){
+        $_SESSION['agregar_persona']['nombre']= $nombre;
+    }
+    if(!isset($errores['apellido'])){
+        $_SESSION['agregar_persona']['apellido']= $apellido;
+    }
+    if(!isset($errores['dni'])){
+        $_SESSION['agregar_persona']['dni']= $dni;
+    }
+    if(!isset($errores['nacimiento'])){
+        $_SESSION['agregar_persona']['nacimiento']= $nacimiento;
+    }
+    
+    
     $mensajes = implode('<br>', $errores);
    header("Location: ../web/formAgregarPersona.php?mensaje=$mensajes"); 
     

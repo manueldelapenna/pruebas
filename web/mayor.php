@@ -1,4 +1,5 @@
 <?php
+
 require_once("../scripts/acceso.php");
 require_once("../functions/funciones.php");
 $mayorPersona = MayorDeEdad(listarPersonas());

@@ -25,6 +25,7 @@ require_once("../functions/funciones.php");
         ?>
         <br/>
         <br/>
+        <?php var_dump($_SESSION); ?>
         <div id="formAgregar" class="col-md-4 col-md-offset-4">
         <form class="form-inline " action="../functions/agregarPersona.php" method="POST"> 
 
