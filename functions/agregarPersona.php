@@ -12,7 +12,7 @@ $errores = validarPersona($dni, $nombre, $apellido, $nacimiento);
 
 if(count($errores) == 0){
 
-$statement->bindParam(':fecha_nacimiento', $nacimiento);
+$statement->bindParam(':fecha_nacimiento',  desformatearFechaNacimiento($nacimiento));
 $statement->bindParam(':nombre', $nombre);
 $statement->bindParam(':apellido', $apellido);
 $statement->bindParam(':dni', $dni);
@@ -22,16 +22,16 @@ $mensaje = "La persona ha sido agregada satisfactoriamente";
 header("Location: ../web/exito.php?mensaje=$mensaje");
 }else{
     if(!isset($errores['nombre'])){
-        $_SESSION['agregar_persona']['nombre']= $nombre;
+        $_SESSION['form_persona']['nombre']= $nombre;
     }
     if(!isset($errores['apellido'])){
-        $_SESSION['agregar_persona']['apellido']= $apellido;
+        $_SESSION['form_persona']['apellido']= $apellido;
     }
     if(!isset($errores['dni'])){
-        $_SESSION['agregar_persona']['dni']= $dni;
+        $_SESSION['form_persona']['dni']= $dni;
     }
     if(!isset($errores['nacimiento'])){
-        $_SESSION['agregar_persona']['nacimiento']= $nacimiento;
+        $_SESSION['form_persona']['nacimiento']= $nacimiento;
     }
     
     

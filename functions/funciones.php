@@ -105,6 +105,12 @@ function formatearFechaNacimiento($fechaNacimiento) {
     return $fechaNacimiento;
 }
 
+function desformatearFechaNacimiento($fechaNacimiento){
+    $fecha = DateTime::createFromFormat("d/m/Y", $fechaNacimiento);
+    
+    return $fecha->format("Y-m-d");
+}
+
 function validarFecha($date)
 {
    
@@ -180,5 +186,6 @@ function soloLetras($in){
   if(preg_match('/^([a-z ñáéíóú]{2,255})$/i',$in)) return TRUE;
   else return FALSE;
 }
+
 
 ?>

@@ -21,21 +21,27 @@ require_once("../functions/funciones.php");
 
         $path = $rootpath . '/pruebas/_partials/menu.php';
         include_once($path);
-        $error = "";
+        
+           $value_nombre = (isset($_SESSION['form_persona']['nombre'])) ? $_SESSION['form_persona']['nombre'] : "";
+           $value_apellido = (isset($_SESSION['form_persona']['apellido'])) ? $_SESSION['form_persona']['apellido'] : "";
+           $value_dni = (isset($_SESSION['form_persona']['dni'])) ? $_SESSION['form_persona']['dni'] : "";
+           $value_nacimiento = (isset($_SESSION['form_persona']['nacimiento'])) ? $_SESSION['form_persona']['nacimiento'] : "";
+            
+           unset($_SESSION['form_persona']);
+         
+        
+        
         ?>
-        <br/>
-        <br/>
-        <?php var_dump($_SESSION); ?>
         <div id="formAgregar" class="col-md-4 col-md-offset-4">
         <form class="form-inline " action="../functions/agregarPersona.php" method="POST"> 
 
-            <input type="text" class="form-control" id="nombre"  placeholder="Nombre" name="nombre">*<br/>
+            <input type="text" class="form-control" id="nombre"  placeholder="Nombre" name="nombre" value="<?php echo $value_nombre;?>">*<br/>
 
-            <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido">*<br/>
+            <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido" value="<?php echo $value_apellido;?>">*<br/>
 
-            <input type="text" class="form-control" id="dni" placeholder="Documento" name="dni" sytle="margin-left: 81px;">* ej:38706974<br/>
+            <input type="text" class="form-control" id="dni" placeholder="Documento" name="dni" sytle="margin-left: 81px;" value="<?php echo $value_dni;?>">* ej:38706974<br/>
 
-            <input type="text" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" name="nacimiento">* ej:21/02/1986<br/><br/>
+            <input type="text" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" name="nacimiento" value="<?php echo $value_nacimiento;?>">* ej:21/02/1986<br/><br/>
             <input type="submit" class="btn btn-primary" value="Agregar Persona">
         </form>
         
