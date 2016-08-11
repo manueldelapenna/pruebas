@@ -25,7 +25,7 @@ require_once("../functions/funciones.php");
         ?>
         <br/>
         <br/>
-        <div id="formAgregar">
+        <div id="formAgregar" class="col-md-4 col-md-offset-4">
         <form class="form-inline " action="../functions/agregarPersona.php" method="POST"> 
 
             <input type="text" class="form-control" id="nombre"  placeholder="Nombre" name="nombre">*<br/>
@@ -37,15 +37,14 @@ require_once("../functions/funciones.php");
             <input type="text" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" name="nacimiento">* ej:21/02/1986<br/><br/>
             <input type="submit" class="btn btn-primary" value="Agregar Persona">
         </form>
-
-        <div class="centered">
+        
         <?php
         if (isset($_GET['mensaje'])) {
             echo $_GET['mensaje'];
         }?>
             
         </div> 
-        </div>    
+            
          <?php   
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);

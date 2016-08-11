@@ -6,6 +6,7 @@ body{
     background-color: #3384FF ;
     width: 100%;
     
+    
 }
 
 button:hover{
@@ -16,7 +17,3 @@ button:hover{
     text-align: center;
 }
 
-#formAgregar input{
-    display: inline-block;
-    margin-left: 400px;
-}

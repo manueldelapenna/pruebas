@@ -11,7 +11,7 @@
         ?>
     </head>
     <body>
-
+        
         <?php
         $path = $rootpath . '/pruebas/_partials/header.php';
         include_once($path);
@@ -29,7 +29,7 @@
             </div>
         <?php } else { ?>
             <br>
-            <div class="form-group container">
+            <div class="form-group">
                 <?php
                 $path = $rootpath . '/pruebas/_partials/login.php';
                 include_once($path);
