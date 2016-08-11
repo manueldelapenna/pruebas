@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-08-2016 a las 16:12:09
+-- Tiempo de generación: 11-08-2016 a las 16:12:05
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -81,6 +81,7 @@ INSERT INTO `permisos` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `personas` (
+  `id` int(11) NOT NULL,
   `dni` int(8) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
@@ -91,24 +92,26 @@ CREATE TABLE `personas` (
 -- Volcado de datos para la tabla `personas`
 --
 
-INSERT INTO `personas` (`dni`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
-(0, 'nicolas', 'grasso', '1986-02-07'),
-(3846092, 'facundo', 'ares', '1986-02-07'),
-(19874290, 'ramiro', 'echague', '1986-02-07'),
-(21114708, 'monica gabriela', 'percow', '1986-02-07'),
-(25847389, 'marcela viviana ', 'percow', '1986-02-07'),
-(25984024, 'santiago', 'coraggio', '1986-02-07'),
-(27987304, 'lucas', 'gomez', '1986-02-07'),
-(28874924, 'roberto', 'sarmiento', '1988-08-05'),
-(34765384, 'manuel', 'delapenna', '1986-02-07'),
-(37846528, 'luciano', 'bianchi', '1986-02-07'),
-(38706974, 'tomas', 'echague', '1995-02-05'),
-(38726395, 'martin', 'lucena', '1986-02-07'),
-(38729994, 'ignacion', 'guglielmino', '1986-02-07'),
-(38765209, 'matias', 'grasso', '1986-02-07'),
-(39847204, 'juan pablo', 'alvarez', '1986-02-07'),
-(43897298, 'martina', 'arguiano', '1986-02-07'),
-(47874278, 'bautista', 'echague', '1986-02-07');
+INSERT INTO `personas` (`id`, `dni`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
+(1, 3846092, 'facundo', 'ares', '1986-02-07'),
+(2, 19874290, 'ramiro', 'echague', '1986-02-07'),
+(3, 21114708, 'monica gabriela', 'percow', '1986-02-07'),
+(4, 21980734, 'marcelo', 'tinelli', '1969-08-21'),
+(5, 23789093, 'moni', 'argento', '1978-07-26'),
+(6, 25847389, 'marcela viviana ', 'percow', '1986-02-07'),
+(7, 25984024, 'santiago', 'coraggio', '1986-02-07'),
+(8, 34765384, 'manuel', 'delapenna', '1986-02-07'),
+(9, 37846528, 'luciano', 'bianchi', '1986-02-07'),
+(10, 38476092, 'lucas', 'desabato', '1994-07-05'),
+(11, 38706974, 'tomas', 'echague', '1995-02-05'),
+(12, 38726395, 'martin', 'lucena', '1986-02-07'),
+(13, 38729994, 'ignacio', 'guglielmino', '1986-02-07'),
+(14, 38765209, 'matias', 'grasso', '1986-02-07'),
+(15, 38892746, 'ernesto', 'durruty', '1994-07-05'),
+(16, 39847092, 'PEPE', 'reina', '1957-03-25'),
+(17, 39847204, 'juan pablo', 'alvarez', '1986-02-07'),
+(18, 43897298, 'martina', 'arguiano', '1986-02-07'),
+(19, 47874278, 'bautista', 'echague', '1986-02-07');
 
 -- --------------------------------------------------------
 
@@ -188,7 +191,8 @@ ALTER TABLE `permisos`
 -- Indices de la tabla `personas`
 --
 ALTER TABLE `personas`
-  ADD PRIMARY KEY (`dni`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -232,6 +236,11 @@ ALTER TABLE `grupos_permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `personas`
+--
+ALTER TABLE `personas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
