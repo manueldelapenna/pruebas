@@ -15,3 +15,8 @@ button:hover{
 .centered{
     text-align: center;
 }
+
+input{
+    display: inline-block;
+    margin-left: 400px;
+}

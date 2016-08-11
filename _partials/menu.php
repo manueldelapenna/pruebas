@@ -1,22 +1,25 @@
 <?php if (isset($_SESSION['usuario'])) { ?>
-    <div class="container">
-        <div class="btn-group center-block" role="group" aria-label="..." data-toggle="collapse" style="margin-left: 220px;">
-
-            <button type="button" class="btn btn-default" data-toggle="collapse" onClick="location.href = '../web/index.php'">Inicio</button>
-            <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
-                <button type="button" class="btn btn-default" data-toggle="collapse" onClick="location.href = '../web/listado.php'">Mostrar Datos</button>
-                <button type="button" class="btn btn-default" data-toggle="collapse" onClick="location.href = '../web/formAgregarPersona.php'">Agregar Persona</button>
-            <?php } ?> 
+   
+<ul class="nav nav-tabs">
+    <li><a href = '../web/index.php'>Inicio</a></li>
+     <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
+    <li><a href = '../web/listado.php'>Mostrar Datos</a></li>
+    <li><a href = '../web/formAgregarPersona.php'>Agregar Persona</a></li>
+    <?php } ?> 
            
-             <?php if (in_array($_SESSION['usuario'], ['admin', 'user'])) { ?>
-
-                <button type="button" class="btn btn-default" data-toggle="collapse" onclick="location.href = '../web/mayor.php'" >Mayor de Edad</button>
-
-                <button type="button" class="btn btn-default" data-toggle="collapse" onClick = "location.href = '../web/menor.php'">Menor de Edad</button>
-            <?php } ?> 
-            <button type="button" class="btn btn-default" data-toggle="collapse" onClick = "location.href = '../scripts/logout.php'">Log Out</button>
-
-
-        </div>
-    </div>    
+    <?php if (in_array($_SESSION['usuario'], ['admin', 'user'])) { ?>
+    <li><a href = '../web/mayor.php'>Mayor Edad</a></li>
+    <li><a href = '../web/menor.php'>Menor Edad</a></li>
+    <?php } ?> 
+    <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administracion<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+      <li><a href = '#'>Agregar Grupo</a></li>
+      <li><a href = '#'>Agregar Permisos</a></li>
+      <li><a href = '#'>Agregar Usuarios</a></li>
+    </ul>
+  </li>
+  <li><a href = '../scripts/logout.php'>Log Out</a></li>
+</ul>
+   
 <?php } ?>

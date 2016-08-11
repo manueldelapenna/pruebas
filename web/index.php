@@ -21,6 +21,8 @@
 
         if (isset($_SESSION['usuario'])) {
             ?>
+            <br/>
+            
             <div class="jumbotron">
 
             <p class="centered">Bienvenido <?php echo $_SESSION['usuario']; ?></p>

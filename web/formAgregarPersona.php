@@ -25,15 +25,15 @@ require_once("../functions/funciones.php");
         ?>
         <br/>
         <br/>
-        <form class="form-inline centered" action="../functions/agregarPersona.php" method="POST"> 
+        <form class="form-inline " action="../functions/agregarPersona.php" method="POST"> 
 
-            <input type="text" class="form-control" id="nombre"  placeholder="Nombre" name="nombre"><br/>
+            <input type="text" class="form-control" id="nombre"  placeholder="Nombre" name="nombre">*<br/>
 
-            <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido"><br/>
+            <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido">*<br/>
 
-            <input type="text" class="form-control" id="dni" placeholder="Documento" name="dni"><br/>
+            <input type="text" class="form-control" id="dni" placeholder="Documento" name="dni" sytle="margin-left: 81px;">* ej:38706974<br/>
 
-            <input type="text" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" name="nacimiento"><br/><br/>
+            <input type="text" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" name="nacimiento">* ej:21/02/1986<br/><br/>
             <input type="submit" class="btn btn-primary" value="Agregar Persona">
         </form>
 
