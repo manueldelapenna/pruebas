@@ -16,7 +16,7 @@ button:hover{
     text-align: center;
 }
 
-input{
+#formAgregar input{
     display: inline-block;
     margin-left: 400px;
 }

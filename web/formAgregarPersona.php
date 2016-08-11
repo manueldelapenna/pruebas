@@ -25,6 +25,7 @@ require_once("../functions/funciones.php");
         ?>
         <br/>
         <br/>
+        <div id="formAgregar">
         <form class="form-inline " action="../functions/agregarPersona.php" method="POST"> 
 
             <input type="text" class="form-control" id="nombre"  placeholder="Nombre" name="nombre">*<br/>
@@ -41,10 +42,14 @@ require_once("../functions/funciones.php");
         <?php
         if (isset($_GET['mensaje'])) {
             echo $_GET['mensaje'];
-        }
+        }?>
+            
+        </div> 
+        </div>    
+         <?php   
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);
         ?>
-        </div>
+        
     </body>
 </html>
