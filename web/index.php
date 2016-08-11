@@ -35,11 +35,15 @@
                 include_once($path);
                 if (isset($_GET['error'])) {
                     echo $_GET['error'];
+            
                 }
+                ?>
+            </div>
+            <?php
             }
             ?> 
-             
-            </div>
+            
+           
         
         <?php
         $path = $rootpath . '/pruebas/_partials/footer.php';
