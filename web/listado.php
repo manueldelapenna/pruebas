@@ -32,7 +32,10 @@ require_once("../functions/funciones.php");
         include_once($path);
         ?>
 
-        <div> 
+        <div>
+            <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
+            <a href="formAgregarPersona.php" class="btn btn-info">Agregar Persona</a>
+             <?php } ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -56,7 +59,7 @@ require_once("../functions/funciones.php");
                             <td> <?php echo edad($usuario['fecha_nacimiento']) ?></td>
                             <td> <?php echo formatearFechaNacimiento($usuario['fecha_nacimiento']); ?></td>
                             <td> <?php echo $usuario['dni']; ?></td>
-                            <td><a href="formVerPersona.php?id=<?php echo $usuario['id'] ?>" class="btn btn-success">Ver Usuario</a></td>
+                            <td><a href="formVerPersona.php?id=<?php echo $usuario['id'] ?>" class="btn btn-success">Ver</a></td>
                             <td> <a href="formModificarPersona.php?id=<?php echo $usuario['id'] ?>" class="btn btn-primary"> Modificar</a></td>
                             <td> <form action="../functions/eliminarPersona.php" method ="POST">
                                     <input type="hidden" value="<?php echo $usuario['dni']?>" name="dniPersona" >
