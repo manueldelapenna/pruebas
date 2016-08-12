@@ -50,19 +50,16 @@ require_once("../functions/funciones.php");
                       foreach(listarPersonas() as $usuario){
                         ?>
                         <tr>
-                             <td> <?php echo $usuario['id']; ?> </td>
+                            <td> <?php echo $usuario['id']; ?> </td>
                             <td> <?php echo ucfirst($usuario['nombre']); ?> </td>
                             <td> <?php echo ucfirst($usuario['apellido']); ?> </td>
                             <td> <?php echo edad($usuario['fecha_nacimiento']) ?></td>
                             <td> <?php echo formatearFechaNacimiento($usuario['fecha_nacimiento']); ?></td>
                             <td> <?php echo $usuario['dni']; ?></td>
-                            <td> <form action="modificarPersona.php" method ="POST">
-                                    <input type="hidden" value="<?php echo $usuario['id']; ?>" name="personaModificada">
-                                    <input type="submit" name="modificar" value="Modificar">
-                                </form></td>
+                            <td> <a href="formModificarPersona.php?id=<?php echo $usuario['id'] ?>" class="btn btn-primary"> Modificar</a></td>
                             <td> <form action="../functions/eliminarPersona.php" method ="POST">
                                     <input type="hidden" value="<?php echo $usuario['dni']?>" name="dniPersona" >
-                                    <input type="submit" name="eliminar" value="Eliminar">
+                                    <input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger">
                                 </form></td>    
                                 
                         

@@ -1,42 +1,26 @@
 <?php
 
 include 'funciones.php';
- echo $_POST['personaModificada']['nombe'];
-$pdo = conectar();
-$statement = $pdo->prepare('UPDATE INTO personas set nombre= :nombre, apellido= :apellido, fecha_nacimiento= :fecha_nacimiento');
 $fecha_nacimiento = $_POST['nacimiento'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $dni = $_POST['dni'];
-$errores = validarPersona($dni, $nombre, $apellido, $nacimiento);
+$id = $_POST['id'];
+$errores = validarPersona($dni, $nombre, $apellido, $fecha_nacimiento);
 
-if(count($errores) == 0){
-
-$statement->bindParam(':fecha_nacimiento',  desformatearFechaNacimiento($nacimiento));
-$statement->bindParam(':nombre', $nombre);
-$statement->bindParam(':apellido', $apellido);
-$statement->bindParam(':dni', $dni);
-$statement->execute();
-
-$mensaje = "La persona ha sido modificada satisfactoriamente";
-header("Location: ../web/exito.php?mensaje=$mensaje");
-}else{
-    if(!isset($errores['nombre'])){
-        $_SESSION['form_persona']['nombre']= $nombre;
-    }
-    if(!isset($errores['apellido'])){
-        $_SESSION['form_persona']['apellido']= $apellido;
-    }
-    if(!isset($errores['dni'])){
-        $_SESSION['form_persona']['dni']= $dni;
-    }
-    if(!isset($errores['nacimiento'])){
-        $_SESSION['form_persona']['nacimiento']= $nacimiento;
-    }
+if (count($errores) == 0) {
+    $pdo = conectar();
+    $statement = $pdo->prepare('UPDATE personas set nombre= :nombre, apellido= :apellido,dni = :dni, fecha_nacimiento= :fecha_nacimiento WHERE id= :id');
+    $statement->bindParam(':fecha_nacimiento', desformatearFechaNacimiento($fecha_nacimiento));
+    $statement->bindParam(':nombre', $nombre);
+    $statement->bindParam(':apellido', $apellido);
+    $statement->bindParam(':dni', $dni);
+    $statement->bindParam(':id', $id);
+    $statement->execute();
     
-    
+    $mensaje = "La persona ha sido modificada satisfactoriamente";
+    header("Location: ../web/exito.php?mensaje=$mensaje");
+} else {
     $mensajes = implode('<br>', $errores);
-   header("Location: ../web/modificarPersona.php?mensaje=$mensajes"); 
-    
-   
-    }
+    header("Location: ../web/formModificarPersona.php?id=$id&&mensaje=$mensajes");
+}
