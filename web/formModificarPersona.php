@@ -43,6 +43,7 @@ require_once("../functions/funciones.php");
             <input type="text" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" name="nacimiento" value="<?php echo formatearFechaNacimiento($result[0]['fecha_nacimiento']);?>"><br/><br/>
             
             <input type="submit" class="btn btn-primary" value="Modificar Persona">
+            <a href="listado.php" class="btn btn-primary">Cancelar</a>
         </form>
 
         <div class="centered">

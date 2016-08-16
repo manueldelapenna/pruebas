@@ -36,7 +36,7 @@ $mensaje ="  " . $mayorPersona['nombre'] . " " . $mayorPersona['apellido'] . " t
 <?php echo $mensaje; ?>    
 
         </div>
-
+        <a href="listado.php" class="btn btn-info">Volver</a>
         <?php
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);
