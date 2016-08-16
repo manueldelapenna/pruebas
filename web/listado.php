@@ -38,23 +38,25 @@ require_once("../functions/funciones.php");
             <?php } ?>
             <?php if (in_array($_SESSION['usuario'], ['admin', 'user'])) { ?>
             <a href="mayor.php" class="btn btn-info">Mayor Edad</a>
-            <a href="menor.php" class="btn btn-info">Menor edad</a>
+            <a href="menor.php" class="btn btn-info">Menor Edad</a>
              <?php } ?>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Edad</th>
-                       <th>Año Nacimiento</th>
-                       <th>Dni</th>
+                        <th><a href="listado.php?orden=id&direccion=<?php echo (isset($_GET['direccion']))? direccionOrdenamiento($_GET['direccion']) : "ASC";  ?>">ID</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
+                        <th><a href="listado.php?orden=nombre&direccion=<?php echo (isset($_GET['direccion']))? direccionOrdenamiento($_GET['direccion']) : "ASC";  ?>">Nombre</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
+                        <th><a href="listado.php?orden=apellido&direccion=<?php echo (isset($_GET['direccion']))? direccionOrdenamiento($_GET['direccion']) : "ASC";  ?>">Apellido</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
+                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo (isset($_GET['direccion']))? direccionOrdenamiento($_GET['direccion']) : "ASC";  ?>">Edad</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
+                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo (isset($_GET['direccion']))? direccionOrdenamiento($_GET['direccion']) : "ASC";  ?>">Año Nacimiento</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
+                        <th><a href="listado.php?orden=dni&direccion=<?php echo (isset($_GET['direccion']))? direccionOrdenamiento($_GET['direccion']) : "ASC";  ?>">Dni</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
                     </tr>
                 </thead>    
                 <tbody> 
 
                     <?php
-                      foreach(listarPersonas() as $usuario){
+                    $orden = (isset($_GET['orden']))?$_GET['orden'] : "id";
+                    $direccion = (isset($_GET['direccion']))?$_GET['direccion'] : "ASC";
+                      foreach(listarPersonas($orden,$direccion) as $usuario){
                         ?>
                         <tr>
                             <td> <?php echo $usuario['id']; ?> </td>

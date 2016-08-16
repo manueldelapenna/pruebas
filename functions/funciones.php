@@ -2,14 +2,24 @@
 
 include '../config/database.php';
 
-function listarPersonas() {
-
+function listarPersonas($orden, $direccion) {
+    
     $pdo = conectar();
-    $statement = $pdo->prepare("SELECT * FROM personas");
+    $statement = $pdo->prepare("SELECT * FROM personas ORDER BY $orden $direccion");
     $statement->execute();
     $result = $statement->fetchAll();
 
     return $result;
+}
+
+function direccionOrdenamiento($direccionActual){
+    if($direccionActual == "ASC"){
+        return "DESC";
+    }else{
+        return "ASC";
+    }
+    
+    
 }
 
 function MayorDeEdad($arreglo) {
