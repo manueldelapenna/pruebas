@@ -2,10 +2,10 @@
 
 include '../config/database.php';
 
-function listarPersonas($orden, $direccion) {
+function listarPersonas($orden, $direccion, $items) {
     
     $pdo = conectar();
-    $statement = $pdo->prepare("SELECT * FROM personas ORDER BY $orden $direccion");
+    $statement = $pdo->prepare("SELECT * FROM personas ORDER BY $orden $direccion limit $items");
     $statement->execute();
     $result = $statement->fetchAll();
 
