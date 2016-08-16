@@ -35,6 +35,10 @@ require_once("../functions/funciones.php");
         <div>
             <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
             <a href="formAgregarPersona.php" class="btn btn-info">Agregar Persona</a>
+            <?php } ?>
+            <?php if (in_array($_SESSION['usuario'], ['admin', 'user'])) { ?>
+            <a href="mayor.php" class="btn btn-info">Mayor Edad</a>
+            <a href="menor.php" class="btn btn-info">Menor edad</a>
              <?php } ?>
             <table class="table">
                 <thead>

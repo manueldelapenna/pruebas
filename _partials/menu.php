@@ -6,11 +6,7 @@
     <li><a href = '../web/listado.php'>Mostrar Datos</a></li>
     
     <?php } ?> 
-           
-    <?php if (in_array($_SESSION['usuario'], ['admin', 'user'])) { ?>
-    <li><a href = '../web/mayor.php'>Mayor Edad</a></li>
-    <li><a href = '../web/menor.php'>Menor Edad</a></li>
-    <?php } ?> 
+     
     <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administracion<span class="caret"></span></a>
           <ul class="dropdown-menu">
