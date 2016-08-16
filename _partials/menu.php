@@ -3,7 +3,7 @@
 <ul class="nav nav-tabs">
     <li><a href = '../web/index.php'>Inicio</a></li>
      <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
-    <li><a href = '../web/listado.php'>Mostrar Datos</a></li>
+    <li><a href = '../web/listado.php'>Personas</a></li>
     
     <?php } ?> 
      
