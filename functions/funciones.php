@@ -17,16 +17,16 @@ function listarPersonas($orden, $direccion, $items, $pagina, $busqueda) {
 
     $offset = ($pagina - 1) * $items;
     $pdo = conectar();
-    var_dump($busqueda);
-    die();
+    
     if ($busqueda != "") {
 
         $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad "
                 . " FROM personas"
+                . " where nombre like '%$busqueda%' or apellido like '%$busqueda%' "
                 . " ORDER BY $orden $direccion "
                 . " limit $items "
                 . " offset $offset"
-                . " where nombre like '%$busqueda%' or apellido like '%$busqueda%' "
+                
         );
     } else {
         $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad "
