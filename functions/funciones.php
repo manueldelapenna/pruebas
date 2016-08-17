@@ -2,13 +2,27 @@
 
 include '../config/database.php';
 
-function listarPersonas($orden, $direccion, $items) {
+function totalPersonas(){
+   $pdo = conectar();
+   $statement = $pdo->prepare("SELECT count(*) as total FROM personas");
+   $statement->execute();
+   $result = $statement->fetchColumn();
     
+   
+   
+   return $result;    
+    
+}
+
+
+
+function listarPersonas($orden, $direccion, $items, $pagina) {
+    $offset = ($pagina - 1)*$items;
     $pdo = conectar();
-    $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad FROM personas ORDER BY $orden $direccion limit $items");
+    $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad FROM personas ORDER BY $orden $direccion limit $items offset $offset");
     $statement->execute();
     $result = $statement->fetchAll();
-
+    
     return $result;
 }
 
