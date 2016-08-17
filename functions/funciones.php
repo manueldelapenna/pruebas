@@ -2,38 +2,52 @@
 
 include '../config/database.php';
 
-function totalPersonas(){
-   $pdo = conectar();
-   $statement = $pdo->prepare("SELECT count(*) as total FROM personas");
-   $statement->execute();
-   $result = $statement->fetchColumn();
-    
-   
-   
-   return $result;    
-    
-}
-
-
-
-function listarPersonas($orden, $direccion, $items, $pagina) {
-    $offset = ($pagina - 1)*$items;
+function totalPersonas() {
     $pdo = conectar();
-    $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad FROM personas ORDER BY $orden $direccion limit $items offset $offset");
+    $statement = $pdo->prepare("SELECT count(*) as total FROM personas");
     $statement->execute();
-    $result = $statement->fetchAll();
-    
+    $result = $statement->fetchColumn();
+
+
+
     return $result;
 }
 
-function direccionOrdenamiento($direccionActual){  //cambia la direccion
-    if($direccionActual == "ASC"){
+function listarPersonas($orden, $direccion, $items, $pagina, $busqueda) {
+
+    $offset = ($pagina - 1) * $items;
+    $pdo = conectar();
+    var_dump($busqueda);
+    die();
+    if ($busqueda != "") {
+
+        $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad "
+                . " FROM personas"
+                . " ORDER BY $orden $direccion "
+                . " limit $items "
+                . " offset $offset"
+                . " where nombre like '%$busqueda%' or apellido like '%$busqueda%' "
+        );
+    } else {
+        $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad "
+                . " FROM personas "
+                . " ORDER BY $orden $direccion "
+                . " limit $items "
+                . " offset $offset");
+    }
+
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    return $result;
+}
+
+function direccionOrdenamiento($direccionActual) {  //cambia la direccion
+    if ($direccionActual == "ASC") {
         return "DESC";
-    }else{
+    } else {
         return "ASC";
     }
-    
-    
 }
 
 function MayorDeEdad($arreglo) {
@@ -49,7 +63,7 @@ function MayorDeEdad($arreglo) {
             $mayor['anios'] = $funEdad;
         }
     }
-    
+
     return $mayor;
 }
 
@@ -65,7 +79,7 @@ function MenorDeEdad($arreglo) {
             $menor['anios'] = $funEdad;
         }
     }
-    
+
     return $menor;
 }
 
@@ -129,87 +143,81 @@ function formatearFechaNacimiento($fechaNacimiento) {
     return $fechaNacimiento;
 }
 
-function desformatearFechaNacimiento($fechaNacimiento){
+function desformatearFechaNacimiento($fechaNacimiento) {
     $fecha = DateTime::createFromFormat("d/m/Y", $fechaNacimiento);
-    
+
     return $fecha->format("Y-m-d");
 }
 
-function validarFecha($date)
-{
-   
- $arregloFecha = explode('/', $date);
+function validarFecha($date) {
 
- if(count($arregloFecha) == 3){
-     
-     if(strlen($arregloFecha[0]) == 2 && 
-        strlen($arregloFecha[1]) == 2 && 
-        strlen($arregloFecha[2]) == 4){
-         
-         return TRUE;
-     }
- }
- 
- return FALSE;  
-   
+    $arregloFecha = explode('/', $date);
+
+    if (count($arregloFecha) == 3) {
+
+        if (strlen($arregloFecha[0]) == 2 &&
+                strlen($arregloFecha[1]) == 2 &&
+                strlen($arregloFecha[2]) == 4) {
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
+function validarPersona($dni, $nombre, $apellido, $nacimiento) {
 
-
-function validarPersona($dni,$nombre,$apellido,$nacimiento){
-    
-$errores = array();    
+    $errores = array();
 //validacion dni
-if (is_numeric($dni) != 1 || strlen($dni) > 8) {
-   
-    $errores['dni'] = "Dni incorrecto";
-    
-}
+    if (is_numeric($dni) != 1 || strlen($dni) > 8) {
+
+        $errores['dni'] = "Dni incorrecto";
+    }
 //fin validacion dni
 //
 //validacion nombre y apellido
 
-if(strlen($nombre) == 0){
-    $errores['nombre'] = "Nombre es un campo obligatorio";
-}else{
-    if(!soloLetras($nombre)){
-        $errores['nombre'] = "Solo se permiten letras en el campo nombre";
+    if (strlen($nombre) == 0) {
+        $errores['nombre'] = "Nombre es un campo obligatorio";
+    } else {
+        if (!soloLetras($nombre)) {
+            $errores['nombre'] = "Solo se permiten letras en el campo nombre";
+        }
     }
-}
 
-if(strlen($apellido) == 0){
-    $errores['apellido'] = "Apellido es un campo obligatorio";
-}else{
-    if(!soloLetras($apellido)){
-        $errores['apellido'] = "Solo se permiten letras en el campo apellido";
+    if (strlen($apellido) == 0) {
+        $errores['apellido'] = "Apellido es un campo obligatorio";
+    } else {
+        if (!soloLetras($apellido)) {
+            $errores['apellido'] = "Solo se permiten letras en el campo apellido";
+        }
     }
-}
 
 //fin validacion nombre y apellido
 //
 //validacion del año de nacimiento
-if (validarFecha($nacimiento)) {
-    
-    list($dia,$mes,$anio) = explode('/', $nacimiento);
-    $nacimiento = $anio."-".$mes."-".$dia;
-    $edad = edad($nacimiento);
-    if ($edad < 18) {    
-        $errores['nacimiento']= "La persona debe ser mayor a 18 años";
+    if (validarFecha($nacimiento)) {
+
+        list($dia, $mes, $anio) = explode('/', $nacimiento);
+        $nacimiento = $anio . "-" . $mes . "-" . $dia;
+        $edad = edad($nacimiento);
+        if ($edad < 18) {
+            $errores['nacimiento'] = "La persona debe ser mayor a 18 años";
+        }
+    } else {
+
+        $errores['nacimiento'] = "Fecha de nacimiento incorrecta ej: dd/mm/aaaa";
     }
-} else {
-    
-    $errores['nacimiento'] = "Fecha de nacimiento incorrecta ej: dd/mm/aaaa";
-   
-}
 //fin validacion año de nacimiento
-return $errores;
+    return $errores;
 }
 
-
-function soloLetras($in){
-  if(preg_match('/^([a-z ñáéíóú]{2,255})$/i',$in)) return TRUE;
-  else return FALSE;
+function soloLetras($in) {
+    if (preg_match('/^([a-z ñáéíóú]{2,255})$/i', $in))
+        return TRUE;
+    else
+        return FALSE;
 }
-
 
 ?>

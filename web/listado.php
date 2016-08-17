@@ -42,6 +42,7 @@ require_once("../functions/funciones.php");
             <?php
             $items = (isset($_GET['items'])) ? $_GET['items'] : 5;
             ?>
+            <input type="text" placeholder="Buscar"><a href="#" role="button" class="btn btn-primary">Buscar</a><br/><br/>
             <label>Items Pagina</label>    
             <select id="cantItems">
                 <option value="5"<?php echo ($items == 5) ? "selected" : ""; ?>>5</option>
@@ -60,7 +61,8 @@ require_once("../functions/funciones.php");
                 <thead>
                     <tr>
                         <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">ID<?php if ($orden == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Nombre<?php if ($orden == 'apellido') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Nombre<?php if ($orden == 'nombre') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Apellido<?php if ($orden == 'apellido') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                         <th><a href="listado.php?orden=edad&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Edad<?php if ($orden == 'edad') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                         <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Año Nacimiento<?php if ($orden == 'fecha_nacimiento') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                         <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Dni<?php if ($orden == 'dni') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
@@ -71,7 +73,7 @@ require_once("../functions/funciones.php");
                     <?php
                     
                     
-                    foreach (listarPersonas($orden, $direccion, $items,$pagActual) as $usuario) {
+                    foreach (listarPersonas($orden, $direccion, $items,$pagActual,"mas") as $usuario) {
                         ?>
                         <tr>
                             <td> <?php echo $usuario['id']; ?> </td>
