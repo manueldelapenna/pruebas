@@ -51,27 +51,28 @@ require_once("../functions/funciones.php");
             <?php
             $indicadorDireccion = (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC";
             $iconoDireccion = ($indicadorDireccion == "DESC") ? "glyphicon glyphicon-circle-arrow-up" : "glyphicon glyphicon-circle-arrow-down";
+            $pagActual = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
+            $orden = (isset($_GET['orden'])) ? $_GET['orden'] : "id";
+            $direccion = (isset($_GET['direccion'])) ? $_GET['direccion'] : "ASC";
             ?>
 
             <table class="table">
                 <thead>
                     <tr>
-                        <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>">ID<?php if ($_GET['orden'] == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>">Nombre<?php if ($_GET['orden'] == 'nombre') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>">Apellido<?php if ($_GET['orden'] == 'apellido') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=edad&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>">Edad<?php if ($_GET['orden'] == 'edad') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>">Año Nacimiento<?php if ($_GET['orden'] == 'fecha_nacimiento') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>">Dni<?php if ($_GET['orden'] == 'dni') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">ID<?php if ($_GET['orden'] == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Nombre<?php if ($_GET['orden'] == 'nombre') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Apellido<?php if ($_GET['orden'] == 'apellido') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=edad&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Edad<?php if ($_GET['orden'] == 'edad') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Año Nacimiento<?php if ($_GET['orden'] == 'fecha_nacimiento') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Dni<?php if ($_GET['orden'] == 'dni') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                     </tr>
                 </thead>    
                 <tbody> 
 
                     <?php
-                    $total = totalPersonas();
-                    $cantPaginas = ceil($total / $items);
-                    $orden = (isset($_GET['orden'])) ? $_GET['orden'] : "id";
-                    $direccion = (isset($_GET['direccion'])) ? $_GET['direccion'] : "ASC";
-                    foreach (listarPersonas($orden, $direccion, $items,$cantPaginas) as $usuario) {
+                    
+                    
+                    foreach (listarPersonas($orden, $direccion, $items,$pagActual) as $usuario) {
                         ?>
                         <tr>
                             <td> <?php echo $usuario['id']; ?> </td>
@@ -93,7 +94,8 @@ require_once("../functions/funciones.php");
                         <?php
                     }
 
-                    
+                    $total = totalPersonas();
+                    $cantPaginas = ceil($total / $items);
                     ?>
 
 
@@ -103,8 +105,12 @@ require_once("../functions/funciones.php");
 
         <div>
             <ul class="pagination">
-                <?php for ($i = 1; $i <= $cantPaginas; $i++) { ?>
-                <li><a href="<?php echo "listado.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i"?>"><?php echo $i ?></a></li>
+                <?php for ($i = 1; $i <= $cantPaginas; $i++) { 
+                 
+                 $active = ($i == $pagActual)?"active": ""; 
+                 
+                 ?>
+                <li class="<?php echo $active; ?>"><a href="<?php echo "listado.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i"?>"><?php echo $i ?></a></li>
 
                 <?php } ?>  
 
