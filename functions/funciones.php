@@ -12,7 +12,7 @@ function listarPersonas($orden, $direccion, $items) {
     return $result;
 }
 
-function direccionOrdenamiento($direccionActual){
+function direccionOrdenamiento($direccionActual){  //cambia la direccion
     if($direccionActual == "ASC"){
         return "DESC";
     }else{

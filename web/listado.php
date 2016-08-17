@@ -40,6 +40,7 @@ include_once($path);
                 <br>
                 <br/>
                 <?php 
+                
                 $items = (isset($_GET['items']))?$_GET['items']: 5;
                 ?>
                 <label>Items Pagina</label>    
@@ -48,16 +49,19 @@ include_once($path);
                 <option value="10"<?php echo ($items==10)?"selected": ""; ?>>10</option>
                 <option value="20"<?php echo ($items==20)?"selected": ""; ?>>20</option>
             </select>
-
+                <?php $indicadorDireccion = (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC";  
+                      $iconoDireccion = ($indicadorDireccion == "DESC")? "glyphicon glyphicon-circle-arrow-down" : "glyphicon glyphicon-circle-arrow-up";  
+                ?>
+               
             <table class="table">
                 <thead>
                     <tr>
-                        <th><a href="listado.php?orden=id&direccion=<?php echo (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC"; ?>">ID</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
-                        <th><a href="listado.php?orden=nombre&direccion=<?php echo (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC"; ?>">Nombre</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
-                        <th><a href="listado.php?orden=apellido&direccion=<?php echo (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC"; ?>">Apellido</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
-                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC"; ?>">Edad</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
-                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC"; ?>">Año Nacimiento</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
-                        <th><a href="listado.php?orden=dni&direccion=<?php echo (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC"; ?>">Dni</a><span class="glyphicon glyphicon-circle-arrow-down"></span></th>
+                        <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">ID</a></th>
+                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Nombre</a></th>
+                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Apellido</a></th>
+                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Edad</a></th>
+                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Año Nacimiento</a></th>
+                        <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Dni</a></th>
                     </tr>
                 </thead>    
                 <tbody> 
@@ -96,6 +100,10 @@ include_once($path);
         $('#cantItems').change(function() { 
             window.location = 'listado.php?'+ '<?php echo "orden=$orden&direccion=$direccion&"?>' + 'items=' + $(this).val();
              
+         });
+         
+         $('th a').click(function(){
+              $(this).append('<span class="<?php echo $iconoDireccion;?>"></span>');
          });
         </script>
            
