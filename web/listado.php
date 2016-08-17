@@ -50,18 +50,18 @@ include_once($path);
                 <option value="20"<?php echo ($items==20)?"selected": ""; ?>>20</option>
             </select>
                 <?php $indicadorDireccion = (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC";  
-                      $iconoDireccion = ($indicadorDireccion == "DESC")? "glyphicon glyphicon-circle-arrow-down" : "glyphicon glyphicon-circle-arrow-up";  
+                      $iconoDireccion = ($indicadorDireccion == "DESC")? "glyphicon glyphicon-circle-arrow-up" : "glyphicon glyphicon-circle-arrow-down";  
                 ?>
                
             <table class="table">
                 <thead>
                     <tr>
-                        <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">ID</a></th>
-                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Nombre</a></th>
-                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Apellido</a></th>
-                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Edad</a></th>
-                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Año Nacimiento</a></th>
-                        <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Dni</a></th>
+                        <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">ID<?php if($_GET['orden']=='id'){ ?><span class="<?php echo $iconoDireccion;?>"<?php }?></a></th>
+                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Nombre<?php if($_GET['orden']=='nombre'){ ?><span class="<?php echo $iconoDireccion;?>"<?php }?></a></th>
+                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Apellido<?php if($_GET['orden']=='apellido'){ ?><span class="<?php echo $iconoDireccion;?>"<?php }?></a></th>
+                        <th><a href="listado.php?orden=edad&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Edad<?php if($_GET['orden']=='edad'){ ?><span class="<?php echo $iconoDireccion;?>"<?php }?></a></th>
+                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Año Nacimiento<?php if($_GET['orden']=='fecha_nacimiento'){ ?><span class="<?php echo $iconoDireccion;?>"<?php }?></a></th>
+                        <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion;?>&items=<?php echo $items ?>">Dni<?php if($_GET['orden']=='dni'){ ?><span class="<?php echo $iconoDireccion;?>"<?php }?></a></th>
                     </tr>
                 </thead>    
                 <tbody> 
@@ -75,7 +75,7 @@ foreach (listarPersonas($orden, $direccion,$items) as $usuario) {
                             <td> <?php echo $usuario['id']; ?> </td>
                             <td> <?php echo ucfirst($usuario['nombre']); ?> </td>
                             <td> <?php echo ucfirst($usuario['apellido']); ?> </td>
-                            <td> <?php echo edad($usuario['fecha_nacimiento']) ?></td>
+                            <td> <?php echo $usuario['edad'] ?></td>
                             <td> <?php echo formatearFechaNacimiento($usuario['fecha_nacimiento']); ?></td>
                             <td> <?php echo $usuario['dni']; ?></td>
                             <td><a href="formVerPersona.php?id=<?php echo $usuario['id'] ?>" class="btn btn-success">Ver</a></td>
@@ -100,10 +100,6 @@ include_once($path);
         $('#cantItems').change(function() { 
             window.location = 'listado.php?'+ '<?php echo "orden=$orden&direccion=$direccion&"?>' + 'items=' + $(this).val();
              
-         });
-         
-         $('th a').click(function(){
-              $(this).append('<span class="<?php echo $iconoDireccion;?>"></span>');
          });
         </script>
            
