@@ -42,7 +42,11 @@ require_once("../functions/funciones.php");
             <?php
             $items = (isset($_GET['items'])) ? $_GET['items'] : 5;
             ?>
-            <input type="text" placeholder="Buscar"><a href="#" role="button" class="btn btn-primary">Buscar</a><br/><br/>
+            <form action="listado.php" method="GET">
+            <input type="text" placeholder="Buscar" name="busqueda">
+            <input type="submit" value="Buscar" class="btn btn-primary">
+            </form>
+            <br/><br/>
             <label>Items Pagina</label>    
             <select id="cantItems">
                 <option value="5"<?php echo ($items == 5) ? "selected" : ""; ?>>5</option>
@@ -55,17 +59,18 @@ require_once("../functions/funciones.php");
             $pagActual = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
             $orden = (isset($_GET['orden'])) ? $_GET['orden'] : "id";
             $direccion = (isset($_GET['direccion'])) ? $_GET['direccion'] : "ASC";
+            $busqueda = (isset($_GET['busqueda'])) ? $_GET['busqueda'] : "";
             ?>
 
             <table class="table">
                 <thead>
                     <tr>
-                        <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">ID<?php if ($orden == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Nombre<?php if ($orden == 'nombre') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Apellido<?php if ($orden == 'apellido') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=edad&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Edad<?php if ($orden == 'edad') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Año Nacimiento<?php if ($orden == 'fecha_nacimiento') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>">Dni<?php if ($orden == 'dni') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">ID<?php if ($orden == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Nombre<?php if ($orden == 'nombre') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Apellido<?php if ($orden == 'apellido') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=edad&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Edad<?php if ($orden == 'edad') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Año Nacimiento<?php if ($orden == 'fecha_nacimiento') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Dni<?php if ($orden == 'dni') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                     </tr>
                 </thead>    
                 <tbody> 
@@ -73,7 +78,7 @@ require_once("../functions/funciones.php");
                     <?php
                     
                     
-                    foreach (listarPersonas($orden, $direccion, $items,$pagActual,"mas") as $usuario) {
+                    foreach (listarPersonas($orden, $direccion, $items,$pagActual, $busqueda) as $usuario) {
                         ?>
                         <tr>
                             <td> <?php echo $usuario['id']; ?> </td>
@@ -95,7 +100,7 @@ require_once("../functions/funciones.php");
                         <?php
                     }
 
-                    $total = totalPersonas();
+                    $total = totalPersonas($busqueda);
                     $cantPaginas = ceil($total / $items);
                     ?>
 
@@ -111,7 +116,7 @@ require_once("../functions/funciones.php");
                  $active = ($i == $pagActual)?"active": ""; 
                  
                  ?>
-                <li class="<?php echo $active; ?>"><a href="<?php echo "listado.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i"?>"><?php echo $i ?></a></li>
+                <li class="<?php echo $active; ?>"><a href="<?php echo "listado.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i&busqueda=$busqueda"?>"><?php echo $i ?></a></li>
 
                 <?php } ?>  
 

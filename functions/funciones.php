@@ -2,9 +2,11 @@
 
 include '../config/database.php';
 
-function totalPersonas() {
+function totalPersonas($busqueda) {
     $pdo = conectar();
-    $statement = $pdo->prepare("SELECT count(*) as total FROM personas");
+    $statement = $pdo->prepare("SELECT count(*) as total "
+                             . " FROM personas"
+                             . " where nombre like '%$busqueda%' or apellido like '%$busqueda%' ");
     $statement->execute();
     $result = $statement->fetchColumn();
 
