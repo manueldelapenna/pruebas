@@ -2,6 +2,16 @@
 
 include '../config/database.php';
 
+function todasPersonas(){
+    $pdo = conectar();
+    $statement = $pdo->prepare("SELECT * from personas");
+    $statement->execute();
+    $result = $statement->fetchAll();
+    
+    
+    return $result;
+}
+
 function totalPersonas($busqueda) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT count(*) as total "

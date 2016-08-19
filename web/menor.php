@@ -4,7 +4,7 @@ require_once("../functions/funciones.php");
 
 $accesos = array("admin", "user");
 tieneAcceso($accesos);
-$menor = MenorDeEdad(listarPersonas());
+$menor = MenorDeEdad(todasPersonas());
 
 $mensaje ="  " . $menor['nombre'] . " " . $menor['apellido'] . " tiene " . $menor['anios'] . " años y es la persona mas chica de la base de datos";
 ?>

@@ -87,8 +87,8 @@ require_once("../functions/funciones.php");
                             <td> <?php echo $usuario['edad'] ?></td>
                             <td> <?php echo formatearFechaNacimiento($usuario['fecha_nacimiento']); ?></td>
                             <td> <?php echo $usuario['dni']; ?></td>
-                            <td><a href="formVerPersona.php?id=<?php echo $usuario['id'] ?>" class="btn btn-success">Ver</a></td>
-                            <td> <a href="formModificarPersona.php?id=<?php echo $usuario['id'] ?>" class="btn btn-primary"> Modificar</a></td>
+                            <td><a href="formVerPersona.php?id=<?php echo $usuario['id'] ?>&busqueda=<?php echo $busqueda?>" class="btn btn-success">Ver</a></td>
+                            <td> <a href="formModificarPersona.php?id=<?php echo $usuario['id']?>&busqueda=<?php echo $busqueda; ?>" class="btn btn-primary"> Modificar</a></td>
                             <td> <form action="../functions/eliminarPersona.php" method ="POST">
                                     <input type="hidden" value="<?php echo $usuario['dni'] ?>" name="dniPersona" >
                                     <input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger">

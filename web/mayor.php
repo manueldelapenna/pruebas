@@ -2,7 +2,7 @@
 
 require_once("../scripts/acceso.php");
 require_once("../functions/funciones.php");
-$mayorPersona = MayorDeEdad(listarPersonas());
+$mayorPersona = MayorDeEdad(todasPersonas());
 $accesos = array("admin", "user");
 tieneAcceso($accesos);
 

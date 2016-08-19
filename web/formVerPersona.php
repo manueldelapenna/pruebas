@@ -22,6 +22,7 @@ require_once("../functions/funciones.php");
         $path = $rootpath . '/pruebas/_partials/menu.php';
         include_once($path);
         $error = "";
+        $busqueda = $_GET['busqueda'];
         $id = $_GET['id'];
         $pdo = conectar();
         $statement = $pdo->prepare("SELECT * FROM personas where id = $id");
@@ -42,7 +43,7 @@ require_once("../functions/funciones.php");
             <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $id; ?>">
             <input type="text" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" name="nacimiento" value="<?php echo formatearFechaNacimiento($result[0]['fecha_nacimiento']);?>"disabled><br/><br/>
             
-            <input type="submit" class="btn btn-primary" value="Retornar al Listado">
+            <a href="listado.php?busqueda=<?php echo $busqueda;?>" class="btn btn-primary">Retornar al listado</a>
         </form>
 
         <div class="centered">
