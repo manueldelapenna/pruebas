@@ -2,23 +2,19 @@
 
 define('BOT_TOKEN', '267163407:AAHVbvi2N0AFTerkb3ZiDoNPf-zNI5RzDRE');
 define('API_URL', 'https://api.telegram.org/bot' . BOT_TOKEN . '/');
+include 'functions/funciones.php';
 
 
 
 // read incoming info and grab the chatID
-$archivo = 'updateId.txt';
-if (!$compararUpdateId = file_get_contents($archivo)) {
-    die("imposible leer archivo");
-}
-$content = @file_get_contents(API_URL . 'getUpdates?offset='.($compararUpdateId+1));
+$updateId = ultimoUpdateId() + 1;
+$content = @file_get_contents(API_URL . 'getUpdates?offset='.$updateId);
 $update = json_decode($content, true);
 $results = $update['result'];
 
 foreach ($results as $result) {
 
-    
-        @file_put_contents($archivo, $result['update_id']);
-        // compose reply
+         // compose reply
 
         switch ($result['message']['text']) {
 
@@ -41,6 +37,8 @@ foreach ($results as $result) {
         // send reply
         $sendto = API_URL . "sendmessage?chat_id=" . $chatID . "&text=" . $reply;
         file_get_contents($sendto);
+        
+        actualizarUpdateId($updateId);
     
 }
 

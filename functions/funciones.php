@@ -1,6 +1,32 @@
 <?php
 
-include '../config/database.php';
+include $_SERVER['DOCUMENT_ROOT'].'/pruebas/config/database.php';
+
+function actualizarUpdateId($update_id){
+    
+     $pdo = conectar();
+    $statement = $pdo->prepare("UPDATE configuracion "
+                             . "SET valor=$update_id "
+                             . "where nombre='update_id'");
+    $statement->execute();
+    $result = $statement->fetchColumn();
+    
+    
+    return $result;
+}
+
+function ultimoUpdateId(){
+    $pdo = conectar();
+    $statement = $pdo->prepare("SELECT valor "
+                              . "from configuracion "
+                              . "where nombre='update_id'");
+    $statement->execute();
+    $result = $statement->fetchColumn();
+    
+    
+    return $result;
+}
+
 
 function todasPersonas(){
     $pdo = conectar();
