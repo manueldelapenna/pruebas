@@ -39,7 +39,7 @@ foreach ($results as $result) {
         file_get_contents($sendto);
         
         actualizarUpdateId($result['update_id']);
-        @file_get_contents(API_URL . 'getUpdates?offset='.$updateId);
+        @file_get_contents(API_URL . 'getUpdates?offset='.($result['update_id']+1));
     
 }
 
