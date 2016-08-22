@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-08-2016 a las 16:12:05
+-- Tiempo de generación: 22-08-2016 a las 15:17:15
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -19,6 +19,25 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `prueba`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `configuracion`
+--
+
+CREATE TABLE `configuracion` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `valor` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `configuracion`
+--
+
+INSERT INTO `configuracion` (`id`, `nombre`, `valor`) VALUES
+(1, 'update_id', '0');
 
 -- --------------------------------------------------------
 
@@ -93,7 +112,7 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`id`, `dni`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
-(1, 3846092, 'facundo', 'ares', '1986-02-07'),
+(1, 38460921, 'facundo', 'ares', '1995-02-17'),
 (2, 19874290, 'ramiro', 'echague', '1986-02-07'),
 (3, 21114708, 'monica gabriela', 'percow', '1986-02-07'),
 (4, 21980734, 'marcelo', 'tinelli', '1969-08-21'),
@@ -166,6 +185,12 @@ CREATE TABLE `usuarios_permisos` (
 --
 
 --
+-- Indices de la tabla `configuracion`
+--
+ALTER TABLE `configuracion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `grupos`
 --
 ALTER TABLE `grupos`
@@ -222,6 +247,11 @@ ALTER TABLE `usuarios_permisos`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `configuracion`
+--
+ALTER TABLE `configuracion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
@@ -240,7 +270,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
