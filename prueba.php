@@ -36,12 +36,12 @@ foreach ($results as $result) {
 
             default:
                 $reply = "Los comandos permitidos son:  /start, /hombre, /mujer";
-        
+        }
         $chatID = $result["message"]["chat"]["id"];
         // send reply
         $sendto = API_URL . "sendmessage?chat_id=" . $chatID . "&text=" . $reply;
         file_get_contents($sendto);
-    }
+    
 }
 
 function sendMessage() {
