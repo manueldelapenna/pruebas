@@ -38,7 +38,8 @@ foreach ($results as $result) {
         $sendto = API_URL . "sendmessage?chat_id=" . $chatID . "&text=" . $reply;
         file_get_contents($sendto);
         
-        actualizarUpdateId($updateId);
+        actualizarUpdateId($result['update_id']);
+        @file_get_contents(API_URL . 'getUpdates?offset='.$updateId);
     
 }
 
