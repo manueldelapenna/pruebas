@@ -10,13 +10,13 @@ $archivo = 'updateId.txt';
 if (!$compararUpdateId = file_get_contents($archivo)) {
     die("imposible leer archivo");
 }
-$content = @file_get_contents(API_URL . 'getUpdates?offset=-1000');
+$content = @file_get_contents(API_URL . 'getUpdates?offset='.($compararUpdateId+1));
 $update = json_decode($content, true);
 $results = $update['result'];
 
 foreach ($results as $result) {
 
-    if ($compararUpdateId < $result['update_id']) {
+    
         @file_put_contents($archivo, $result['update_id']);
         // compose reply
 
@@ -36,7 +36,7 @@ foreach ($results as $result) {
 
             default:
                 $reply = "Los comandos permitidos son:  /start, /hombre, /mujer";
-        }
+        
         $chatID = $result["message"]["chat"]["id"];
         // send reply
         $sendto = API_URL . "sendmessage?chat_id=" . $chatID . "&text=" . $reply;
