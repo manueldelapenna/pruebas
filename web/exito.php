@@ -36,7 +36,7 @@
                 }
             }
             ?> 
-             
+             <a href="index.php" class="btn btn-info">Volver a inicio</a>
             </div>
         
         <?php

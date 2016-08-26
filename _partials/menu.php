@@ -10,9 +10,9 @@
     <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administracion<span class="caret"></span></a>
           <ul class="dropdown-menu">
-      <li><a href = '#'>Agregar Grupo</a></li>
-      <li><a href = '#'>Agregar Permisos</a></li>
-      <li><a href = '#'>Agregar Usuarios</a></li>
+      <li><a href = '../web/agregarGrupo.php'>Agregar Grupo</a></li>
+      <li><a href = '../web/agregarPermiso.php'>Agregar Permisos</a></li>
+      <li><a href = '../web/agregarUsuario.php'>Agregar Usuarios</a></li>
     </ul>
   </li>
   <li><a href = '../scripts/logout.php'>Log Out</a></li>
