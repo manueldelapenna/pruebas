@@ -258,4 +258,51 @@ function soloLetras($in) {
         return FALSE;
 }
 
+function getPermisos(){
+    
+    $pdo = conectar();
+   $statement = $pdo->prepare("SELECT *"
+                            . "FROM permisos");
+   $statement->execute();
+   $result = $statement->fetchAll();
+   
+   return $result; 
+}
+
+function getGrupo($id){
+    
+    $pdo = conectar();
+   $statement = $pdo->prepare("SELECT *"
+                            . "FROM grupos WHERE id = $id");
+   $statement->execute();
+   $result = $statement->fetchAll();
+   
+   return $result; 
+}
+
+function getGrupoConPermisos($id){
+    $pdo = conectar();
+   $statement = $pdo->prepare("SELECT g.id AS grupo_id, g.name AS grupo_nombre, p.id AS permiso_id, p.name AS permiso_nombre
+                               FROM grupos g INNER JOIN grupos_permisos gp ON 
+                                     g.id = gp.grupo_id INNER JOIN permisos p ON
+                                     p.id = gp.permisos_id
+                               WHERE g.id = $id");
+   $statement->execute();
+   $result = $statement->fetchAll();
+   
+   return $result; 
+    
+}
+
+function grupoTienePermiso($permisosDeGrupos,$idPermiso){
+    foreach ($permisosDeGrupos as $aux){
+        if($aux['permiso_id'] == $idPermiso){
+            return TRUE;
+            
+        }
+    }
+    return FALSE;
+}
+
+
 ?>

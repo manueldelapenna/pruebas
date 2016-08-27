@@ -6,9 +6,9 @@ include 'funciones.php';
 $nombreUsuario = $_POST['nameUser'];
 $passUsuario = $_POST['passUser'];
 
-if(!soloLetras($nombreUsuario)){
+if($nombreUsuario == ""){
     
-    $mensaje = "Solo se permiten letras en el nombre de usuario";
+    $mensaje = "Debe ingresar un usuario";
     header("Location: ../web/agregarPermiso.php?mensaje=$mensaje");
     
 }else{
