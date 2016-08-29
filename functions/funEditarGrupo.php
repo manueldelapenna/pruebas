@@ -22,10 +22,6 @@ if (!soloLetras($nombreGrupo)) {
     $statement->bindParam(':id', $grupoID);
     $statement->execute();
 
-    //Busco ID grupo
-    $grupoID = $pdo->lastInsertId();
-
-
     //Borrar permisos actuales del grupo
     $statement = $pdo->prepare("DELETE FROM grupos_permisos
                                 WHERE grupo_id = $grupoID");
