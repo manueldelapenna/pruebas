@@ -37,7 +37,8 @@ require_once("../functions/funciones.php");
          <div class='container' >   
             <h2> <?php echo $obtenerGrupo[0]['name'] ?></h2>
             <div id="editarGrupo" class="col-md-12 col-md-offset-4">
-            <form class="form-inline" action="../functions/funAgregarGrupo.php" method="POST">
+            <form class="form-inline" action="../functions/funEditarGrupo.php" method="POST">
+                <input type="hidden" value="<?php echo $grupo ?>" name="grupoId">
                 <input type="text" class="form-control" value="<?php echo $obtenerGrupo[0]['name'] ?>" name="nameGroup"><br/>
                 <label>Indique los permisos</label><br/>
                 <?php 
