@@ -304,5 +304,16 @@ function grupoTienePermiso($permisosDeGrupos,$idPermiso){
     return FALSE;
 }
 
+function getGrupos(){
+    
+    $pdo = conectar();
+   $statement = $pdo->prepare("SELECT *
+                               FROM grupos");
+   $statement->execute();
+   $result = $statement->fetchAll();
+   
+   return $result; 
+}
+
 
 ?>
