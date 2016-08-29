@@ -1,48 +1,47 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'].'/pruebas/config/database.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/pruebas/config/database.php';
 
-function actualizarUpdateId($update_id){
-    
-     $pdo = conectar();
+function actualizarUpdateId($update_id) {
+
+    $pdo = conectar();
     $statement = $pdo->prepare("UPDATE configuracion "
-                             . "SET valor=$update_id "
-                             . "where nombre='update_id'");
+            . "SET valor=$update_id "
+            . "where nombre='update_id'");
     $statement->execute();
     $result = $statement->fetchColumn();
-    
-    
+
+
     return $result;
 }
 
-function ultimoUpdateId(){
+function ultimoUpdateId() {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT valor "
-                              . "from configuracion "
-                              . "where nombre='update_id'");
+            . "from configuracion "
+            . "where nombre='update_id'");
     $statement->execute();
     $result = $statement->fetchColumn();
-    
-    
+
+
     return $result;
 }
 
-
-function todasPersonas(){
+function todasPersonas() {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT * from personas");
     $statement->execute();
     $result = $statement->fetchAll();
-    
-    
+
+
     return $result;
 }
 
 function totalPersonas($busqueda) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT count(*) as total "
-                             . " FROM personas"
-                             . " where nombre like '%$busqueda%' or apellido like '%$busqueda%' ");
+            . " FROM personas"
+            . " where nombre like '%$busqueda%' or apellido like '%$busqueda%' ");
     $statement->execute();
     $result = $statement->fetchColumn();
 
@@ -55,7 +54,7 @@ function listarPersonas($orden, $direccion, $items, $pagina, $busqueda) {
 
     $offset = ($pagina - 1) * $items;
     $pdo = conectar();
-    
+
     if ($busqueda != "") {
 
         $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad "
@@ -64,7 +63,6 @@ function listarPersonas($orden, $direccion, $items, $pagina, $busqueda) {
                 . " ORDER BY $orden $direccion "
                 . " limit $items "
                 . " offset $offset"
-                
         );
     } else {
         $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad "
@@ -258,62 +256,59 @@ function soloLetras($in) {
         return FALSE;
 }
 
-function getPermisos(){
-    
+function getPermisos() {
+
     $pdo = conectar();
-   $statement = $pdo->prepare("SELECT *"
-                            . "FROM permisos");
-   $statement->execute();
-   $result = $statement->fetchAll();
-   
-   return $result; 
+    $statement = $pdo->prepare("SELECT *"
+            . "FROM permisos");
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    return $result;
 }
 
-function getGrupo($id){
-    
+function getGrupo($id) {
+
     $pdo = conectar();
-   $statement = $pdo->prepare("SELECT *"
-                            . "FROM grupos WHERE id = $id");
-   $statement->execute();
-   $result = $statement->fetchAll();
-   
-   return $result; 
+    $statement = $pdo->prepare("SELECT *"
+            . "FROM grupos WHERE id = $id");
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    return $result;
 }
 
-function getGrupoConPermisos($id){
+function getGrupoConPermisos($id) {
     $pdo = conectar();
-   $statement = $pdo->prepare("SELECT g.id AS grupo_id, g.name AS grupo_nombre, p.id AS permiso_id, p.name AS permiso_nombre
+    $statement = $pdo->prepare("SELECT g.id AS grupo_id, g.name AS grupo_nombre, p.id AS permiso_id, p.name AS permiso_nombre
                                FROM grupos g INNER JOIN grupos_permisos gp ON 
                                      g.id = gp.grupo_id INNER JOIN permisos p ON
                                      p.id = gp.permisos_id
                                WHERE g.id = $id");
-   $statement->execute();
-   $result = $statement->fetchAll();
-   
-   return $result; 
-    
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    return $result;
 }
 
-function grupoTienePermiso($permisosDeGrupos,$idPermiso){
-    foreach ($permisosDeGrupos as $aux){
-        if($aux['permiso_id'] == $idPermiso){
+function grupoTienePermiso($permisosDeGrupos, $idPermiso) {
+    foreach ($permisosDeGrupos as $aux) {
+        if ($aux['permiso_id'] == $idPermiso) {
             return TRUE;
-            
         }
     }
     return FALSE;
 }
 
-function getGrupos(){
-    
-    $pdo = conectar();
-   $statement = $pdo->prepare("SELECT *
-                               FROM grupos");
-   $statement->execute();
-   $result = $statement->fetchAll();
-   
-   return $result; 
-}
+function getGrupos() {
 
+    $pdo = conectar();
+    $statement = $pdo->prepare("SELECT *
+                               FROM grupos");
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    return $result;
+}
 
 ?>

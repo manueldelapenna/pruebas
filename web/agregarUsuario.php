@@ -25,43 +25,51 @@ require_once("../functions/funciones.php");
         <br/>
         <br/>
 
-        <div id="formAgregar" class=" row container col-md-12">
-            <form class="form-inline" action="../functions/funAgregarUsuario.php" method="POST">
-                <input type="text" class="form-control" placeholder="Nombre del Usuario" name="nameUser">
-                <input type="password" class="form-control" placeholder="Contraseña" name="passUser"><br/>
-                
-                <div class="col-md-6 col-md-offset-3">
-                <label>Indique Grupos</label><br/>
-                
-                <?php 
-                foreach(getGrupos() as $grupo){
-                ?>   
-                
-                <input type="checkbox" name="grupos[]" value="<?php echo $grupo['id']?>"><?php echo $grupo['name'] ?><br/>
-                
-                <?php    
-                }
-                ?>
+
+        <form class="form-inline" action="../functions/funAgregarUsuario.php" method="POST">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2">
+                    <input type="text" class="form-control" placeholder="Nombre del Usuario" name="nameUser">
+                    <input type="password" class="form-control" placeholder="Contraseña" name="passUser"><br/>
                 </div>
-                <div class="col-md-6 col-md-offset-3">
-                <label>Indique los permisos</label><br/>
-                
-                <?php 
-                foreach(getPermisos() as $permiso){
-                ?>   
-                
-                <input type="checkbox" name="permisos[]" value="<?php echo $permiso['id']?>"><?php echo $permiso['name'] ?><br/>
-                
-                <?php    
-                }
-                ?>
-                
-                
-                <input type="submit" value="Agregar Usuario" class="btn btn-info">
-                <a href="index.php" class="btn btn-info">Volver a inicio</a>
-            </form>
+            </div>    
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-3">
+                    <label>Indique Grupos</label><br/>
+
+                    <?php
+                    foreach (getGrupos() as $grupo) {
+                        ?>   
+
+                        <input type="checkbox" name="grupos[]" value="<?php echo $grupo['id'] ?>"><?php echo $grupo['name'] ?><br/>
+
+                        <?php
+                    }
+                    ?>
+                </div>
+                <div class="col-md-3 ">
+                    <label>Indique los permisos</label><br/>
+
+                    <?php
+                    foreach (getPermisos() as $permiso) {
+                        ?>   
+
+                        <input type="checkbox" name="permisos[]" value="<?php echo $permiso['id'] ?>"><?php echo $permiso['name'] ?><br/>
+
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-4">
+                    <input type="submit" value="Agregar Usuario" class="btn btn-info">
+                    <a href="index.php" class="btn btn-info">Volver a inicio</a>
+                </div>
+            </div>
+        </form>
+
+
 
 
 
