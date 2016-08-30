@@ -11,7 +11,7 @@ $updateId = ultimoUpdateId() + 1;
 $content = @file_get_contents(API_URL . 'getUpdates?offset=' . $updateId);
 $update = json_decode($content, true);
 $results = $update['result'];
-
+$string = "";
 foreach ($results as $result) {
 
     // Diferenciamos si es una respuesta del teclado o si es solo una palabra ingresada por el usuario
@@ -25,9 +25,47 @@ foreach ($results as $result) {
     }
 
     switch ($cmd) {
+        
+        case "/start":
+            $reply = "Buenos Dias!.Escriba /help y obtendra informacion sobre el funcionamiento del programa.".
+            $encodeado = "";
+            break;
+        
+        case "/help":
+            $reply = 'Abajo a la derecha hay un recuadro con el simbolo "/" el cual va a obtener los comandos que puede ingresar. ' ;
+            $encodeado = "";
+            break;
 
         case "/hombre":
-            $reply = "La persona ingresada es un hombre";
+            $string = 'M';
+            $reply = "La persona ingresada es un hombre.Indique la entidad a la que pertenece:";
+            
+            $data = array(
+                'text' =>"Caja",
+                'callback_data' => $string." Caja"
+            );
+
+
+            $data2 = array(
+                'text' => "Docentes",
+                'callback_data' => $string." Docentes"
+            );
+
+            $data3 = array(
+                'text' => "Salud",
+                'callback_data' => $string." Salud"
+            );
+            
+            $keyboard = array(
+                'inline_keyboard' => array(array($data, $data2,$data3))
+            );
+
+            $encodeado = json_encode($keyboard);
+            
+            break;
+        
+        case "Caja"||"Docentes"||"Salud":
+            $reply = $string."".$cmd;
             $encodeado = "";
             break;
 
@@ -51,6 +89,14 @@ foreach ($results as $result) {
         case "/hora":
             $reply = date('d-m-Y H:i:s');
             $encodeado = "";
+            
+            break;
+        case "/input":
+            $reply = '<form action="prueba.php" method="POST">
+                      <input type="text" placeholder="ingrese legajo de la persona"> ';
+            $encodeado = "";
+            $sendto = API_URL . "sendmessage?chat_id=" . $chatID ."&parse_mode=HTML&text=" . $reply . "&reply_markup=" . $encodeado;
+            file_get_contents($sendto);
             
             break;
 
@@ -82,9 +128,14 @@ foreach ($results as $result) {
                 'text' => "\xE2\x8F\xB0"."Hora",
                 'callback_data' => "/hora"
             );
+            $data6 = array(
+                'text' => "Input",
+                'callback_data' => "/input"
+            );
+            
 
             $keyboard = array(
-                'inline_keyboard' => array(array($data, $data2), array($data3, $data4, $data5))
+                'inline_keyboard' => array(array($data, $data2,$data6), array($data3, $data4, $data5))
             );
 
             $encodeado = json_encode($keyboard);

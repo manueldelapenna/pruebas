@@ -59,7 +59,7 @@ require_once("../functions/funciones.php");
                 
                 
                 <input type="submit" value="Modificar Grupo" class="btn btn-info">
-                <a href="index.php" class="btn btn-info">Volver a inicio</a>
+                <a href="verGrupos.php" class="btn btn-info">Volver</a>
             </form>
         </div>       
         </div>
