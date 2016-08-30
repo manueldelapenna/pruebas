@@ -48,12 +48,14 @@ require_once("../functions/funciones.php");
         
         <?php
         if (isset($_GET['mensaje'])) {
-            echo $_GET['mensaje'];
-        }?>
-            
-        </div> 
-            
-         <?php   
+            ?>
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?php echo $_GET['mensaje']; ?>
+            </div> 
+        </div>
+         <?php
+        } 
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);
         ?>

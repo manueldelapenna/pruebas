@@ -24,17 +24,17 @@
                         Administracion<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="../web/verUsuarios.php">Usuarios</a></li>
+                        <li><a href="../web/verUsuarios.php"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Usuarios</a></li>
                         <li class="divider"></li>
-                        <li><a href="../web/verGrupos.php">Grupos</a></li>
+                        <li><a href="../web/verGrupos.php"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Grupos</a></li>
                         <li class="divider"></li>
-                        <li><a href="../web/verPermisos.php">Permisos</a></li>
+                        <li><a href="../web/verPermisos.php"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Permisos</a></li>
                     </ul>
                 </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../scripts/logout.php">Log Out</a></li>
+                <li><a href="../scripts/logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Log Out</a></li>
             </ul>
         </div>
     </nav>
