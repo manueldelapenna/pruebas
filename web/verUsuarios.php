@@ -80,8 +80,8 @@ require_once("../functions/funciones.php");
                             <td> <?php echo $usuario['id']; ?> </td>
                             <td> <?php echo ucfirst($usuario['username']); ?> </td>
                             <td> <?php echo ucfirst($usuario['password']); ?> </td>
-                            <td> <?php echo $usuario['fecha_alta'] ?></td>
-                            <td> <?php echo formatearFechaNacimiento($usuario['ultimo_logueo']); ?></td>
+                            <td> <?php echo formatearFechaNacimiento($usuario['fecha_alta'])?></td>
+                            <td> <?php if(is_null($usuario['ultimo_logueo'])){echo "-----";}else{ echo formatearFechaNacimiento($usuario['ultimo_logueo']); }?></td>
                             <td><a href="verUsuario.php?id=<?php echo $usuario['id'] ?>&busqueda=<?php echo $busqueda?>" class="btn btn-success">Ver</a></td>
                             <td> <a href="editarUsuario.php?id=<?php echo $usuario['id']?>&busqueda=<?php echo $busqueda; ?>" class="btn btn-primary"> Modificar</a></td>
                             <td> <form action="../functions/eliminarUsuario.php" method ="POST">

@@ -78,7 +78,7 @@ require_once("../functions/funciones.php");
                 ?>
                     </div>
                 </div>    
-                <a href="verUsuarios.php" class="btn btn-info">Volver a inicio</a>
+                <a href="verUsuarios.php" class="btn btn-info">Volver</a>
             </form>
         </div>       
         

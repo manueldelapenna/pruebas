@@ -54,7 +54,7 @@ function totalGrupos($busqueda) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT count(*) as total 
                                 FROM grupos
-                                where nombre like '%$busqueda%' or apellido like '%$busqueda%' ");
+                                where name like '%$busqueda%'");
     $statement->execute();
     $result = $statement->fetchColumn();
 
@@ -67,7 +67,7 @@ function totalPermisos($busqueda) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT count(*) as total 
                                 FROM permisos
-                                where nombre like '%$busqueda%' or apellido like '%$busqueda%' ");
+                                where name like '%$busqueda%'");
     $statement->execute();
     $result = $statement->fetchColumn();
 
@@ -80,7 +80,7 @@ function totalUsuarios($busqueda) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT count(*) as total 
                                 FROM usuarios
-                                where nombre like '%$busqueda%' or apellido like '%$busqueda%' ");
+                                where username like '%$busqueda%'");
     $statement->execute();
     $result = $statement->fetchColumn();
 
@@ -126,7 +126,7 @@ function listarUsuarios($orden, $direccion, $items, $pagina, $busqueda) {
 
         $statement = $pdo->prepare("SELECT * 
                                     FROM usuarios
-                                    where nombre like '%$busqueda%' or apellido like '%$busqueda%' 
+                                    where username like '%$busqueda%' 
                                     ORDER BY $orden $direccion 
                                     LIMIT $items 
                                     OFFSET $offset"
@@ -154,7 +154,7 @@ function listarGrupos($orden, $direccion, $items, $pagina, $busqueda) {
 
         $statement = $pdo->prepare("SELECT * 
                                     FROM grupos
-                                    where nombre like '%$busqueda%' or apellido like '%$busqueda%' 
+                                    where name like '%$busqueda%'  
                                     ORDER BY $orden $direccion 
                                     LIMIT $items 
                                     OFFSET $offset"
@@ -182,7 +182,7 @@ function listarPermisos($orden, $direccion, $items, $pagina, $busqueda) {
 
         $statement = $pdo->prepare("SELECT * 
                                     FROM permisos
-                                    where nombre like '%$busqueda%' or apellido like '%$busqueda%' 
+                                    where name like '%$busqueda%'
                                     ORDER BY $orden $direccion 
                                     LIMIT $items 
                                     OFFSET $offset"
