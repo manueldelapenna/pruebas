@@ -201,7 +201,6 @@ function listarPermisos($orden, $direccion, $items, $pagina, $busqueda) {
     return $result;
 }
 
-
 function direccionOrdenamiento($direccionActual) {  //cambia la direccion
     if ($direccionActual == "ASC") {
         return "DESC";
@@ -402,14 +401,14 @@ function getGrupo($id) {
     return $result;
 }
 
-function todosLosGrupos(){
-   $pdo = conectar();
+function todosLosGrupos() {
+    $pdo = conectar();
     $statement = $pdo->prepare("SELECT *
                                 FROM grupos");
     $statement->execute();
     $result = $statement->fetchAll();
 
-    return $result; 
+    return $result;
 }
 
 function getGrupoConPermisos($id) {
@@ -426,20 +425,20 @@ function getGrupoConPermisos($id) {
     return $result;
 }
 
-function getUsuarioConPermisos($id){
+function getUsuarioConPermisos($id) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT u.id as usuario_id, u.username AS username, u.password AS password, p.id AS permiso_id, p.name AS permiso_nombre
                                 FROM usuarios u INNER JOIN usuarios_permisos up ON
                                       u.id = up.user_id INNER JOIN permisos p ON
                                       p.id = up.permisos_id
-                                WHERE u.id = $id" 
-                                );
+                                WHERE u.id = $id"
+    );
     $statement->execute();
     $result = $statement->fetchAll();
     return $result;
 }
 
-function getUsuarioConGrupos($id){
+function getUsuarioConGrupos($id) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT u.id AS usuario_id, u.username AS username, u.password AS password, g.id AS grupo_id, g.name AS grupo_name 
                                 FROM usuarios u INNER JOIN usuarios_grupos ug ON
@@ -451,25 +450,25 @@ function getUsuarioConGrupos($id){
     return $result;
 }
 
-function usuarioTienePermiso($permisosUsuario, $idPermiso){
-    foreach($permisosUsuario as $permiso){
-        if($permiso['id'] == $idPermiso){
+function usuarioTienePermiso($permisosUsuario, $idPermiso) {
+    foreach ($permisosUsuario as $permiso) {
+        if ($permiso['id'] == $idPermiso) {
             return TRUE;
         }
     }
     return FALSE;
 }
 
-function usuarioPerteneceGrupo($gruposUsuario, $idGrupo){
-    foreach($gruposUsuario as $grupo){
-        if($grupo['grupo_id'] == $idGrupo){
+function usuarioPerteneceGrupo($gruposUsuario, $idGrupo) {
+    foreach ($gruposUsuario as $grupo) {
+        if ($grupo['grupo_id'] == $idGrupo) {
             return TRUE;
         }
     }
     return FALSE;
 }
 
-function getUsuario($id){
+function getUsuario($id) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT * 
                                 FROM usuarios u
@@ -477,9 +476,7 @@ function getUsuario($id){
     $statement->execute();
     $result = $statement->fetchAll();
     return $result;
-    
 }
-
 
 function grupoTienePermiso($permisosDeGrupos, $idPermiso) {
     foreach ($permisosDeGrupos as $aux) {
@@ -501,7 +498,7 @@ function getGrupos() {
     return $result;
 }
 
-function getPermiso($id){
+function getPermiso($id) {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT * 
                                 FROM permisos
@@ -511,20 +508,33 @@ function getPermiso($id){
     return $result;
 }
 
-function tienePermiso($idUsuario, $nombrePermiso){
+function tienePermiso($nombreUsuario, $nombrePermiso) {
     $pdo = conectar();
-    
+
     $statement = $pdo->prepare("SELECT count(*) AS cantidad
                                 FROM usuarios u INNER JOIN usuarios_grupos ug ON u.id = ug.user_id
                                                 INNER JOIN grupos g ON ug.group_id = g.id 
                                                 INNER JOIN grupos_permisos gp ON g.id = gp.grupo_id 
                                                 INNER JOIN permisos p ON gp.permisos_id = p.id
-                                WHERE u.id = $idUsuario and p.name = '$nombrePermiso'");
+                                WHERE u.username = $nombreUsuario and p.name = '$nombrePermiso'");
     $statement->execute();
     $result = $statement->fetchColumn();
-    
-    return $result;
-    
+
+    if ($result) {
+        return TRUE;
+    } else {
+
+        $statement = $pdo->prepare("SELECT count(*) AS cantidad
+                                    FROM usuarios u INNER JOIN usuarios_permisos up ON
+                                          u.id = up.user_id INNER JOIN permisos p ON
+                                          p.id = up.permisos_id
+                                    WHERE u.username = $nombreUsuario and p.name = '$nombrePermiso'"
+        );
+        $statement->execute();
+        $result2 = $statement->fetchColumn();
+
+        return $result2;
+    }
 }
 
 ?>

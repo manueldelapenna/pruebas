@@ -2,21 +2,22 @@
 
 session_start();
 require("../functions/funciones.php");
-function tieneAcceso($usernameArray) {
+
+function tieneAcceso($nombrePermiso) {
 
     if (!isset($_SESSION['usuario'])) {
         header("Location: ../web/index.php");
         exit();
     } else {
 
-        $tieneAcceso = in_array($_SESSION['usuario'], $usernameArray);
-        
-         if (!$tieneAcceso) {
-            $error = "El usuario no tiene acceso";
-            header("Location: ../web/error.php/error=$error");
-            return FALSE;
+        $tieneAcceso = tienePermiso($_SESSION['usuario'], $nombrePermiso);
+
+        if ($tieneAcceso) {
+            return TRUE;
         }
-         return TRUE;
+        $error = "El usuario no tiene acceso";
+        header("Location: ../web/error.php/error=$error");
+        return FALSE;
     }
 }
 
