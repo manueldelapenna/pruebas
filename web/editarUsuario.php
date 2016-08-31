@@ -77,7 +77,7 @@ foreach (getPermisos() as $permiso) {
                     </div>
                 </div>
 
-                <input type="submit" value="Modificar Grupo" class="btn btn-info">
+                <input type="submit" value="Modificar Usuario" class="btn btn-info">
                 <a href="verUsuarios.php" class="btn btn-info">Volver</a>
             </form>
         </div>       

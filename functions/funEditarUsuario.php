@@ -36,7 +36,7 @@ $statement->execute();
 
 
 //Elimino los permisos que tenia
-$satetement = $pdo->prepare("DELETE FROM usuarios_permisos
+$statement = $pdo->prepare("DELETE FROM usuarios_permisos
                              WHERE user_id = $usuarioId");
 $statement->execute();
 
