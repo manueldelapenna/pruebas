@@ -16,7 +16,7 @@ function tieneAcceso($nombrePermiso) {
             return TRUE;
         }
         $error = "El usuario no tiene acceso";
-        header("Location: ../web/error.php/error=$error");
+        header("Location: ../web/error.php?error=$error");
         return FALSE;
     }
 }
