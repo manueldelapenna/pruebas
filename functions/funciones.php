@@ -511,4 +511,20 @@ function getPermiso($id){
     return $result;
 }
 
+function tienePermiso($idUsuario, $nombrePermiso){
+    $pdo = conectar();
+    
+    $statement = $pdo->prepare("SELECT count(*) AS cantidad
+                                FROM usuarios u INNER JOIN usuarios_grupos ug ON u.id = ug.user_id
+                                                INNER JOIN grupos g ON ug.group_id = g.id 
+                                                INNER JOIN grupos_permisos gp ON g.id = gp.grupo_id 
+                                                INNER JOIN permisos p ON gp.permisos_id = p.id
+                                WHERE u.id = $idUsuario and p.name = '$nombrePermiso'");
+    $statement->execute();
+    $result = $statement->fetchColumn();
+    
+    return $result;
+    
+}
+
 ?>

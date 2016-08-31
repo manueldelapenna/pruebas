@@ -18,7 +18,7 @@ $statement->bindParam(":username", $nombreUsuario);
 $statement->execute();
 
 //borro los grupos a los que pertenece el usuario
-$statement = $pdo->prepare("DELETE INTO usuarios_grupos
+$statement = $pdo->prepare("DELETE FROM usuarios_grupos
                             WHERE user_id = :usuarioId");
 $statement->bindParam(":usuarioId", $usuarioId);
 $statement->execute();
@@ -36,7 +36,7 @@ $statement->execute();
 
 
 //Elimino los permisos que tenia
-$satetement = $pdo->prepare("DELETE INTO usuarios_permisos
+$satetement = $pdo->prepare("DELETE FROM usuarios_permisos
                              WHERE user_id = $usuarioId");
 $statement->execute();
 
