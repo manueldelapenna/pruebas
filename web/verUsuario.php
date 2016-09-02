@@ -39,8 +39,15 @@ require_once("../functions/funciones.php");
           
              <h2> <?php echo ucfirst($usuario[0]['username']) ?></h2>
             <div id="editarGrupo" class="col-md-12 col-md-offset-4">
+                <div class="row">
             <form class="form-inline" action="../functions/funEditarUsuario.php" method="POST">
+                <div class="col-sm-3">
                 <input type="text" class="form-control" value="<?php echo ucfirst($usuario[0]['username']) ?>" name="username" disabled><br/>
+                </div>
+                <div class="col-sm-3">
+                <input type="text" class="form-control" value="<?php echo $usuario[0]['password'] ?>" name="password" disabled><br/>
+                </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-2">
                 

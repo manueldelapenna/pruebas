@@ -1,7 +1,6 @@
 <?php
 require("../scripts/acceso.php");
-$accesos = array("admin");
-tieneAcceso($accesos);
+tieneAcceso('grupos_listar');
 
 require_once("../functions/funciones.php");
 ?>
