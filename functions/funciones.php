@@ -516,7 +516,7 @@ function tienePermiso($nombreUsuario, $nombrePermiso) {
                                                 INNER JOIN grupos g ON ug.group_id = g.id 
                                                 INNER JOIN grupos_permisos gp ON g.id = gp.grupo_id 
                                                 INNER JOIN permisos p ON gp.permisos_id = p.id
-                                WHERE u.username = $nombreUsuario and p.name = '$nombrePermiso'");
+                                WHERE u.username = '$nombreUsuario' and p.name = '$nombrePermiso'");
     $statement->execute();
     $result = $statement->fetchColumn();
 
@@ -528,7 +528,7 @@ function tienePermiso($nombreUsuario, $nombrePermiso) {
                                     FROM usuarios u INNER JOIN usuarios_permisos up ON
                                           u.id = up.user_id INNER JOIN permisos p ON
                                           p.id = up.permisos_id
-                                    WHERE u.username = $nombreUsuario and p.name = '$nombrePermiso'"
+                                    WHERE u.username = '$nombreUsuario' and p.name = '$nombrePermiso'"
         );
         $statement->execute();
         $result2 = $statement->fetchColumn();
