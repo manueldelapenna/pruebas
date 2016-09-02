@@ -282,15 +282,24 @@ function obtenerUsuarios() {
     return $result;
 }
 
-function verificarUsuario($usuario, $contrasena) {
+function verificarUsuario($username, $password) {
 
-    foreach (obtenerUsuarios() as $u) {
-
-        if ($u['username'] == $usuario && $u['password'] == $contrasena) {
-            return TRUE;
-        }
-    }
-
+   $pdo = conectar();
+   
+   $statement = $pdo->prepare("SELECT * FROM usuarios
+                                WHERE username = :username");
+    $statement->bindParam(':username', $username);
+    
+    $statement->execute();
+    $result = $statement->fetchAll();
+    
+    
+    
+      if (isset($result[0])&&(encryptPassword($result[0]['salt'], $password) == $result[0]['password'])){
+          return TRUE;
+      }
+    
+    
     return FALSE;
 }
 
@@ -536,5 +545,20 @@ function tienePermiso($nombreUsuario, $nombrePermiso) {
         return $result2;
     }
 }
+
+function generateSalt(){
+    $salt = md5(uniqid(mt_rand(), true));
+    return $salt;
+}
+
+function encryptPassword($salt, $password){
+
+$password = md5($salt.sha1($password));  
+
+return $password;
+}
+
+
+
 
 ?>

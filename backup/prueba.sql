@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2016 a las 09:57:38
+-- Tiempo de generación: 02-09-2016 a las 11:02:56
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -106,6 +106,7 @@ CREATE TABLE `permisos` (
 INSERT INTO `permisos` (`id`, `name`) VALUES
 (9, 'grupos_listar'),
 (8, 'grupo_agregar'),
+(10, 'permisos_listar'),
 (4, 'personas_agregar'),
 (5, 'personas_editar'),
 (6, 'personas_eliminar'),
@@ -161,6 +162,7 @@ INSERT INTO `personas` (`id`, `dni`, `nombre`, `apellido`, `fecha_nacimiento`) V
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `salt` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `fecha_alta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ultimo_logueo` datetime DEFAULT NULL
@@ -170,12 +172,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `username`, `password`, `fecha_alta`, `ultimo_logueo`) VALUES
-(1, 'Admin', 'admin', '2016-08-05 09:52:53', '2016-08-05 09:52:53'),
-(2, 'user', 'user', '2016-08-05 09:52:53', '2016-08-05 09:52:53'),
-(4, 'marcelo', 'tinelli', '2016-08-05 09:52:53', '2016-08-05 09:52:53'),
-(5, 'tomascope', 'copelaplata', '2016-08-24 18:58:36', NULL),
-(11, 'php ', 'aphp', '2016-08-29 10:33:44', NULL);
+INSERT INTO `usuarios` (`id`, `username`, `salt`, `password`, `fecha_alta`, `ultimo_logueo`) VALUES
+(12, 'callcenter', '285941c404c961e7f025d220e0abb228', '2bb61e557c6db6bf103caea9b93d96e8', '2016-09-02 10:44:07', NULL),
+(13, 'administrador', '35402efc55b9610986c14e4e1afeded6', '2969672cb3889790c9df3f84f84960d7', '2016-09-02 10:45:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -194,8 +193,8 @@ CREATE TABLE `usuarios_grupos` (
 --
 
 INSERT INTO `usuarios_grupos` (`id`, `group_id`, `user_id`) VALUES
-(2, 9, 11),
-(24, 1, 1);
+(26, 3, 12),
+(27, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -208,22 +207,6 @@ CREATE TABLE `usuarios_permisos` (
   `user_id` int(11) NOT NULL,
   `permisos_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuarios_permisos`
---
-
-INSERT INTO `usuarios_permisos` (`id`, `user_id`, `permisos_id`) VALUES
-(14, 11, 6),
-(15, 11, 1),
-(59, 1, 9),
-(60, 1, 8),
-(61, 1, 4),
-(62, 1, 5),
-(63, 1, 6),
-(64, 1, 1),
-(65, 1, 2),
-(66, 1, 3);
 
 --
 -- Índices para tablas volcadas
@@ -310,7 +293,7 @@ ALTER TABLE `grupos_permisos`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `personas`
 --
@@ -320,17 +303,17 @@ ALTER TABLE `personas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `usuarios_grupos`
 --
 ALTER TABLE `usuarios_grupos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT de la tabla `usuarios_permisos`
 --
 ALTER TABLE `usuarios_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 --
 -- Restricciones para tablas volcadas
 --

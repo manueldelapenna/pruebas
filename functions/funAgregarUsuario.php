@@ -15,9 +15,11 @@ if ($nombreUsuario == "") {
 } else {
 
     $pdo = conectar();
-    $statement = $pdo->prepare("INSERT INTO usuarios(username,password,fecha_alta) VALUE (:username,:password, :fecha_alta)");
+    $salt = generateSalt();
+    $statement = $pdo->prepare("INSERT INTO usuarios(username,salt,password,fecha_alta) VALUE (:username,:salt,:password, :fecha_alta)");
     $statement->bindParam(':username', $nombreUsuario);
-    $statement->bindParam(':password', $passUsuario);
+    $statement->bindParam(':salt', $salt);
+    $statement->bindParam(':password', encryptPassword($salt, $passUsuario));
     $statement->bindParam(':fecha_alta', $horaActual = date('Y-m-d H:i:s'));
     $statement->execute();
     //Busco ID Usuario
