@@ -35,7 +35,7 @@ foreach ($results as $result) {
     
     
     if (is_numeric($cmd) && strlen($cmd) <= 11) {
-        $Legajo = $cmd;
+        $legajo = $cmd;
         $reply = "Indique la entidad";
         $data = array(
             'text' => "Caja",
@@ -76,27 +76,18 @@ foreach ($results as $result) {
                 break;
 
             case "Hombre":
+            case "/hombre":
+                $string = "M";
                 $reply = "Ingrese numero de legajo";
                $encodeado = "";
                break;
 
-                break;
-
-            case "/hombre":
-               $reply = "Ingrese numero de legajo";
-               $encodeado = "";
-               break;
-
             case "Docentes":
-                $reply = $string . " Docentes";
+                $reply = $string ."".$legajo." Docentes";
                 $encodeado = "";
                 break;
 
-            /* case "Caja"||"Docentes"||"Salud":
-              $reply = "Ingreso una entidad valida";
-              $encodeado = "";
-              break; */
-
+            
             case "/mujer" :
                 $reply = "La persona ingresada es una mujer";
                 $encodeado = "";
