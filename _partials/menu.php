@@ -34,6 +34,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="../scripts/editarMiUsuario.php">Editar Usuario</a></li>
                 <li><a href="../scripts/logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Log Out</a></li>
             </ul>
         </div>

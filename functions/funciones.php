@@ -284,22 +284,22 @@ function obtenerUsuarios() {
 
 function verificarUsuario($username, $password) {
 
-   $pdo = conectar();
-   
-   $statement = $pdo->prepare("SELECT * FROM usuarios
+    $pdo = conectar();
+
+    $statement = $pdo->prepare("SELECT * FROM usuarios
                                 WHERE username = :username");
     $statement->bindParam(':username', $username);
-    
+
     $statement->execute();
     $result = $statement->fetchAll();
-    
-    
-    
-      if (isset($result[0])&&(encryptPassword($result[0]['salt'], $password) == $result[0]['password'])){
-          return TRUE;
-      }
-    
-    
+
+
+
+    if (isset($result[0]) && (encryptPassword($result[0]['salt'], $password) == $result[0]['password'])) {
+        return TRUE;
+    }
+
+
     return FALSE;
 }
 
@@ -546,19 +546,42 @@ function tienePermiso($nombreUsuario, $nombrePermiso) {
     }
 }
 
-function generateSalt(){
+function generateSalt() {
     $salt = md5(uniqid(mt_rand(), true));
     return $salt;
 }
 
-function encryptPassword($salt, $password){
+function encryptPassword($salt, $password) {
 
-$password = md5($salt.sha1($password));  
+    $password = md5($salt . sha1($password));
 
-return $password;
+    return $password;
 }
 
+function getIdUsuario($username){
+    
+    $pdo = conectar();
+    
+    $statement = $pdo->prepare("SELECT id
+                                 FROM usuarios
+                                 WHERE username = :username");
+    $statement->bindParam(':username', $username);
+    $statement->execute();
+    $result = $statement->fetchColumn();
+    
+    return $result;
+}
 
-
-
+function getPasswordUsuario($username){
+  $pdo = conectar();
+    
+    $statement = $pdo->prepare("SELECT password
+                                 FROM usuarios
+                                 WHERE username = :username");
+    $statement->bindParam(':username', $username);
+    $statement->execute();
+    $result = $statement->fetchColumn();
+    
+    return $result;  
+}
 ?>
