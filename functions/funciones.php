@@ -572,7 +572,7 @@ function getIdUsuario($username){
     return $result;
 }
 
-function getPasswordUsuario($username){
+function getPasswordUser($username){
   $pdo = conectar();
     
     $statement = $pdo->prepare("SELECT password
@@ -583,5 +583,18 @@ function getPasswordUsuario($username){
     $result = $statement->fetchColumn();
     
     return $result;  
+}
+
+function getAllUser($username){
+    $pdo = conectar();
+    
+    $statement = $pdo->prepare("SELECT *
+                                 FROM usuarios
+                                 WHERE username = :username");
+    $statement->bindParam(':username', $username);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    
+    return $result;
 }
 ?>
