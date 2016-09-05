@@ -5,11 +5,14 @@ include 'funciones.php';
 
 $usuarioId = $_POST['usuarioId'];
 $nombreUsuario = $_POST['username'];
-$gruposUsuario = $_POST['grupos'];
-$permisosUsuario = $_POST['permisos'];
-
+$gruposUsuario = isset($_POST['grupos'])?$_POST['grupos']: [];
+$permisosUsuario = isset($_POST['permisos'])?$_POST['permisos']: [];
+$string = [];
+$string1 = [];
+try{
+    
 $pdo = conectar();
-
+$pdo->beginTransaction();
 //cambio el nombre del usuario
 $statement = $pdo->prepare("UPDATE usuarios
                             SET username = :username
@@ -49,7 +52,11 @@ $pegado1 = implode(",", $string1);
 $statement = $pdo->prepare("INSERT INTO usuarios_permisos(user_id,permisos_id) VALUE $pegado1");
 $statement->execute();
 
-
+$pdo->commit();
 $mensaje= "El usuario ha sido modificado exitosamente";
 
 header("Location: ../web/exito.php?mensaje=$mensaje");
+}catch(Exception $e){
+  echo $e->getMessage();
+$pdo->rollBack();  
+}
