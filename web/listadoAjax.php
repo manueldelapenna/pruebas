@@ -27,8 +27,7 @@ require_once("../functions/funciones.php");
         $path = $rootpath . '/pruebas/functions/funciones.php';
         include_once($path);
         ?>
-        <input type="text" placeholder="Buscar" id="busqueda" name="busqueda">
-        <input type="button" value="Buscar" class="btn btn-primary" onclick="filterPerson()"><br/>
+        <input type="text" placeholder="Buscar" id="busqueda" onkeyup="filterPerson()" name="busqueda"><br/><br/>
         <input type="button" class="btn btn-info" value="Traer Personas" name="button">
 
 

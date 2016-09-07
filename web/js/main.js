@@ -14,10 +14,6 @@ function buscarAjax() {
         }});
 }
 
-$("#busqueda").keyup(function(){
-    alert("entra");
-   filterPerson(); 
-});
 function filterPerson() {
     $.ajax({
         url: "listadoService.php",
