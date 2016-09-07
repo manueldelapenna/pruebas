@@ -264,7 +264,7 @@ function edad($fechaNacimiento) {
 function agregarUsuarios($dni, $nombre, $apellido, $edad) {
     $pdo = conectar();
 
-    $statement = $pdo->prepare("INSERT INTO usuarios(dni,nombre,apellido,edad) VALUE (:dni,:nombre, :apellido, :edad)");
+    $statement = $pdo->prepare("INSERT INTO usuarios(dni,nombre,apellido,edad) VALUES (:dni,:nombre, :apellido, :edad)");
     $statement->bindParam(':dni', $dni);
     $statement->bindParam(':nombre', $nombre);
     $statement->bindParam(':apellido', $apellido);
