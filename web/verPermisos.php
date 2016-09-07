@@ -30,7 +30,7 @@ require_once("../functions/funciones.php");
         ?>
 
         <div>
-            <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
+            <?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
             <a href="agregarPermiso.php" class="btn btn-info">Agregar Permiso</a>
             <?php } ?>
             <br>

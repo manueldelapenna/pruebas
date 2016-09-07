@@ -29,7 +29,7 @@ require_once("../functions/funciones.php");
         ?>
 
         <div>
-            <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
+            <?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
             <a href="agregarUsuario.php" class="btn btn-info">Agregar Usuario</a>
             <?php } ?>
             <br>
@@ -37,7 +37,7 @@ require_once("../functions/funciones.php");
             <?php
             $items = (isset($_GET['items'])) ? $_GET['items'] : 5;
             ?>
-            <form action="verUsuarios.php" method="GET">
+           <form action="verUsuarios.php" method="GET">
             <input type="text" placeholder="Buscar" name="busqueda">
             <input type="submit" value="Buscar" class="btn btn-primary">
             </form>
