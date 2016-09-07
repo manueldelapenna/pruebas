@@ -27,9 +27,25 @@ require_once("../functions/funciones.php");
         $path = $rootpath . '/pruebas/functions/funciones.php';
         include_once($path);
         ?>
+        <input type="text" placeholder="Buscar" id="busqueda" name="busqueda">
+        <input type="button" value="Buscar" class="btn btn-primary" onclick="filterPerson()"><br/>
+        <input type="button" class="btn btn-info" value="Traer Personas" name="button">
 
-		
 
+        <div id="result" class="jumbotron" style="display:none">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                    </tr>
+                </thead>    
+                <tbody class="body-table"> 
+                </tbody>
+            </table>
+        </div>
         <?php
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);
