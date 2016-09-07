@@ -28,7 +28,7 @@ require_once("../functions/funciones.php");
         include_once($path);
         ?>
         <input type="text" placeholder="Buscar" id="busqueda" onkeyup="filterPerson()" name="busqueda"><br/><br/>
-        <input type="button" class="btn btn-info" value="Traer Personas" name="button">
+        <input type="button" class="btn btn-info" value="Traer Personas" onclick="filterPerson()" name="button">
 
 
         <div id="result" class="jumbotron" style="display:none">
