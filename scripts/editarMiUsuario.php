@@ -62,25 +62,25 @@ require_once("../functions/funciones.php");
                         $("#password").prop("type", "password");
                     }
                 })
-                
-            $("#show-password2").click(function () {
+
+                $("#show-password2").click(function () {
                     if ($(this).is(':checked')) {
                         $("#confirmPassword").prop("type", "text");
                     } else {
                         $("#confirmPassword").prop("type", "password");
                     }
                 })
-             
-            $("#change-password").click(function(){
-                 if ($(this).is(':checked')) {
+
+                $("#change-password").click(function () {
+                    if ($(this).is(':checked')) {
                         $("#passwordContainer").show();
                     } else {
                         $("#password").val("");
                         $("#confirmPassword").val("");
                         $("#passwordContainer").hide();
-                        
+
                     }
-            }) 
+                })
             });
         </script>
         <?php

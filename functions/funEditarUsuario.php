@@ -4,21 +4,51 @@ session_start();
 include 'funciones.php';
 
 $usuarioId = $_POST['usuarioId'];
-$nombreUsuario = $_POST['username'];
+$Usuario = $_POST['username'];
+$nombreUsuario = $_POST['firstname'];
+$apellidoUsuario = $_POST['lastname'];
+$email = $_POST['email'];
 $gruposUsuario = isset($_POST['grupos'])?$_POST['grupos']: [];
 $permisosUsuario = isset($_POST['permisos'])?$_POST['permisos']: [];
 $string = [];
 $string1 = [];
+
 try{
     
 $pdo = conectar();
 $pdo->beginTransaction();
-//cambio el nombre del usuario
+//cambio el usuario
 $statement = $pdo->prepare("UPDATE usuarios
                             SET username = :username
                             WHERE id = $usuarioId");
-$statement->bindParam(":username", $nombreUsuario);
+$statement->bindParam(":username", $Usuario);
 $statement->execute();
+
+//cambio el firstname
+$statement = $pdo->prepare("UPDATE usuarios
+                            SET firstname = :firstname
+                            WHERE id = $usuarioId");
+$statement->bindParam(":firstname", $nombreUsuario);
+$statement->execute();
+
+//cambio el lastname
+$statement = $pdo->prepare("UPDATE usuarios
+                            SET lastname = :lastname
+                            WHERE id = $usuarioId");
+$statement->bindParam(":lastname", $apellidoUsuario);
+$statement->execute();
+
+
+//valido el mail
+if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+    //modifico email
+$statement = $pdo->prepare("UPDATE usuarios
+                            SET email = :email
+                            WHERE id = $usuarioId");
+$statement->bindParam(":email", $email);
+$statement->execute();
+    
+}
 
 //borro los grupos a los que pertenece el usuario
 $statement = $pdo->prepare("DELETE FROM usuarios_grupos

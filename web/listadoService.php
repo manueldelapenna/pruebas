@@ -1,4 +1,5 @@
 <?php
+
 require_once("../functions/funciones.php");
 
 $items = (isset($_GET['items'])) ? $_GET['items'] : 100;
@@ -10,11 +11,13 @@ $orden = (isset($_GET['orden'])) ? $_GET['orden'] : "id";
 $direccion = (isset($_GET['direccion'])) ? $_GET['direccion'] : "ASC";
 $busqueda = (isset($_GET['busqueda'])) ? $_GET['busqueda'] : "";
 
-$personas = listarPersonas($orden, $direccion, $items,$pagActual, $busqueda);
+$personas = listarPersonas($orden, $direccion, $items, $pagActual, $busqueda);
 
-$result = ['code' => 200, 'result' => $personas];
+$total = totalPersonas($busqueda);
+$cantPaginas = ceil($total / $items);
+
+$result = ['code' => 200, 'result' => $personas, 'paginas' => $cantPaginas];
 
 echo json_encode($result);
+?>
 
-?>                    
-        

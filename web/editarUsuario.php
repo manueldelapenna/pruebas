@@ -1,5 +1,6 @@
 <?php
 require_once("../scripts/acceso.php");
+tieneAcceso('usuario_editar');
 require_once("../functions/funciones.php");
 ?>
 <!DOCTYPE html>

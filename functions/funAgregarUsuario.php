@@ -7,10 +7,16 @@ $nombreUsuario = $_POST['nameUser'];
 $passUsuario = $_POST['passUser'];
 $grupos = $_POST['grupos'];
 $permisos = $_POST['permisos'];
+$email = $_POST['email'];
 
 if ($nombreUsuario == "") {
 
     $mensaje = "Debe ingresar un usuario";
+    header("Location: ../web/agregarPermiso.php?mensaje=$mensaje");
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $mensaje = "Debe ingresar un mail correcto";
     header("Location: ../web/agregarPermiso.php?mensaje=$mensaje");
 } else {
 

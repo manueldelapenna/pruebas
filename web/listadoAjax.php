@@ -49,8 +49,8 @@ require_once("../functions/funciones.php");
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);
         ?>
-		<script>
-			filterPerson();
-		</script>
+        <script>
+            filterPerson();
+        </script>
     </body>
 </html>

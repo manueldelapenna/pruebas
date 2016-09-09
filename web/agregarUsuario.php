@@ -30,7 +30,8 @@ require_once("../functions/funciones.php");
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2">
                     <input type="text" class="form-control" placeholder="Nombre del Usuario" name="nameUser">
-                    <input type="password" class="form-control" placeholder="Contraseña" name="passUser"><br/>
+                    <input type="password" class="form-control" placeholder="Contraseña" name="passUser">
+                    <input type="text" class="form-control" placeholder="Email" name="email">  <br/>
                 </div>
             </div>    
             <div class="row">
@@ -80,8 +81,8 @@ require_once("../functions/funciones.php");
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <?php echo $_GET['mensaje']; ?>
             </div> 
-           
-         <?php
+
+            <?php
         }
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);

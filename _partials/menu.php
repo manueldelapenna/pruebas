@@ -16,9 +16,9 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="../web/index.php">Inicio</a></li>
-                <?php if (in_array($_SESSION['usuario'], ['admin'])) { ?>
-                    <li><a href="../web/listado.php">Personas</a></li>
-                <?php } ?>
+
+                <li><a href="../web/listado.php">Personas</a></li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Administracion<b class="caret"></b>

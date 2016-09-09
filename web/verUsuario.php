@@ -1,5 +1,6 @@
 <?php
 require_once("../scripts/acceso.php");
+tieneAcceso('usuarios_listar');
 require_once("../functions/funciones.php");
 ?>
 <!DOCTYPE html>
