@@ -100,7 +100,7 @@ require_once("../functions/funciones.php");
         <script>
             filterPerson();
             $('#cantItems').change(function () {
-                window.location = 'listado.php?' + '<?php echo "orden=$orden&direccion=$direccion&" ?>' + 'items=' + $(this).val();
+             filterPerson();   
 
             });
         </script>
