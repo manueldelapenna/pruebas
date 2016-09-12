@@ -56,7 +56,7 @@ function existeSexo($chatID){
                                 WHERE chatid = '$chatID'");
     $statement->execute();
     $result = $statement->fetchColumn();
-    if(empty($result)){
+    if(!empty($result)){
         return TRUE;
     }
     return FALSE; 
@@ -69,7 +69,7 @@ function existeLegajo($chatID){
                                 WHERE chatid = '$chatID'");
     $result = $statement->execute();
     $result = $statement->fetchColumn();
-    if($result){
+    if(!empty($result)){
         return TRUE;
     }
     return FALSE; 
@@ -83,7 +83,6 @@ function cambiarEntidad($chatID, $entidad){
                                 SET entidad= '$entidad'
                                 WHERE chatid= '$chatID'");
     $statement->execute();
-    return $result; 
 }
 
 function  borrarCampos($chatID){
