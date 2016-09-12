@@ -26,6 +26,17 @@ require_once("../functions/funciones.php");
         include_once($path);
         $path = $rootpath . '/pruebas/functions/funciones.php';
         include_once($path);
+
+        $items = (isset($_GET['items'])) ? $_GET['items'] : 100;
+
+        $indicadorDireccion = (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC";
+        $iconoDireccion = ($indicadorDireccion == "DESC") ? "glyphicon glyphicon-circle-arrow-up" : "glyphicon glyphicon-circle-arrow-down";
+        $pagActual = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
+        $orden = (isset($_GET['orden'])) ? $_GET['orden'] : "id";
+        $direccion = (isset($_GET['direccion'])) ? $_GET['direccion'] : "ASC";
+        $busqueda = (isset($_GET['busqueda'])) ? $_GET['busqueda'] : "";
+        $total = totalPersonas($busqueda);
+        $cantPaginas = ceil($total / $items);
         ?>
 
         <div>
@@ -44,14 +55,14 @@ require_once("../functions/funciones.php");
 
 
             <br/><br/>
-           <!-- <label>Items Pagina</label>    
+            <label>Items Pagina</label>    
             <select id="cantItems">
-                <option value="5"<?php //echo ($items == 5) ? "selected" : ""; ?>>5</option>
-                <option value="10"<?php //echo ($items == 10) ? "selected" : ""; ?>>10</option>
-                <option value="20"<?php //echo ($items == 20) ? "selected" : ""; ?>>20</option>
-            </select>-->
+                <option value="5"<?php echo ($items == 5) ? "selected" : ""; ?>>5</option>
+                <option value="10"<?php echo ($items == 10) ? "selected" : ""; ?>>10</option>
+                <option value="20"<?php echo ($items == 20) ? "selected" : ""; ?>>20</option>
+            </select>
 
-            <table class="table" style="display:none">
+            <table class="table">
                 <thead>
                     <tr>
                         <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">ID<?php if ($orden == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
@@ -62,14 +73,14 @@ require_once("../functions/funciones.php");
                         <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Dni<?php if ($orden == 'dni') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                     </tr>
                 </thead>    
-               <tbody class="body-table"> 
+                <tbody class="body-table"> 
 
                 </tbody>
             </table>
         </div>
 
         <div>
-          <!--  <ul class="pagination">
+            <ul class="pagination">
                 <?php
                 for ($i = 1; $i <= $cantPaginas; $i++) {
 
@@ -79,7 +90,7 @@ require_once("../functions/funciones.php");
 
                 <?php } ?>  
 
-            </ul>-->
+            </ul>
 
         </div> 
         <?php
