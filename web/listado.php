@@ -80,15 +80,16 @@ require_once("../functions/funciones.php");
         </div>
 
         <div>
+<input type="hidden" value="1" id="paginaActual">
             <ul class="pagination">
-                <?php
-                for ($i = 1; $i <= $cantPaginas; $i++) {
+                
+                <!--   <?php /* for ($i = 1; $i <= $cantPaginas; $i++) {
 
-                    $active = ($i == $pagActual) ? "active" : "";
-                    ?>
-                    <li class="<?php echo $active; ?>"><a href="<?php echo "listado.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i&busqueda=$busqueda" ?>"><?php echo $i ?></a></li>
+              $active = ($i == $pagActual) ? "active" : "";
+              ?>
+              <li class="<?php echo $active; ?>"><a href="<?php echo "listado.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i&busqueda=$busqueda" ?>"><?php echo $i ?></a></li>
 
-                <?php } ?>  
+              <?php } */ ?> -->
 
             </ul>
 
@@ -98,9 +99,10 @@ require_once("../functions/funciones.php");
         include_once($path);
         ?>
         <script>
+            var paginaActual = 1;
             filterPerson();
             $('#cantItems').change(function () {
-             filterPerson();   
+                filterPerson();
 
             });
         </script>
