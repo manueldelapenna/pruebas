@@ -22,6 +22,7 @@ function filterPerson() {
             //dibujar paginador
             var cantPaginas = JSONArray.paginas;
             var paginador = "";
+			var paginaActual = $("#paginaActual").val();
             for (var i = 1; i <= cantPaginas; i++) {
                 if (paginaActual == i) {
                     var active = "active";
@@ -38,11 +39,8 @@ function filterPerson() {
 ;
 
 $(document).ready(function () {
-    $(".pagination li a").click(function () {
+    $(".pagination").on( "click", "a", function () {
         $("#paginaActual").val($(this).text());
         filterPerson();
-
-
     });
-
 });
