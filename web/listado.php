@@ -32,24 +32,24 @@ require_once("../functions/funciones.php");
             <?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
                 <a href="formAgregarPersona.php" class="btn btn-info">Agregar Persona</a>
             <?php } ?>
-            <?php if (in_array($_SESSION['usuario'], ['admin', 'user'])) { ?>
+            <?php if (in_array($_SESSION['usuario'], ['administrador', 'user'])) { ?>
                 <a href="mayor.php" class="btn btn-info">Mayor Edad</a>
                 <a href="menor.php" class="btn btn-info">Menor Edad</a>
             <?php } ?>
             <br>
             <br/>
 
-            <form action="listado.php" method="GET">
-                <input type="text" placeholder="Buscar" id="busqueda" name="busqueda"onclick="filterPerson()">
-                <input type="submit" value="Buscar" class="btn btn-primary">
-            </form>
+
+            <input type="text" placeholder="Buscar" id="busqueda" onkeyup="filterPerson()" name="busqueda"><br/><br/>
+
+
             <br/><br/>
-            <label>Items Pagina</label>    
+           <!-- <label>Items Pagina</label>    
             <select id="cantItems">
-                <option value="5"<?php echo ($items == 5) ? "selected" : ""; ?>>5</option>
-                <option value="10"<?php echo ($items == 10) ? "selected" : ""; ?>>10</option>
-                <option value="20"<?php echo ($items == 20) ? "selected" : ""; ?>>20</option>
-            </select>
+                <option value="5"<?php //echo ($items == 5) ? "selected" : ""; ?>>5</option>
+                <option value="10"<?php //echo ($items == 10) ? "selected" : ""; ?>>10</option>
+                <option value="20"<?php //echo ($items == 20) ? "selected" : ""; ?>>20</option>
+            </select>-->
 
             <table class="table" style="display:none">
                 <thead>
@@ -62,14 +62,14 @@ require_once("../functions/funciones.php");
                         <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Dni<?php if ($orden == 'dni') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                     </tr>
                 </thead>    
-                <tbody id="listadoBody"> 
+               <tbody class="body-table"> 
 
                 </tbody>
             </table>
         </div>
 
         <div>
-            <ul class="pagination">
+          <!--  <ul class="pagination">
                 <?php
                 for ($i = 1; $i <= $cantPaginas; $i++) {
 
@@ -79,7 +79,7 @@ require_once("../functions/funciones.php");
 
                 <?php } ?>  
 
-            </ul>
+            </ul>-->
 
         </div> 
         <?php

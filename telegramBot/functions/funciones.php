@@ -43,7 +43,7 @@ function existeChatId($chatID){
 function agregarChatID($chatID){
     //agregar chatID
     $pdo = conectar();
-    $statement = $pdo->prepare("INSERT INTO datos(chatid) VALUES ('$chatID'))");
+    $statement = $pdo->prepare("INSERT INTO datos(chatid) VALUES ('$chatID')");
     $result = $statement->execute();
 }
 
@@ -87,4 +87,12 @@ function cambiarEntidad($chatID, $entidad){
 
 function  borrarCampos($chatID){
     //limpia los campos sexo, legajo y entidad del chatID
+}
+
+function cargarSexo($chatID,$string){
+    $pdo = conectar();
+    $statement = $pdo->prepare("UPDATE datos 
+                                SET sexo= '$string' 
+                                WHERE chatid='$chatID'");
+    $statement->execute();
 }

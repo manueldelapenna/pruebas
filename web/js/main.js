@@ -32,6 +32,7 @@ function filterPerson() {
             });
             $(".jumbotron").show();
             $(".body-table").html(HTML);
+            
 
         }});
 }

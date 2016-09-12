@@ -5,8 +5,11 @@ require(dirname(__FILE__).'/../index.php');
 
 function saludo($chatID){
     if(!existeChatId($chatID)){
+        echo $chatID;
+        echo "No existe chat ID";
         agregarChatID($chatID);
     }
+    
      $reply = "Buenos Dias!.Para comenzar a realizar la consulta deberá apretar uno de los botones para indicar de que sexo es la persona la cual desea consultar su informacion.Ante cualquier duda envie /help";
      /*$data = array(
                 'text' => 'Hombre',
@@ -31,14 +34,14 @@ function saludo($chatID){
 }
 
 function procesarSexo($chatID,$string){
-    $reply = "Usted ha ingresado que la persona es un hombre";
-    $pdo = conectar();
-    $statement = $pdo->prepare("UPDATE datos 
-                                SET sexo=$string 
-                                WHERE chatid=$chatID");
-    $result = $statement->execute();
+   if($string == "M"){
+       $sexo = "un hombre";
+   }else{
+       $sexo = "una mujer";
+   }
+    $reply = "Usted ha ingresado que la persona es ".$sexo;
+    cargarSexo($chatID,$string);
     enviar($chatID,$reply,'');
-    return $result;
 }
 
 
