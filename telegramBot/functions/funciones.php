@@ -7,20 +7,16 @@ function actualizarUpdateId($update_id) {
     $pdo = conectar();
     $ultimo = $update_id +1;
     $statement = $pdo->prepare("UPDATE configuracion "
-            . "SET valor=$ultimo "
-            . "where nombre='update_id'");
+            . "SET valor= '$ultimo' "
+            . "where nombre= 'update_id'");
     $statement->execute();
-    $result = $statement->fetchColumn();
-
-
-    return $result;
 }
 
 function ultimoUpdateId() {
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT valor "
             . "from configuracion "
-            . "where nombre='update_id'");
+            . "where nombre= 'update_id'");
     $statement->execute();
     $result = $statement->fetchColumn();
     return $result;
@@ -37,7 +33,8 @@ function existeChatId($chatID){
   //corrobora si existe el chatID
     $pdo = conectar();
     $statement = $pdo->prepare("SELECT count(*) from datos
-                                WHERE chatid = $chatID");
+                                WHERE chatid = '$chatID'");
+    $statement->execute();
     $result = $statement->fetchColumn();
     
     return $result;
@@ -46,15 +43,8 @@ function existeChatId($chatID){
 function agregarChatID($chatID){
     //agregar chatID
     $pdo = conectar();
-   echo $chatID;
-    $statement = $pdo->prepare("INSERT INTO 'datos'('chatid') VALUES ($chatID))");
+    $statement = $pdo->prepare("INSERT INTO datos(chatid) VALUES ('$chatID'))");
     $result = $statement->execute();
-    
-    if($result == 0){
-     echo "traje un resultado";   
-    }else{
-        "no traje nada";
-    }
 }
 
 
@@ -62,10 +52,11 @@ function agregarChatID($chatID){
 function existeSexo($chatID){
     //comprueba si el campo sexo de ese chatID no esta vacio
    $pdo = conectar();
-    $statement = $pdo->prepare("SELECT sexo from telegramBot
-                                WHERE id=$chatID");
-    $result = $statement->execute();
-    if($result){
+    $statement = $pdo->prepare("SELECT sexo from datos
+                                WHERE chatid = '$chatID'");
+    $statement->execute();
+    $result = $statement->fetchColumn();
+    if(empty($result)){
         return TRUE;
     }
     return FALSE; 
@@ -74,8 +65,9 @@ function existeSexo($chatID){
 function existeLegajo($chatID){
     //comprueba si existe el campo legajo del chatID no esta vacio
    $pdo = conectar();
-    $statement = $pdo->prepare("SELECT legajo from telegramBot
-                                WHERE id=$chatID");
+    $statement = $pdo->prepare("SELECT legajo from datos
+                                WHERE chatid = '$chatID'");
+    $result = $statement->execute();
     $result = $statement->fetchColumn();
     if($result){
         return TRUE;
@@ -88,8 +80,8 @@ function cambiarEntidad($chatID, $entidad){
     //cambia el campo entidad de ese chatID
      $pdo = conectar();
     $statement = $pdo->prepare("UPDATE datos 
-                                SET entidad=$entidad
-                                WHERE chatid=$chatID");
+                                SET entidad= '$entidad'
+                                WHERE chatid= '$chatID'");
     $statement->execute();
     return $result; 
 }
