@@ -1,9 +1,5 @@
 <?php
-
-define('BOT_TOKEN', '267163407:AAHVbvi2N0AFTerkb3ZiDoNPf-zNI5RzDRE');
-define('API_URL', 'https://api.telegram.org/bot' . BOT_TOKEN . '/');
-include $_SERVER['DOCUMENT_ROOT'] . '/pruebas/telegramBot/functions/funciones.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/pruebas/telegramBot/functions/funciones.php';
 
 
 // GetUpdates para leer a partir del ultimo mensaje leido
@@ -26,17 +22,21 @@ foreach ($results as $result) {
 
     $cmd = $result['message']['text'];
     $chatID = $result["message"]["chat"]["id"];
-
+    
+    echo $cmd;
+    die();  
     if (!existeId($chatID)) {
         agregarChatID($chatID);
         $cmd = "/start";
     }
+    
+    
 
     switch ($cmd) {
         case "/start":
             $reply = "Buenos Dias!.Para comenzar a realizar la consulta deberá apretar uno de los botones para indicar de que sexo es la persona la cual desea consultar su informacion.Ante cualquier duda envie /help";
 
-            $data = array(
+            /*$data = array(
                 'text' => "Hombre",
                 'callback_data' => "/hombre"
             );
@@ -52,10 +52,10 @@ foreach ($results as $result) {
                 'resize_keyboard' => true,
                 'one_time_keyboard' => true,
                 'force_reply' => true
-            );
+            );*/
 
-            $encodeado = json_encode($keyboard);
-
+            //$encodeado = json_encode($keyboard);
+            $encodeado = "";
             enviar($chatID, $reply, $encodeado);
             break;
 
