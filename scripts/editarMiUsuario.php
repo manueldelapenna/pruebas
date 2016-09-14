@@ -49,7 +49,7 @@ require_once("../functions/funciones.php");
                 </div>
                 <input type="hidden" class="form-control" value="<?php echo $idUser ?>" name="id"><br/>
                 <input type="submit" value="Modificar Usuario" class="btn btn-info">
-                <a href="verUsuarios.php" class="btn btn-info">Volver</a>
+                <a id="volver" class="btn btn-info">Volver</a>
             </form>
         </div>       
 

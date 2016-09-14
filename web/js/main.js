@@ -6,8 +6,9 @@ function filterPerson() {
         data: {
             busqueda: $("#busqueda").val(),
             items: $("#cantItems option:selected").val(),
-            orden: $("#orden").val(),
-            pagina: $("#paginaActual").val()
+            orden: $("#ordenActual").val(),
+            pagina: $("#paginaActual").val(),
+            direccion : $("#direccionActual").val()
         },
         success: function (data) {
             var JSONArray = $.parseJSON(data);
@@ -43,4 +44,26 @@ $(document).ready(function () {
         $("#paginaActual").val($(this).text());
         filterPerson();
     });
+    
+    $(".head-table").on( "click", "a", function () {
+        //var iconoDireccion = $("#iconoDireccion").val();
+        
+        //cambio de direccion
+        if($("#direccionActual").val() === "ASC"){
+            $("#direccionActual").val("DESC");
+        }else{
+            $("#direccionActual").val("ASC");
+        }
+        
+       // $(".table").find("span").remove();
+        //$(this).append("span").addClass(iconoDireccion);
+        
+        //cambio el orden
+        $("#ordenActual").val($(this).attr('name'));
+        filterPerson();
+    });
+    
+    $("#volver").click(function(){
+        window.history.back();
+    })
 });

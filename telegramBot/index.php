@@ -29,15 +29,15 @@ case "/mujer":
     break;
 
 case "/caja":
-    procesarEntidad('caja');
+    procesarEntidad($chatID,'caja');
     break;
 
 case "/docentes":
-    procesarEntidad('docentes');
+    procesarEntidad($chatID,'docentes');
     break;
 
 case "/salud":
-    procesarEntidad('salud');
+    procesarEntidad($chatID,'salud');
     break;
 
 case "/help":
@@ -49,7 +49,7 @@ case "/cancelar":
     break;
     
 default:
-    procesarLegajo();
+    procesarLegajo($chatID,$cmd);
     break;
 }    
  actualizarUpdateId($result['update_id']);   

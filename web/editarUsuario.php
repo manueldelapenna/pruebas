@@ -44,15 +44,15 @@ require_once("../functions/funciones.php");
                 <div class="row">
                     <div class="col-sm-3">
                         <label>Indique Grupo</label><br/>
-<?php
-foreach (getGrupos() as $grupo) {
+                        <?php
+                        foreach (getGrupos() as $grupo) {
 
-    if (usuarioPerteneceGrupo($gruposUsuario, $grupo['id'])) {
-        $checked = "checked";
-    } else {
-        $checked = "";
-    }
-    ?>
+                            if (usuarioPerteneceGrupo($gruposUsuario, $grupo['id'])) {
+                                $checked = "checked";
+                            } else {
+                                $checked = "";
+                            }
+                            ?>
                             <input type="checkbox" name="grupos[]" value="<?php echo $grupo['id'] ?>" <?php echo $checked ?>><?php echo $grupo['name'] ?><br/>  
                             <?php
                         }
@@ -60,35 +60,35 @@ foreach (getGrupos() as $grupo) {
                     </div>
                     <div class="col-sm-3">
                         <label>Indique los permisos</label><br/>
-<?php
-foreach (getPermisos() as $permiso) {
+                        <?php
+                        foreach (getPermisos() as $permiso) {
 
-    if (grupoTienePermiso($permisosUsuario, $permiso['id'])) {
-        $checked = "checked";
-    } else {
-        $checked = "";
-    }
-    ?>   
+                            if (grupoTienePermiso($permisosUsuario, $permiso['id'])) {
+                                $checked = "checked";
+                            } else {
+                                $checked = "";
+                            }
+                            ?>   
 
                             <input type="checkbox" name="permisos[]" value="<?php echo $permiso['id'] ?>" <?php echo $checked ?>><?php echo $permiso['name'] ?><br/>
 
-    <?php
-}
-?>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
 
                 <input type="submit" value="Modificar Usuario" class="btn btn-info">
-                <a href="verUsuarios.php" class="btn btn-info">Volver</a>
+                <a id="volver" class="btn btn-info">Volver</a>
             </form>
         </div>       
 
 
 
-<?php
-$path = $rootpath . '/pruebas/_partials/footer.php';
-include_once($path);
-?>
+        <?php
+        $path = $rootpath . '/pruebas/_partials/footer.php';
+        include_once($path);
+        ?>
 
 
     </body>

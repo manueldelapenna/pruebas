@@ -37,7 +37,7 @@ $permiso = getPermiso($permisoId);
 </form>
 <br/>
 
-<a href="verPermisos.php" class="btn btn-info">Volver</a>
+<a id="volver" class="btn btn-info">Volver</a>
 
         
         

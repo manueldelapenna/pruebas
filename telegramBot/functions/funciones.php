@@ -87,6 +87,11 @@ function cambiarEntidad($chatID, $entidad){
 
 function  borrarCampos($chatID){
     //limpia los campos sexo, legajo y entidad del chatID
+    $pdo = conectar();
+    $statement = $pdo->prepare("UPDATE datos 
+                                SET sexo= '', legajo='', entidad='' 
+                                WHERE chatid='$chatID'");
+    $statement->execute();
 }
 
 function cargarSexo($chatID,$string){
@@ -95,4 +100,57 @@ function cargarSexo($chatID,$string){
                                 SET sexo= '$string' 
                                 WHERE chatid='$chatID'");
     $statement->execute();
+}
+
+function cargarEntidad($chatID,$entidad){
+    $pdo = conectar();
+    $statement = $pdo->prepare("UPDATE datos 
+                                SET entidad= '$entidad' 
+                                WHERE chatid='$chatID'");
+    $statement->execute();
+}
+
+function cargarLegajo($chatId,$legajo){
+    $pdo = conectar();
+    $statement = $pdo->prepare("UPDATE datos 
+                                SET legajo= '$legajo' 
+                                WHERE chatid='$chatId'");
+    $statement->execute();
+}
+
+
+function tieneLegajo($chatID){
+    $pdo = conectar();
+    $statement = $pdo->prepare("SELECT legajo from datos
+                                WHERE chatid = '$chatID'");
+    $statement->execute();
+    $result = $statement->fetchColumn();
+    
+    if(!empty($result)){
+        return TRUE;
+    }
+    return FALSE;
+}
+
+function noTieneLegajo($chatID){
+    $reply = "Debe ingresar un legajo";
+    enviar($chatID,$reply,'');
+}
+
+function noTieneSexo($chatId){
+    $reply = "No ha indicado el sexo de la persona, ingrese /hombre si la persona es masculina o /mujer si la persona es femenina";
+    enviar($chatId,$reply,'');
+}
+
+function tieneSexo($chatID){
+    $pdo = conectar();
+    $statement = $pdo->prepare("SELECT sexo from datos
+                                WHERE chatid = '$chatID'");
+    $statement->execute();
+    $result = $statement->fetchColumn();
+    
+    if(!empty($result)){
+        return TRUE;
+    }
+    return FALSE;
 }

@@ -43,7 +43,7 @@ require_once("../functions/funciones.php");
 
             <input type="text" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" name="nacimiento" value="<?php echo $value_nacimiento;?>">* ej:21/02/1986<br/><br/>
             <input type="submit" class="btn btn-primary" value="Agregar Persona">
-            <a href="listado.php" class="btn btn-primary">Cancelar</a>
+            <a id="volver" class="btn btn-primary">Cancelar</a>
         </form>
         
         <?php

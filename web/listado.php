@@ -31,9 +31,8 @@ require_once("../functions/funciones.php");
 
         $indicadorDireccion = (isset($_GET['direccion'])) ? direccionOrdenamiento($_GET['direccion']) : "ASC";
         $iconoDireccion = ($indicadorDireccion == "DESC") ? "glyphicon glyphicon-circle-arrow-up" : "glyphicon glyphicon-circle-arrow-down";
-        $pagActual = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
         $orden = (isset($_GET['orden'])) ? $_GET['orden'] : "id";
-        $direccion = (isset($_GET['direccion'])) ? $_GET['direccion'] : "ASC";
+        $direccion = (isset($_GET['direccion'])) ? $_GET['direccion'] : "DESC";
         $busqueda = (isset($_GET['busqueda'])) ? $_GET['busqueda'] : "";
         $total = totalPersonas($busqueda);
         $cantPaginas = ceil($total / $items);
@@ -61,16 +60,18 @@ require_once("../functions/funciones.php");
                 <option value="10"<?php echo ($items == 10) ? "selected" : ""; ?>>10</option>
                 <option value="20"<?php echo ($items == 20) ? "selected" : ""; ?>>20</option>
             </select>
-
+            <input type="hidden" value="<?php $orden ?>" id="ordenActual">
+            <input type="hidden" value="<?php echo $direccion ?>" id="direccionActual">
+            <input type="hidden" value="<?php echo $iconoDireccion ?>" id="iconoDireccion">
             <table class="table">
-                <thead>
+                <thead class="head-table">
                     <tr>
-                        <th><a href="listado.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">ID<?php if ($orden == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=nombre&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Nombre<?php if ($orden == 'nombre') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=apellido&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Apellido<?php if ($orden == 'apellido') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=edad&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Edad<?php if ($orden == 'edad') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=fecha_nacimiento&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Año Nacimiento<?php if ($orden == 'fecha_nacimiento') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="listado.php?orden=dni&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Dni<?php if ($orden == 'dni') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a name="id">ID</a></th>
+                        <th><a name="nombre">Nombre</a></th>
+                        <th><a name="apellido">Apellido</a></th>
+                        <th><a name="edad">Edad</a></th>
+                        <th><a name="fecha_nacimiento">Año Nacimiento</a></th>
+                        <th><a name="dni">Dni</a></th>
                     </tr>
                 </thead>    
                 <tbody class="body-table"> 
@@ -80,16 +81,8 @@ require_once("../functions/funciones.php");
         </div>
 
         <div>
-<input type="hidden" value="1" id="paginaActual">
+            <input type="hidden" value="1" id="paginaActual">
             <ul class="pagination">
-                
-                <!--   <?php /* for ($i = 1; $i <= $cantPaginas; $i++) {
-
-              $active = ($i == $pagActual) ? "active" : "";
-              ?>
-              <li class="<?php echo $active; ?>"><a href="<?php echo "listado.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i&busqueda=$busqueda" ?>"><?php echo $i ?></a></li>
-
-              <?php } */ ?> -->
 
             </ul>
 
@@ -99,8 +92,9 @@ require_once("../functions/funciones.php");
         include_once($path);
         ?>
         <script>
-            var paginaActual = 1;
             filterPerson();
+            var paginaActual = 1;
+            
             $('#cantItems').change(function () {
                 filterPerson();
 
