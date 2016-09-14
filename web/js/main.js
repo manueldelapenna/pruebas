@@ -14,10 +14,11 @@ function filterPerson() {
             var JSONArray = $.parseJSON(data);
             var HTML = "";
             $.each(JSONArray.result, function (i, item) {
-                HTML += "<tr><td>" + item['id'] + "</td><td>" + item['nombre'] + "</td><td>" + item['apellido'] + "</td><td>" + item['edad'] + "</td><td>" + item['fecha_nacimiento'] + "</td><td>" + item['dni'] + "</td></tr>";
-                HTML += '<td><a href="editarUsuario.php?id='+item['id']+'" class="btn btn-primary">Modificar</a></td>';
-                HTML += "<td> <form action='../functions/eliminarUsuario.php' method ='POST'>";
-                HTML += "<input type='hidden' value="+item['id']+"name='id'>";
+                HTML += "<tr><td>" + item['id'] + "</td><td>" + item['nombre'] + "</td><td>" + item['apellido'] + "</td><td>" + item['edad'] + "</td><td>" + item['fecha_nacimiento'] + "</td><td>" + item['dni'] + "</td>";
+                HTML += '<td><a href="formVerPersona.php?id='+item['id']+'" class="btn btn-success">Ver</a></td>';
+                HTML += '<td><a href="formModificarPersona.php?id='+item['id']+'" class="btn btn-primary">Modificar</a></td>';
+                HTML += "<td> <form action='../functions/eliminarPersona.php' method ='POST'>";
+                HTML += "<input type='hidden' value="+item['id']+" name='id'>";
                 HTML += "<input type='submit' name='eliminar' value='Eliminar' class='btn btn-danger'></form></td></tr>";
             });
             $(".jumbotron").show();
