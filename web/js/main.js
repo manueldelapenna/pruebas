@@ -14,8 +14,11 @@ function filterPerson() {
             var JSONArray = $.parseJSON(data);
             var HTML = "";
             $.each(JSONArray.result, function (i, item) {
-                console.log(item);
-                HTML += "<tr><td>" + item['id'] + "</td><td>" + item['nombre'] + "</td><td>" + item['apellido'] + "</td><td>" + item['edad'] + "</td><td>" + item['fecha_nacimiento'] + "</td><td>" + item['dni'] + "</td></tr>"
+                HTML += "<tr><td>" + item['id'] + "</td><td>" + item['nombre'] + "</td><td>" + item['apellido'] + "</td><td>" + item['edad'] + "</td><td>" + item['fecha_nacimiento'] + "</td><td>" + item['dni'] + "</td></tr>";
+                HTML += "<td> <a href=editarUsuario.php?id="+item['id']+"class='btn btn-primary'>Modificar</a></td>";
+                HTML += "<td> <form action='../functions/eliminarUsuario.php' method ='POST'>";
+                HTML += "<input type='hidden' value="+item['id']+"name='id'>";
+                HTML += "<input type='submit' name='eliminar' value='Eliminar' class='btn btn-danger'></form></td></tr>";
             });
             $(".jumbotron").show();
             $(".body-table").html(HTML);
@@ -47,12 +50,16 @@ $(document).ready(function () {
     
     $(".head-table").on( "click", "a", function () {
         //var iconoDireccion = $("#iconoDireccion").val();
-        
+       
         //cambio de direccion
         if($("#direccionActual").val() === "ASC"){
             $("#direccionActual").val("DESC");
+            $(this+' span').removeClass('glyphicon glyphicon-circle-arrow-up');
+            $(this+'[name= '+$(this).attr('name')+'] span').addClass('glyphicon glyphicon-circle-arrow-down');
         }else{
             $("#direccionActual").val("ASC");
+            $(this+' span').removeClass('glyphicon glyphicon-circle-arrow-down');
+            $(this+'[name= '+$(this).attr('name')+'] span').addClass('glyphicon glyphicon-circle-arrow-up');
         }
         
        // $(".table").find("span").remove();

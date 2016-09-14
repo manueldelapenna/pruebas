@@ -54,16 +54,15 @@ require_once("../functions/funciones.php");
             </select>
             <input type="hidden" value="id" id="ordenActual">
             <input type="hidden" value="ASC" id="direccionActual">
-            <input type="hidden" value="glyphicon glyphicon-circle-arrow-up" id="iconoDireccion">
             <table class="table">
                 <thead class="head-table">
                     <tr>
                         <th><a name="id"><span class="glyphicon glyphicon-circle-arrow-up"></span>ID</a></th>
-                        <th><a name="nombre">Nombre</a></th>
-                        <th><a name="apellido">Apellido</a></th>
-                        <th><a name="edad">Edad</a></th>
-                        <th><a name="fecha_nacimiento">Año Nacimiento</a></th>
-                        <th><a name="dni">Dni</a></th>
+                        <th><a name="nombre"><span></span>Nombre</a></th>
+                        <th><a name="apellido"><span></span>Apellido</a></th>
+                        <th><a name="edad"><span></span>Edad</a></th>
+                        <th><a name="fecha_nacimiento"><span></span>Año Nacimiento</a></th>
+                        <th><a name="dni"><span></span>Dni</a></th>
                     </tr>
                 </thead>    
                 <tbody class="body-table"> 
