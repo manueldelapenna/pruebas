@@ -63,6 +63,7 @@ require_once("../functions/funciones.php");
                         <th><a name="edad"><span></span>Edad</a></th>
                         <th><a name="fecha_nacimiento"><span></span>Año Nacimiento</a></th>
                         <th><a name="dni"><span></span>Dni</a></th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>    
                 <tbody class="body-table"> 
