@@ -61,7 +61,7 @@ require_once("../functions/funciones.php");
                 <thead>
                     <tr>
                         <th><a href="verGrupos.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">ID<?php if ($orden == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        <th><a href="verGrupos.php?orden=username&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Nombre<?php if ($orden == 'name') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
+                        <th><a href="verGrupos.php?orden=name&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Nombre<?php if ($orden == 'name') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                         
                     </tr>
                 </thead>    
