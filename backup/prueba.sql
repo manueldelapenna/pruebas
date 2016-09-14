@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-09-2016 a las 10:05:24
+-- Tiempo de generación: 14-09-2016 a las 09:15:50
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -80,15 +80,16 @@ CREATE TABLE `grupos_permisos` (
 INSERT INTO `grupos_permisos` (`id`, `grupo_id`, `permisos_id`) VALUES
 (8, 9, 5),
 (9, 9, 1),
-(29, 1, 9),
-(30, 1, 8),
-(31, 1, 10),
-(32, 1, 4),
-(33, 1, 5),
-(34, 1, 6),
-(35, 1, 1),
-(36, 1, 2),
-(37, 1, 3);
+(38, 1, 9),
+(39, 1, 8),
+(40, 1, 10),
+(41, 1, 4),
+(42, 1, 5),
+(43, 1, 6),
+(44, 1, 1),
+(45, 1, 2),
+(46, 1, 3),
+(47, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,9 @@ INSERT INTO `permisos` (`id`, `name`) VALUES
 (6, 'personas_eliminar'),
 (1, 'personas_listar'),
 (2, 'personas_mayor'),
-(3, 'personas_menor');
+(3, 'personas_menor'),
+(12, 'usuarios_listar'),
+(11, 'usuario_editar');
 
 -- --------------------------------------------------------
 
@@ -164,8 +167,11 @@ INSERT INTO `personas` (`id`, `dni`, `nombre`, `apellido`, `fecha_nacimiento`) V
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
   `salt` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `fecha_alta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ultimo_logueo` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -174,9 +180,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `username`, `salt`, `password`, `fecha_alta`, `ultimo_logueo`) VALUES
-(12, 'Callcenter', '285941c404c961e7f025d220e0abb228', '2bb61e557c6db6bf103caea9b93d96e8', '2016-09-02 10:44:07', NULL),
-(13, 'Administrador', '35402efc55b9610986c14e4e1afeded6', '2969672cb3889790c9df3f84f84960d7', '2016-09-02 10:45:21', NULL);
+INSERT INTO `usuarios` (`id`, `username`, `firstname`, `lastname`, `salt`, `password`, `email`, `fecha_alta`, `ultimo_logueo`) VALUES
+(12, 'Callcenter', '', '', '285941c404c961e7f025d220e0abb228', '2bb61e557c6db6bf103caea9b93d96e8', '', '2016-09-02 10:44:07', NULL),
+(13, 'Administrador', '', '', '35402efc55b9610986c14e4e1afeded6', '2969672cb3889790c9df3f84f84960d7', 'Administrador@php.com', '2016-09-02 10:45:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -195,7 +201,7 @@ CREATE TABLE `usuarios_grupos` (
 --
 
 INSERT INTO `usuarios_grupos` (`id`, `group_id`, `user_id`) VALUES
-(38, 1, 13);
+(39, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -214,15 +220,17 @@ CREATE TABLE `usuarios_permisos` (
 --
 
 INSERT INTO `usuarios_permisos` (`id`, `user_id`, `permisos_id`) VALUES
-(11, 13, 9),
-(12, 13, 8),
-(13, 13, 10),
-(14, 13, 4),
-(15, 13, 5),
-(16, 13, 6),
-(17, 13, 1),
-(18, 13, 2),
-(19, 13, 3);
+(20, 13, 9),
+(21, 13, 8),
+(22, 13, 10),
+(23, 13, 4),
+(24, 13, 5),
+(25, 13, 6),
+(26, 13, 1),
+(27, 13, 2),
+(28, 13, 3),
+(29, 13, 12),
+(30, 13, 11);
 
 --
 -- Índices para tablas volcadas
@@ -304,12 +312,12 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `grupos_permisos`
 --
 ALTER TABLE `grupos_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `personas`
 --
@@ -324,12 +332,12 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios_grupos`
 --
 ALTER TABLE `usuarios_grupos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT de la tabla `usuarios_permisos`
 --
 ALTER TABLE `usuarios_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- Restricciones para tablas volcadas
 --
