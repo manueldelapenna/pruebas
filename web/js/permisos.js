@@ -11,9 +11,7 @@ function listPermisos(){
         },
         success: function (data) {
             var JSONArray = $.parseJSON(data);
-            console.log(data);
             var HTML = "";
-            console.log(JSONArray);
             $.each(JSONArray.permisos, function (i, item) {
                 HTML += '<tr><td>'+item['id']+'</td><td>'+item['name']+'</td>';
                 HTML += '<td>form action="../functions/eliminarPermiso.php" method ="POST">';

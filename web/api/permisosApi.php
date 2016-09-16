@@ -13,7 +13,6 @@ $busqueda = (isset($_GET['busqueda'])) ? $_GET['busqueda'] : "";
 $total = totalPermisos($busqueda);
 $cantPaginas = ceil($total / $items);
 $permisos = listarPermisos($orden, $direccion, $items, $pagActual, $busqueda);
-var_dump($permisos);
 
 $result = ['code'=> 200,'permisos'=> $permisos,'paginas'=> $cantPaginas];
 
