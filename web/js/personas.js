@@ -11,9 +11,9 @@ function filterPerson() {
             direccion : $("#direccionActual").val()
         },
         success: function (data) {
-            var JSONArray = $.parseJSON(data);
+            console.log(data.result);
             var HTML = "";
-            $.each(JSONArray.result, function (i, item) {
+            $.each(data.result, function (i, item) {
                 var CutFecha = item['fecha_nacimiento'].split("-");
                 HTML += "<tr><td>" + item['id'] + "</td><td>" + item['nombre'] + "</td><td>" + item['apellido'] + "</td><td>" + item['edad'] + "</td><td>" + CutFecha[2]+'-'+CutFecha[1]+'-'+CutFecha[0] + "</td><td>" + item['dni'] + "</td>";
                 HTML += '<td><a href="formVerPersona.php?id='+item['id']+'" class="btn btn-success">Ver</a></td>';
@@ -26,7 +26,7 @@ function filterPerson() {
             $(".body-table").html(HTML);
 
             //dibujar paginador
-            var cantPaginas = JSONArray.paginas;
+            var cantPaginas = data.paginas;
             var paginador = "";
 			var paginaActual = $("#paginaActual").val();
             for (var i = 1; i <= cantPaginas; i++) {

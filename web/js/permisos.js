@@ -10,21 +10,19 @@ function listPermisos(){
             direccion : $("#direccionActual").val()
         },
         success: function (data) {
-            var JSONArray = $.parseJSON(data);
+            
             var HTML = "";
-            $.each(JSONArray.permisos, function (i, item) {
+            $.each(data.permisos, function (i, item) {
                 HTML += '<tr><td>'+item['id']+'</td><td>'+item['name']+'</td>';
                 HTML += '<td><a href="editarPermiso.php?id='+item['id']+'" class="btn btn-primary">Modificar</a>';
-                HTML += '<form action="../functions/eliminarPermiso.php" method ="POST">';
-                HTML += '<input type="hidden" value="'+item['id']+'" name="id" >';
-                HTML += '<input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger">';
-                HTML += '</form></td>';
+                HTML += '<input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger" onclick="eliminarPermiso('+item['id']+')">';
+                HTML += '</td>';
             });
             
             $("#body-permisos").html(HTML);
 
             //dibujar paginador
-            var cantPaginas = JSONArray.paginas;
+            var cantPaginas = data.paginas;
             var paginador = "";
             var paginaActual = $("#paginaActual").val();
             for (var i = 1; i <= cantPaginas; i++) {
@@ -74,3 +72,21 @@ $(document).ready(function () {
     
     });
     
+function eliminarPermiso(id){
+    $.ajax({
+        url: "api/eliminarPermiso.php",
+        type: 'POST',
+        data: {
+            id: id
+        },
+        success: function (data) {
+          
+        alert(data.message);
+        if(data.code == 200){
+            listPermisos();
+        }
+        }
+        
+        
+    });
+}

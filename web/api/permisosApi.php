@@ -16,6 +16,7 @@ $permisos = listarPermisos($orden, $direccion, $items, $pagActual, $busqueda);
 
 $result = ['code'=> 200,'permisos'=> $permisos,'paginas'=> $cantPaginas];
 
+header('Content-Type: application/json'); 
 echo json_encode($result);
 
 ?>

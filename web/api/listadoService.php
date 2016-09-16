@@ -18,6 +18,7 @@ $cantPaginas = ceil($total / $items);
 
 $result = ['code' => 200, 'result' => $personas, 'paginas' => $cantPaginas];
 
+header('Content-Type: application/json'); 
 echo json_encode($result);
 ?>
 
