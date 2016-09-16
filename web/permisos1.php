@@ -32,19 +32,19 @@ require_once("../functions/funciones.php");
 
         <div>
             <?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
-            <a href="agregarPermiso.php" class="btn btn-info">Agregar Permiso</a>
+                <a href="agregarPermiso.php" class="btn btn-info">Agregar Permiso</a>
             <?php } ?>
             <br>
             <br/>
-            
+
             <input type="hidden" value="id" id="ordenActual">
             <input type="hidden" value="ASC" id="direccionActual">
             <input type="hidden" value="1" id="paginaActual">
+
             
-            <form action="verPermisos.php" method="GET">
-                <input type="text" placeholder="Buscar" id="busqueda" name="busqueda">
-            <input type="submit" value="Buscar" class="btn btn-primary">
-            </form>
+                <input type="text" placeholder="Buscar" id="busqueda" name="busqueda" onkeyup="listPermisos()">
+                
+            
             <br/><br/>
             <label>Items Pagina</label>    
             <select id="cantItems">
@@ -52,7 +52,7 @@ require_once("../functions/funciones.php");
                 <option value="10">10</option>
                 <option value="20">20</option>
             </select>
-            
+
             <table class="table">
                 <thead>
                     <tr>
@@ -63,14 +63,14 @@ require_once("../functions/funciones.php");
                 </thead>    
                 <tbody id="body-permisos"> 
 
-                   
+
                 </tbody>
             </table>
         </div>
 
         <div>
             <ul class="pagination">
-                 
+
 
             </ul>
 
@@ -81,13 +81,12 @@ require_once("../functions/funciones.php");
         ?>
         <script>
             $(document).ready(function(){
-              listPermisos();
-          });  
-            var paginaActual = 1;
+            listPermisos();
+          });
+            
             
             $('#cantItems').change(function () {
-                listPermisos();
-
+            listPermisos();
             });
         </script>
 

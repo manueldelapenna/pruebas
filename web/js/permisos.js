@@ -14,7 +14,8 @@ function listPermisos(){
             var HTML = "";
             $.each(JSONArray.permisos, function (i, item) {
                 HTML += '<tr><td>'+item['id']+'</td><td>'+item['name']+'</td>';
-                HTML += '<td>form action="../functions/eliminarPermiso.php" method ="POST">';
+                HTML += '<td><a href="editarPermiso.php?id='+item['id']+'" class="btn btn-primary">Modificar</a>';
+                HTML += '<form action="../functions/eliminarPermiso.php" method ="POST">';
                 HTML += '<input type="hidden" value="'+item['id']+'" name="id" >';
                 HTML += '<input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger">';
                 HTML += '</form></td>';
@@ -25,7 +26,7 @@ function listPermisos(){
             //dibujar paginador
             var cantPaginas = JSONArray.paginas;
             var paginador = "";
-			var paginaActual = $("#paginaActual").val();
+            var paginaActual = $("#paginaActual").val();
             for (var i = 1; i <= cantPaginas; i++) {
                 if (paginaActual == i) {
                     var active = "active";
