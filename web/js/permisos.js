@@ -1,7 +1,6 @@
-function filterPerson() {
-
+function listPermisos(){
     $.ajax({
-        url: "api/listadoService.php",
+        url: "api/permisosApi.php",
         type: 'GET',
         data: {
             busqueda: $("#busqueda").val(),
@@ -12,18 +11,18 @@ function filterPerson() {
         },
         success: function (data) {
             var JSONArray = $.parseJSON(data);
+            console.log(data);
             var HTML = "";
-            $.each(JSONArray.result, function (i, item) {
-                var CutFecha = item['fecha_nacimiento'].split("-");
-                HTML += "<tr><td>" + item['id'] + "</td><td>" + item['nombre'] + "</td><td>" + item['apellido'] + "</td><td>" + item['edad'] + "</td><td>" + CutFecha[2]+'-'+CutFecha[1]+'-'+CutFecha[0] + "</td><td>" + item['dni'] + "</td>";
-                HTML += '<td><a href="formVerPersona.php?id='+item['id']+'" class="btn btn-success">Ver</a></td>';
-                HTML += '<td><a href="formModificarPersona.php?id='+item['id']+'" class="btn btn-primary">Modificar</a></td>';
-                HTML += "<td> <form action='../functions/eliminarPersona.php' method ='POST'>";
-                HTML += "<input type='hidden' value="+item['id']+" name='id'>";
-                HTML += "<input type='submit' name='eliminar' value='Eliminar' class='btn btn-danger'></form></td></tr>";
+            console.log(JSONArray);
+            $.each(JSONArray.permisos, function (i, item) {
+                HTML += '<tr><td>'+item['id']+'</td><td>'+item['name']+'</td>';
+                HTML += '<td>form action="../functions/eliminarPermiso.php" method ="POST">';
+                HTML += '<input type="hidden" value="'+item['id']+'" name="id" >';
+                HTML += '<input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger">';
+                HTML += '</form></td>';
             });
-            $(".jumbotron").show();
-            $(".body-table").html(HTML);
+            
+            $("#body-permisos").html(HTML);
 
             //dibujar paginador
             var cantPaginas = JSONArray.paginas;
@@ -39,16 +38,17 @@ function filterPerson() {
 
             }
             $(".pagination").html(paginador);
-
-        }});
-}
-;
+        }
+        
+        
+    });
+};
 
 
 $(document).ready(function () {
     $(".pagination").on( "click", "a", function () {
         $("#paginaActual").val($(this).text());
-        filterPerson();
+        listPermisos();
     });
     
     $(".head-table").on( "click", "a", function () {
@@ -70,10 +70,8 @@ $(document).ready(function () {
         
         //cambio el orden
         $("#ordenActual").val($(this).attr('name'));
-        filterPerson();
+        listPermisos();
     });
     
-    $("#volver").click(function(){
-        window.history.back();
-    })
-});
+    });
+    
