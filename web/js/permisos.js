@@ -14,8 +14,8 @@ function listPermisos(){
             var HTML = "";
             $.each(data.permisos, function (i, item) {
                 HTML += '<tr><td>'+item['id']+'</td><td>'+item['name']+'</td>';
-                HTML += '<td><a href="editarPermiso.php?id='+item['id']+'" class="btn btn-primary">Modificar</a>';
-                HTML += '<input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger" onclick="eliminarPermiso('+item['id']+')">';
+                HTML += '<td><a href="editarPermiso.php?id='+item['id']+'" class="btn btn-primary">Modificar</a></td>';
+                HTML += '<td><input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger" onclick="eliminarPermiso('+item['id']+')">';
                 HTML += '</td>';
             });
             
