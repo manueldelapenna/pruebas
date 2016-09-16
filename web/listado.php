@@ -15,6 +15,7 @@ require_once("../functions/funciones.php");
         $path = $rootpath . '/pruebas/_partials/head.php';
         include_once($path);
         ?>
+        <script src="../web/js/personas.js" type="text/javascript"></script>
     </head>
     <body>
 
