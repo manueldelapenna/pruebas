@@ -15,12 +15,11 @@ function filterPerson() {
             var HTML = "";
             $.each(data.result, function (i, item) {
                 var CutFecha = item['fecha_nacimiento'].split("-");
-                HTML += "<tr><td>" + item['id'] + "</td><td>" + item['nombre'] + "</td><td>" + item['apellido'] + "</td><td>" + item['edad'] + "</td><td>" + CutFecha[2]+'-'+CutFecha[1]+'-'+CutFecha[0] + "</td><td>" + item['dni'] + "</td>";
+                HTML += '<tr><td>' + item['id'] + '</td><td><input type="text" name="nombre" value=" '+ item['nombre'] + '" disabled></td><td>' + item['apellido'] +' </td><td>' + item['edad'] + '</td><td>' + CutFecha[2]+'-'+CutFecha[1]+'-'+CutFecha[0] + '</td><td>' + item['dni'] + '</td>';
                 HTML += '<td><a href="formVerPersona.php?id='+item['id']+'" class="btn btn-success">Ver</a></td>';
                 HTML += '<td><a href="formModificarPersona.php?id='+item['id']+'" class="btn btn-primary">Modificar</a></td>';
-                HTML += "<td> <form action='../functions/eliminarPersona.php' method ='POST'>";
-                HTML += "<input type='hidden' value="+item['id']+" name='id'>";
-                HTML += "<input type='submit' name='eliminar' value='Eliminar' class='btn btn-danger'></form></td></tr>";
+               HTML += '<td><input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger" onclick="eliminarPersona('+item['id']+')">';
+                HTML += '</td></tr>';
             });
             $(".jumbotron").show();
             $(".body-table").html(HTML);
@@ -77,3 +76,23 @@ $(document).ready(function () {
         window.history.back();
     })
 });
+
+
+function eliminarPersona(id){
+    $.ajax({
+        url: "api/eliminarPersona.php",
+        type: 'POST',
+        data: {
+            id: id
+        },
+        success: function (data) {
+          
+        alert(data.message);
+        if(data.code == 200){
+           filterPerson();
+        }
+        }
+        
+        
+    });
+}

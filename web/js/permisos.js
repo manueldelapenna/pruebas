@@ -13,10 +13,11 @@ function listPermisos(){
             
             var HTML = "";
             $.each(data.permisos, function (i, item) {
-                HTML += '<tr><td>'+item['id']+'</td><td>'+item['name']+'</td>';
-                HTML += '<td><a href="editarPermiso.php?id='+item['id']+'" class="btn btn-primary">Modificar</a></td>';
+                HTML += '<tr><td>'+item['id']+'</td><td><input type="text" id="'+item['id']+'" name="permiso" value="'+item['name']+'" disabled>';
+                HTML += '<input type="submit" name="confirmar" value="confirmar" class="btn btn-success" onclick="modificarPermiso('+item['id']+')"></td>';
+                HTML += '<td><input type="submit" name="modificar" value="Modificar" class="btn btn-primary" onclick="activarModiPermiso('+item['id']+')">';
                 HTML += '<td><input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger" onclick="eliminarPermiso('+item['id']+')">';
-                HTML += '</td>';
+                HTML += '</td></tr>';
             });
             
             $("#body-permisos").html(HTML);
@@ -89,4 +90,10 @@ function eliminarPermiso(id){
         
         
     });
+}
+
+
+function activarModiPermiso(id){
+   $('#'+id).prop('disabled', false); 
+    
 }
