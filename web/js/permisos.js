@@ -13,8 +13,8 @@ function listPermisos(){
             
             var HTML = "";
             $.each(data.permisos, function (i, item) {
-                HTML += '<tr><td>'+item['id']+'</td><td><input type="text" id="'+item['id']+'" name="permiso" value="'+item['name']+'" disabled>';
-                HTML += '<input type="submit" name="confirmar" value="confirmar" class="btn btn-success" onclick="modificarPermiso('+item['id']+')"></td>';
+                HTML += '<tr><td>'+item['id']+'</td><td>';
+                HTML += '<div class="input-group"><input type="text" class="form-control" id="'+item['id']+'" name="permiso" value="'+item['name']+'" disabled><span class="input-group-btn" id="editbutton-'+item['id']+'" style="display:none"> <button class="btn btn-success" type="button" onclick="cambiarPermiso('+item['id']+','+item['name']+')">Aceptar</button><button class="btn btn-warning" type="button" onclick="cancelarEdicion('+item['id']+')">Cancelar</button> </span> </div></td>';
                 HTML += '<td><input type="submit" name="modificar" value="Modificar" class="btn btn-primary" onclick="activarModiPermiso('+item['id']+')">';
                 HTML += '<td><input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger" onclick="eliminarPermiso('+item['id']+')">';
                 HTML += '</td></tr>';
@@ -95,5 +95,32 @@ function eliminarPermiso(id){
 
 function activarModiPermiso(id){
    $('#'+id).prop('disabled', false); 
+   $('#editbutton-'+id).show();
     
+}
+
+function cancelarEdicion(id){
+    $('#editbutton-'+id).hide();
+    $('#'+id).prop('disabled', true); 
+}
+
+function cambiarPermiso(id,nombre){
+    $.ajax({
+        url: "api/editarPermiso.php",
+        type: 'POST',
+        data: {
+            nombre: nombre,
+            id: id
+        },
+        success: function (data) {
+          
+        alert(data.message);
+        if(data.code == 200){
+           // listPermisos();
+          
+        }
+        }
+        
+        
+    });
 }
