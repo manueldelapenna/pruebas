@@ -7,7 +7,7 @@ try {
     if (!isset($_POST['id'])) {
         throw new Exception("No hay id definido");
     }
-    if (!isset($_POST['nombre'])) {
+    if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
         throw new Exception("No hay nombre definido");
     }
 

@@ -14,7 +14,7 @@ function listPermisos(){
             var HTML = "";
             $.each(data.permisos, function (i, item) {
                 HTML += '<tr><td>'+item['id']+'</td><td>';
-                HTML += '<div class="input-group"><input type="text" class="form-control" id="'+item['id']+'" name="permiso" value="'+item['name']+'" disabled><span class="input-group-btn" id="editbutton-'+item['id']+'" style="display:none"> <button class="btn btn-success" type="button" onclick="cambiarPermiso('+item['id']+','+item['name']+')">Aceptar</button><button class="btn btn-warning" type="button" onclick="cancelarEdicion('+item['id']+')">Cancelar</button> </span> </div></td>';
+                HTML += '<div class="input-group"><input type="text" class="form-control" id="'+item['id']+'" name="permiso" value="'+item['name']+'" disabled><span class="input-group-btn" id="editbutton-'+item['id']+'" style="display:none"> <button class="btn btn-success" type="button" onclick="cambiarPermiso('+item['id']+')">Aceptar</button><button class="btn btn-warning" type="button" onclick="cancelarEdicion('+item['id']+',\''+item['name']+'\')">Cancelar</button> </span> </div></td>';
                 HTML += '<td><input type="submit" name="modificar" value="Modificar" class="btn btn-primary" onclick="activarModiPermiso('+item['id']+')">';
                 HTML += '<td><input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger" onclick="eliminarPermiso('+item['id']+')">';
                 HTML += '</td></tr>';
@@ -99,12 +99,17 @@ function activarModiPermiso(id){
     
 }
 
-function cancelarEdicion(id){
+function cancelarEdicion(id, name){
+    $('#'+id).val(name);
     $('#editbutton-'+id).hide();
     $('#'+id).prop('disabled', true); 
+    
 }
 
-function cambiarPermiso(id,nombre){
+function cambiarPermiso(id){
+   
+    var nombre = $('#'+id).val();
+    
     $.ajax({
         url: "api/editarPermiso.php",
         type: 'POST',
@@ -116,7 +121,7 @@ function cambiarPermiso(id,nombre){
           
         alert(data.message);
         if(data.code == 200){
-           // listPermisos();
+           listPermisos();
           
         }
         }
