@@ -29,9 +29,9 @@ require_once("../functions/funciones.php");
         ?>
 
         <div>
-            <?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
+            
             <a href="agregarUsuario.php" class="btn btn-info">Agregar Usuario</a>
-            <?php } ?>
+            
             <br>
             <br/>
             <?php

@@ -64,7 +64,7 @@ require_once("../functions/funciones.php");
             </div>
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-4">
-                    <input type="submit" value="Agregar Usuario" class="btn btn-info">
+                    <input type="submit" value="Agregar Usuario" class="btn btn-info" id="agregar">
                     <a href="index.php" class="btn btn-info">Volver a inicio</a>
                 </div>
             </div>
@@ -87,6 +87,14 @@ require_once("../functions/funciones.php");
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);
         ?>
+
+        <script>
+            $('#agregar').click(function () {
+                var string = $('input[name="grupos[]"]');
+                alert(string);
+            });
+
+        </script>
 
     </body>
 </html>

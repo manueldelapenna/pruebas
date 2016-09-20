@@ -27,18 +27,16 @@ require_once("../functions/funciones.php");
         include_once($path);
         $path = $rootpath . '/pruebas/functions/funciones.php';
         include_once($path);
-
-        
         ?>
 
         <div>
-            <?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
+<?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
                 <a href="formAgregarPersona.php" class="btn btn-info">Agregar Persona</a>
             <?php } ?>
             <?php if (in_array($_SESSION['usuario'], ['administrador', 'user'])) { ?>
                 <a href="mayor.php" class="btn btn-info">Mayor Edad</a>
                 <a href="menor.php" class="btn btn-info">Menor Edad</a>
-            <?php } ?>
+<?php } ?>
             <br>
             <br/>
 
@@ -80,21 +78,28 @@ require_once("../functions/funciones.php");
             </ul>
 
         </div> 
-        <?php
-        $path = $rootpath . '/pruebas/_partials/footer.php';
-        include_once($path);
-        ?>
-        <script>
-          $(document).ready(function(){
-              filterPerson();
-          });  
-            var paginaActual = 1;
-            
-            $('#cantItems').change(function () {
-                filterPerson();
+        
 
-            });
-        </script>
+        
+    </div>
+</div>
+<?php
+$path = $rootpath . '/pruebas/_partials/footer.php';
+include_once($path);
+?>
+<script>
+    $(document).ready(function () {
+        filterPerson();
+    });
+    var paginaActual = 1;
 
-    </body>
+    $('#cantItems').change(function () {
+        filterPerson();
+
+    });
+    
+    
+</script>
+
+</body>
 </html>

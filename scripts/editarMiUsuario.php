@@ -12,6 +12,7 @@ require_once("../functions/funciones.php");
         $path = $rootpath . '/pruebas/_partials/head.php';
         include_once($path);
         ?>
+        <script src="../web/js/miUsuario.js" type="text/javascript"></script>
     </head>
     <body>
 
@@ -34,61 +35,28 @@ require_once("../functions/funciones.php");
         ?>
 
         <h2> <?php echo ucfirst($user) ?></h2>
-        <div id="editarGrupo" class="col-md-12 col-md-offset-4">
-            <form class="form-inline" action="../functions/funEditarMiUsuario.php" method="POST">
-                <input type="text" class="form-control" value="<?php echo ucfirst($user) ?>" name="username"><br/>
-                <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['firstname']) ?>" placeholder="Nombre" name="firstname"><br/>
-                <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['lastname']) ?>" placeholder="Apellido" name="lastname"><br/>
-                <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['email']) ?>" placeholder="Email" name="email"><br/>
-                <input type="checkbox" id="change-password">¿Desea Cambiar la contraseña?<br/>
-                <div id="passwordContainer" style="display:none">
-                    <input type="password" id="password" class="form-control" placeholder="Nueva Contraseña" name="password">
-                    <input type="checkbox" id="show-password"><br/>
-                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar Contraseña" name="confirmPassword">
-                    <input type="checkbox" id="show-password2"><br/>
-                </div>
-                <input type="hidden" class="form-control" value="<?php echo $idUser ?>" name="id"><br/>
-                <input type="submit" value="Modificar Usuario" class="btn btn-info">
-                <a id="volver" class="btn btn-info">Volver</a>
-            </form>
+        <div id="editarGrupo" class="col-md-5 col-md-offset-4 jumbotron">
+            
+            <input type="text" class="form-control" value="<?php echo ucfirst($user) ?>" name="username"><br/>
+            <input type="hidden" value="<?php echo $user ?>" name="copyUsername">
+            <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['firstname']) ?>" placeholder="Nombre" name="firstname"><br/>
+            <input type="hidden" value="<?php echo $all[0]['firstname'] ?>" name="copyFirstname">
+            <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['lastname']) ?>" placeholder="Apellido" name="lastname"><br/>
+            <input type="hidden" value="<?php echo $all[0]['lastname'] ?>" name="copyLastname">
+            <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['email']) ?>" placeholder="Email" name="email"><br/>
+            <input type="hidden" value="<?php echo $all[0]['email'] ?>" name="copyEmail">
+            <input type="checkbox" id="change-password">¿Desea Cambiar la contraseña?<br/>
+            <div id="passwordContainer" style="display:none">
+                <input type="password" id="password" class="form-control" placeholder="Nueva Contraseña" name="password">
+                <input type="checkbox" id="show-password"><br/>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar Contraseña" name="confirmPassword">
+                <input type="checkbox" id="show-password2"><br/>
+            </div>
+            <input type="hidden" class="form-control" value="<?php echo $idUser ?>" name="id"><br/>
+            <input type="button" value="Modificar Usuario" class="btn btn-info" onclick="modificarUsuario()">
+            <a id="volver" class="btn btn-info">Volver</a>
+
         </div>       
-
-        <script>
-            $(document).ready(function () {
-                $("#show-password").click(function () {
-                    if ($(this).is(':checked')) {
-                        $("#password").prop("type", "text");
-                    } else {
-                        $("#password").prop("type", "password");
-                    }
-                })
-
-                $("#show-password2").click(function () {
-                    if ($(this).is(':checked')) {
-                        $("#confirmPassword").prop("type", "text");
-                    } else {
-                        $("#confirmPassword").prop("type", "password");
-                    }
-                })
-
-                $("#change-password").click(function () {
-                    if ($(this).is(':checked')) {
-                        $("#passwordContainer").show();
-                    } else {
-                        $("#password").val("");
-                        $("#confirmPassword").val("");
-                        $("#passwordContainer").hide();
-
-                    }
-                })
-            });
-        </script>
-        <?php
-        if (isset($_GET['mensaje'])) {
-            echo $_GET['mensaje'];
-        }
-        ?>
-
 
         <?php
         $path = $rootpath . '/pruebas/_partials/footer.php';
