@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 
 <html>
@@ -23,7 +23,7 @@
             ?>
             <div class="jumbotron">
 
-            <p class="centered"><?php echo $_GET['mensaje']; ?></p>
+                <p class="centered"><?php echo $_GET['mensaje']; ?></p>
             </div>
         <?php } else { ?>
             <br>
@@ -36,9 +36,9 @@
                 }
             }
             ?> 
-             <a href="index.php" class="btn btn-info">Volver a inicio</a>
-            </div>
-        
+            <a href="index.php" class="btn btn-info">Volver a inicio</a>
+        </div>
+
         <?php
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);

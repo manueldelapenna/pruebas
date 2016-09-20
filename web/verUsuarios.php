@@ -29,17 +29,17 @@ require_once("../functions/funciones.php");
         ?>
 
         <div>
-            
+
             <a href="agregarUsuario.php" class="btn btn-info">Agregar Usuario</a>
-            
+
             <br>
             <br/>
             <?php
             $items = (isset($_GET['items'])) ? $_GET['items'] : 5;
             ?>
-           <form action="verUsuarios.php" method="GET">
-            <input type="text" placeholder="Buscar" name="busqueda">
-            <input type="submit" value="Buscar" class="btn btn-primary">
+            <form action="verUsuarios.php" method="GET">
+                <input type="text" placeholder="Buscar" name="busqueda">
+                <input type="submit" value="Buscar" class="btn btn-primary">
             </form>
             <br/><br/>
             <label>Items Pagina</label>    
@@ -65,24 +65,26 @@ require_once("../functions/funciones.php");
                         <th><a href="verUsuarios.php?orden=password&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">CONTRASEÑA<?php if ($orden == 'password') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                         <th><a href="verUsuarios.php?orden=fecha_alta&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">FECHA DE ALTA<?php if ($orden == 'fecha_alta') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                         <th><a href="verUsuarios.php?orden=ultimo_logueo&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">ULTIMO LOGUEO<?php if ($orden == 'ultimo_logueo') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        
+
                     </tr>
                 </thead>    
                 <tbody> 
 
                     <?php
-                    
-                    
-                    foreach (listarUsuarios($orden, $direccion, $items,$pagActual, $busqueda) as $usuario) {
+                    foreach (listarUsuarios($orden, $direccion, $items, $pagActual, $busqueda) as $usuario) {
                         ?>
                         <tr>
                             <td> <?php echo $usuario['id']; ?> </td>
                             <td> <?php echo ucfirst($usuario['username']); ?> </td>
                             <td> <?php echo ucfirst($usuario['password']); ?> </td>
-                            <td> <?php echo formatearFechaNacimiento($usuario['fecha_alta'])?></td>
-                            <td> <?php if(is_null($usuario['ultimo_logueo'])){echo "-----";}else{ echo formatearFechaNacimiento($usuario['ultimo_logueo']); }?></td>
-                            <td><a href="verUsuario.php?id=<?php echo $usuario['id'] ?>&busqueda=<?php echo $busqueda?>" class="btn btn-success">Ver</a></td>
-                            <td> <a href="editarUsuario.php?id=<?php echo $usuario['id']?>&busqueda=<?php echo $busqueda; ?>" class="btn btn-primary"> Modificar</a></td>
+                            <td> <?php echo formatearFechaNacimiento($usuario['fecha_alta']) ?></td>
+                            <td> <?php if (is_null($usuario['ultimo_logueo'])) {
+                        echo "-----";
+                    } else {
+                        echo formatearFechaNacimiento($usuario['ultimo_logueo']);
+                    } ?></td>
+                            <td><a href="verUsuario.php?id=<?php echo $usuario['id'] ?>&busqueda=<?php echo $busqueda ?>" class="btn btn-success">Ver</a></td>
+                            <td> <a href="editarUsuario.php?id=<?php echo $usuario['id'] ?>&busqueda=<?php echo $busqueda; ?>" class="btn btn-primary"> Modificar</a></td>
                             <td> <form action="../functions/eliminarUsuario.php" method ="POST">
                                     <input type="hidden" value="<?php echo $usuario['id'] ?>" name="id" >
                                     <input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger">
@@ -105,14 +107,14 @@ require_once("../functions/funciones.php");
 
         <div>
             <ul class="pagination">
-                <?php for ($i = 1; $i <= $cantPaginas; $i++) { 
-                 
-                 $active = ($i == $pagActual)?"active": ""; 
-                 
-                 ?>
-                <li class="<?php echo $active; ?>"><a href="<?php echo "verUsuarios.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i&busqueda=$busqueda"?>"><?php echo $i ?></a></li>
+                <?php
+                for ($i = 1; $i <= $cantPaginas; $i++) {
 
-                <?php } ?>  
+                    $active = ($i == $pagActual) ? "active" : "";
+                    ?>
+                    <li class="<?php echo $active; ?>"><a href="<?php echo "verUsuarios.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i&busqueda=$busqueda" ?>"><?php echo $i ?></a></li>
+
+<?php } ?>  
 
             </ul>
 

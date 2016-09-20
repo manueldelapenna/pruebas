@@ -31,9 +31,9 @@ require_once("../functions/funciones.php");
         ?>
 
         <div>
-           <?php if (tienePermiso($_SESSION['usuario'], 'permisos_agregar')){?>
+            <?php if (tienePermiso($_SESSION['usuario'], 'permisos_agregar')) { ?>
                 <a href="agregarPermiso.php" class="btn btn-info">Agregar Permiso</a>
-           <?php } ?>
+            <?php } ?>
             <br>
             <br/>
 
@@ -41,10 +41,10 @@ require_once("../functions/funciones.php");
             <input type="hidden" value="ASC" id="direccionActual">
             <input type="hidden" value="1" id="paginaActual">
 
-            
-                <input type="text" placeholder="Buscar" id="busqueda" name="busqueda" onkeyup="listPermisos()">
-                
-            
+
+            <input type="text" placeholder="Buscar" id="busqueda" name="busqueda" onkeyup="listPermisos()">
+
+
             <br/><br/>
             <label>Items Pagina</label>    
             <select id="cantItems">
@@ -80,13 +80,13 @@ require_once("../functions/funciones.php");
         include_once($path);
         ?>
         <script>
-            $(document).ready(function(){
-            listPermisos();
-          });
-            
-            
+            $(document).ready(function () {
+                listPermisos();
+            });
+
+
             $('#cantItems').change(function () {
-            listPermisos();
+                listPermisos();
             });
         </script>
 

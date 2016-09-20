@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 
 <html>
@@ -18,18 +18,16 @@
 
         $path = $rootpath . '/pruebas/_partials/menu.php';
         include_once($path);
-
-       
-            ?>
-            <div class="jumbotron">
+        ?>
+        <div class="jumbotron">
 
             <p class="centered"><?php echo $_GET['error']; ?></p>
-            </div>
-        
-        <?php
-        $path = $rootpath . '/pruebas/_partials/footer.php';
-        include_once($path);
-        ?>
+        </div>
+
+<?php
+$path = $rootpath . '/pruebas/_partials/footer.php';
+include_once($path);
+?>
 
 
     </body>

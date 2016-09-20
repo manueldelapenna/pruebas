@@ -30,13 +30,13 @@ require_once("../functions/funciones.php");
         ?>
 
         <div>
-<?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
+            <?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
                 <a href="formAgregarPersona.php" class="btn btn-info">Agregar Persona</a>
             <?php } ?>
             <?php if (in_array($_SESSION['usuario'], ['administrador', 'user'])) { ?>
                 <a href="mayor.php" class="btn btn-info">Mayor Edad</a>
                 <a href="menor.php" class="btn btn-info">Menor Edad</a>
-<?php } ?>
+            <?php } ?>
             <br>
             <br/>
 
@@ -78,9 +78,9 @@ require_once("../functions/funciones.php");
             </ul>
 
         </div> 
-        
 
-        
+
+
     </div>
 </div>
 <?php
@@ -97,8 +97,8 @@ include_once($path);
         filterPerson();
 
     });
-    
-    
+
+
 </script>
 
 </body>

@@ -1,5 +1,4 @@
 <?php
-
 require_once("../scripts/acceso.php");
 require_once("../functions/funciones.php");
 $mayorPersona = MayorDeEdad(todasPersonas());
@@ -7,7 +6,7 @@ $accesos = array("admin", "user");
 tieneAcceso($accesos);
 
 
-$mensaje ="  " . $mayorPersona['nombre'] . " " . $mayorPersona['apellido'] . " tiene " . $mayorPersona['anios'] . " años y es la persona mas grande de la base de datos";
+$mensaje = "  " . $mayorPersona['nombre'] . " " . $mayorPersona['apellido'] . " tiene " . $mayorPersona['anios'] . " años y es la persona mas grande de la base de datos";
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +32,7 @@ $mensaje ="  " . $mayorPersona['nombre'] . " " . $mayorPersona['apellido'] . " t
         <br/>
         <br/>
         <div class="jumbotron centered"> 
-<?php echo $mensaje; ?>    
+            <?php echo $mensaje; ?>    
 
         </div>
         <a href="listado.php" class="btn btn-info">Volver</a>

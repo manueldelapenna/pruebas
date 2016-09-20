@@ -25,79 +25,77 @@ require_once("../functions/funciones.php");
         ?>
         <br/>
         <br/>
-        
-            
-        <?php 
+
+
+        <?php
         $usuarioID = $_GET['id'];
-        
+
         $permisosUsuario = getUsuarioConPermisos($usuarioID);
         $gruposUsuario = getUsuarioConGrupos($usuarioID);
-        
+
         $usuario = getUsuario($usuarioID);
-        
-        
         ?>
-          
-             <h2> <?php echo ucfirst($usuario[0]['username']) ?></h2>
-            <div id="editarGrupo" class="col-md-12 col-md-offset-4">
-                <div class="row">
-            <form class="form-inline" action="../functions/funEditarUsuario.php" method="POST">
-                <div class="col-sm-3">
-                <input type="text" class="form-control" value="<?php echo ucfirst($usuario[0]['username']) ?>" name="username" disabled><br/>
-                </div>
-                <div class="col-sm-3">
-                <input type="text" class="form-control" value="<?php echo $usuario[0]['password'] ?>" name="password" disabled><br/>
-                </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2">
-                
-                <label>Grupos</label><br/>
-                <?php 
-                foreach(getGrupos() as $grupo){
-                    
-                    if(usuarioPerteneceGrupo($gruposUsuario,$grupo['id'])){
-                        $checked = "checked";
-                    }else{
-                        $checked = "";
-                    }
-                ?>
-                <input type="checkbox" name="grupos[]" value="<?php echo $grupo['id']?>" <?php echo $checked ?> disabled><?php echo $grupo['name'] ?><br/>  
-               <?php
-                }
-                ?>
+
+        <h2> <?php echo ucfirst($usuario[0]['username']) ?></h2>
+        <div id="editarGrupo" class="col-md-12 col-md-offset-4">
+            <div class="row">
+                <form class="form-inline" action="../functions/funEditarUsuario.php" method="POST">
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" value="<?php echo ucfirst($usuario[0]['username']) ?>" name="username" disabled><br/>
                     </div>
                     <div class="col-sm-3">
-                <label>Permisos</label><br/>
-                <?php 
-                foreach(getPermisos() as $permiso){
-                    
-                    if(grupoTienePermiso($permisosUsuario, $permiso['id'])){
-                        $checked = "checked";
-                    }else{
-                        $checked = "";
-                    }
-                ?>   
-                
-                <input type="checkbox" name="permisos[]" value="<?php echo $permiso['id']?>" <?php echo $checked ?> disabled><?php echo $permiso['name'] ?><br/>
-                
-                <?php    
-                }
-                ?>
+                        <input type="text" class="form-control" value="<?php echo $usuario[0]['password'] ?>" name="password" disabled><br/>
                     </div>
-                </div>    
-                <a href="verUsuarios.php" class="btn btn-info">Volver</a>
-            </form>
-        </div>       
-        
-        
-        
-        <?php
-        $path = $rootpath . '/pruebas/_partials/footer.php';
-        include_once($path);
-        ?>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <label>Grupos</label><br/>
+<?php
+foreach (getGrupos() as $grupo) {
+
+    if (usuarioPerteneceGrupo($gruposUsuario, $grupo['id'])) {
+        $checked = "checked";
+    } else {
+        $checked = "";
+    }
+    ?>
+                        <input type="checkbox" name="grupos[]" value="<?php echo $grupo['id'] ?>" <?php echo $checked ?> disabled><?php echo $grupo['name'] ?><br/>  
+                        <?php
+                    }
+                    ?>
+                </div>
+                <div class="col-sm-3">
+                    <label>Permisos</label><br/>
+<?php
+foreach (getPermisos() as $permiso) {
+
+    if (grupoTienePermiso($permisosUsuario, $permiso['id'])) {
+        $checked = "checked";
+    } else {
+        $checked = "";
+    }
+    ?>   
+
+                        <input type="checkbox" name="permisos[]" value="<?php echo $permiso['id'] ?>" <?php echo $checked ?> disabled><?php echo $permiso['name'] ?><br/>
+
+    <?php
+}
+?>
+                </div>
+            </div>    
+            <a href="verUsuarios.php" class="btn btn-info">Volver</a>
+        </form>
+    </div>       
 
 
-    </body>
+
+<?php
+$path = $rootpath . '/pruebas/_partials/footer.php';
+include_once($path);
+?>
+
+
+</body>
 </html>
 

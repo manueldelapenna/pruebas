@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 
 <html>
@@ -11,7 +11,7 @@
         ?>
     </head>
     <body>
-        
+
         <?php
         $path = $rootpath . '/pruebas/_partials/header.php';
         include_once($path);
@@ -22,10 +22,10 @@
         if (isset($_SESSION['usuario'])) {
             ?>
             <br/>
-            
+
             <div class="jumbotron">
 
-            <p class="centered">Bienvenido <?php echo $_SESSION['usuario']; ?></p>
+                <p class="centered">Bienvenido <?php echo $_SESSION['usuario']; ?></p>
             </div>
         <?php } else { ?>
             <br>
@@ -35,16 +35,15 @@
                 include_once($path);
                 if (isset($_GET['error'])) {
                     echo $_GET['error'];
-            
                 }
                 ?>
             </div>
             <?php
-            }
-            ?> 
-            
-           
-        
+        }
+        ?> 
+
+
+
         <?php
         $path = $rootpath . '/pruebas/_partials/footer.php';
         include_once($path);

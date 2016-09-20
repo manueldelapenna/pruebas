@@ -29,23 +29,23 @@ require_once("../functions/funciones.php");
             <form class="form-inline" action="../functions/funAgregarGrupo.php" method="POST">
                 <input type="text" class="form-control" placeholder="Nombre del grupo" name="nameGroup"><br/>
                 <label>Indique los permisos</label><br/>
-                <?php 
-                foreach(getPermisos() as $permiso){
-                ?>   
-                
-                <input type="checkbox" name="permisos[]" value="<?php echo $permiso['id']?>"><?php echo $permiso['name'] ?><br/>
-                
-                <?php    
+                <?php
+                foreach (getPermisos() as $permiso) {
+                    ?>   
+
+                    <input type="checkbox" name="permisos[]" value="<?php echo $permiso['id'] ?>"><?php echo $permiso['name'] ?><br/>
+
+                    <?php
                 }
                 ?>
-                
-                
+
+
                 <input type="submit" value="Agregar Grupo" class="btn btn-info">
                 <a href="index.php" class="btn btn-info">Volver a inicio</a>
             </form>
         </div>
-        
-        
+
+
 
 
 
@@ -56,8 +56,8 @@ require_once("../functions/funciones.php");
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <?php echo $_GET['mensaje']; ?>
             </div> 
-           
-         <?php
+
+            <?php
         }
 
         $path = $rootpath . '/pruebas/_partials/footer.php';

@@ -29,17 +29,17 @@ require_once("../functions/funciones.php");
         ?>
 
         <div>
-           <?php if (tienePermiso($_SESSION['usuario'], 'grupo_agregar')){?>
-            <a href="agregarGrupo.php" class="btn btn-info">Agregar Grupo</a>
-           <?php } ?>
+            <?php if (tienePermiso($_SESSION['usuario'], 'grupo_agregar')) { ?>
+                <a href="agregarGrupo.php" class="btn btn-info">Agregar Grupo</a>
+            <?php } ?>
             <br>
             <br/>
             <?php
             $items = (isset($_GET['items'])) ? $_GET['items'] : 5;
             ?>
             <form action="verGrupos.php" method="GET">
-            <input type="text" placeholder="Buscar" name="busqueda">
-            <input type="submit" value="Buscar" class="btn btn-primary">
+                <input type="text" placeholder="Buscar" name="busqueda">
+                <input type="submit" value="Buscar" class="btn btn-primary">
             </form>
             <br/><br/>
             <label>Items Pagina</label>    
@@ -62,21 +62,19 @@ require_once("../functions/funciones.php");
                     <tr>
                         <th><a href="verGrupos.php?orden=id&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">ID<?php if ($orden == 'id') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
                         <th><a href="verGrupos.php?orden=name&direccion=<?php echo $indicadorDireccion; ?>&items=<?php echo $items ?>&pagina=<?php echo $pagActual ?>&busqueda=<?php echo $busqueda; ?>">Nombre<?php if ($orden == 'name') { ?><span class="<?php echo $iconoDireccion; ?>"<?php } ?></a></th>
-                        
+
                     </tr>
                 </thead>    
                 <tbody> 
 
                     <?php
-                    
-                    
-                    foreach (listarGrupos($orden, $direccion, $items,$pagActual, $busqueda) as $grupo) {
+                    foreach (listarGrupos($orden, $direccion, $items, $pagActual, $busqueda) as $grupo) {
                         ?>
                         <tr>
                             <td> <?php echo $grupo['id']; ?> </td>
                             <td> <?php echo ucfirst($grupo['name']); ?> </td>
-                            <td><a href="VerGrupo.php?grupoID=<?php echo $grupo['id'] ?>&busqueda=<?php echo $busqueda?>" class="btn btn-success">Ver</a></td>
-                            <td> <a href="editarGrupo.php?grupoID=<?php echo $grupo['id']?>&busqueda=<?php echo $busqueda; ?>" class="btn btn-primary"> Modificar</a></td>
+                            <td><a href="VerGrupo.php?grupoID=<?php echo $grupo['id'] ?>&busqueda=<?php echo $busqueda ?>" class="btn btn-success">Ver</a></td>
+                            <td> <a href="editarGrupo.php?grupoID=<?php echo $grupo['id'] ?>&busqueda=<?php echo $busqueda; ?>" class="btn btn-primary"> Modificar</a></td>
                             <td> <form action="../functions/eliminarGrupo.php" method ="POST">
                                     <input type="hidden" value="<?php echo $grupo['id'] ?>" name="id" >
                                     <input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger">
@@ -85,12 +83,12 @@ require_once("../functions/funciones.php");
 
 
                         </tr>  
-                        <?php
-                    }
+    <?php
+}
 
-                    $total = totalGrupos($busqueda);
-                    $cantPaginas = ceil($total / $items);
-                    ?>
+$total = totalGrupos($busqueda);
+$cantPaginas = ceil($total / $items);
+?>
 
 
                 </tbody>
@@ -99,22 +97,22 @@ require_once("../functions/funciones.php");
 
         <div>
             <ul class="pagination">
-                <?php for ($i = 1; $i <= $cantPaginas; $i++) { 
-                 
-                 $active = ($i == $pagActual)?"active": ""; 
-                 
-                 ?>
-                <li class="<?php echo $active; ?>"><a href="<?php echo "verGrupos.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i&busqueda=$busqueda"?>"><?php echo $i ?></a></li>
+<?php
+for ($i = 1; $i <= $cantPaginas; $i++) {
 
-                <?php } ?>  
+    $active = ($i == $pagActual) ? "active" : "";
+    ?>
+                    <li class="<?php echo $active; ?>"><a href="<?php echo "verGrupos.php?orden=$orden&direccion=$direccion&items=$items&pagina=$i&busqueda=$busqueda" ?>"><?php echo $i ?></a></li>
+
+<?php } ?>  
 
             </ul>
 
         </div> 
-        <?php
-        $path = $rootpath . '/pruebas/_partials/footer.php';
-        include_once($path);
-        ?>
+<?php
+$path = $rootpath . '/pruebas/_partials/footer.php';
+include_once($path);
+?>
         <script>
             $('#cantItems').change(function () {
                 window.location = 'verGrupos.php?' + '<?php echo "orden=$orden&direccion=$direccion&" ?>' + 'items=' + $(this).val();

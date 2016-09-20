@@ -64,10 +64,10 @@ require_once("../functions/funciones.php");
         <a href="verGrupos.php" class="btn btn-info">Volver</a>
 
 
-<?php
-$path = $rootpath . '/pruebas/_partials/footer.php';
-include_once($path);
-?>
+        <?php
+        $path = $rootpath . '/pruebas/_partials/footer.php';
+        include_once($path);
+        ?>
 
 
     </body>
