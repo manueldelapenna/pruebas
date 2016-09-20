@@ -29,9 +29,9 @@ require_once("../functions/funciones.php");
         ?>
 
         <div>
-            <?php if (in_array($_SESSION['usuario'], ['administrador'])) { ?>
+           <?php if (tienePermiso($_SESSION['usuario'], 'grupo_agregar')){?>
             <a href="agregarGrupo.php" class="btn btn-info">Agregar Grupo</a>
-            <?php } ?>
+           <?php } ?>
             <br>
             <br/>
             <?php
