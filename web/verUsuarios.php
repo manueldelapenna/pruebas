@@ -81,7 +81,7 @@ require_once("../functions/funciones.php");
                             <td> <?php if (is_null($usuario['ultimo_logueo'])) {
                         echo "-----";
                     } else {
-                        echo formatearFechaNacimiento($usuario['ultimo_logueo']);
+                        echo $usuario['ultimo_logueo'];
                     } ?></td>
                             <td><a href="verUsuario.php?id=<?php echo $usuario['id'] ?>&busqueda=<?php echo $busqueda ?>" class="btn btn-success">Ver</a></td>
                             <td> <a href="editarUsuario.php?id=<?php echo $usuario['id'] ?>&busqueda=<?php echo $busqueda; ?>" class="btn btn-primary"> Modificar</a></td>

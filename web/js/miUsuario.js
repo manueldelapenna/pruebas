@@ -28,7 +28,7 @@ $(document).ready(function () {
 });
 
 function modificarUsuario() {
-    if ($('input[name="username"]').val() == "") {
+  /*  if ($('input[name="username"]').val() == "") {
         var username = $('input[name="copyUsername"]').val();
     } else {
         username = $('input[name="username"]').val();
@@ -49,13 +49,17 @@ function modificarUsuario() {
         var email = $('input[name="copyEmail"]').val();
     } else {
         email = $('input[name="email"]').val();
-    }
-
-    
-
+    }*/
+        
+      var username = $('input[name="username"]').val();
+      var firstname = $('input[name="firstname"]').val();
+      var lastname = $('input[name="lastname"]').val();
+      var email = $('input[name="email"]').val();
     var id = $('input[name="id"]').val();
     var password = $('input[name="password"]').val();
     var confirmPassword = $('input[name="confirmPassword"]').val();
+    
+    console.log
     
     if($('#change-password').is(':checked')){
         var changePassword = 1;
@@ -81,7 +85,7 @@ function modificarUsuario() {
         success: function (data) {
 
             alert(data.message);
-
+            console.log(data.errors);
         }
 
 

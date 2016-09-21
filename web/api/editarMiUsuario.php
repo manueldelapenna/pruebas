@@ -38,12 +38,13 @@ try {
             exit();
         }
         
-        
+        $passEncrypt = encryptPassword($salt, $password);
         
         $statement = $pdo->prepare("UPDATE usuarios
-                            SET password = :password
+                            SET password = :password, salt = :salt
                             WHERE id = :id");
-        $statement->bindParam(':password', $password);
+        $statement->bindParam(':salt', $salt);
+        $statement->bindParam(':password', $passEncrypt);
         $statement->bindParam(':id', $idUser);
         $statement->execute();
     }
