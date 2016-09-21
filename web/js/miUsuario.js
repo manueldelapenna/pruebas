@@ -94,7 +94,6 @@ $(document).ready(function () {
                     url: "../web/api/cambiarContrasena.php",
                     type: 'POST',
                     data: {
-                        username: username,
                         password: password,
                         confirmPassword: confirmPassword,
                         id: id
@@ -102,9 +101,7 @@ $(document).ready(function () {
                     success: function (data) {
 
                         alert(data.message);
-                        if (data.code == 200) {
-                            listPermisos();
-                        }
+                        
                     }
 
 
