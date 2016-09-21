@@ -10,13 +10,42 @@ try {
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
     $idUser = $_POST['id'];
+    //Password
+    $salt = generateSalt();
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    $changePassword = $_POST['changePassword'];
 
+
+    $erroresUser = validarUsuario($username, $firstname, $lastname, $email);
+    if (count($erroresUser)) {
+        $result = ['code' => 500, 'message' => "No se ha podido modificar el usuario. ", 'errors' => $erroresUser];
+
+        header('Content-Type: application/json');
+        echo json_encode($result);
+        exit();
+    }
 
     $pdo = conectar();
+    
+    if ($changePassword) {
 
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        throw new Exception("Mail invalido.");
+        $erroresPass = validarContrasenas($password, $confirmPassword);
+        if (count($erroresPass)) {
+            $result = ['code' => 500, 'message' => "No se ha podido modificar el usuario. ", 'errors' => $erroresPass];
+            header('Content-Type: application/json');
+            echo json_encode($result);
+            exit();
+        }
+        
+        
+        
+        $statement = $pdo->prepare("UPDATE usuarios
+                            SET password = :password
+                            WHERE id = :id");
+        $statement->bindParam(':password', $password);
+        $statement->bindParam(':id', $idUser);
+        $statement->execute();
     }
 
 

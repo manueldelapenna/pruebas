@@ -597,4 +597,66 @@ function getAllUser($username){
     
     return $result;
 }
+
+
+function validarUsuario($username, $firstname, $lastname, $email) {
+
+    $errores = array();
+
+
+
+    if (strlen($username) == 0) {
+        $errores['username'] = "Nombre de usuario es un campo obligatorio";
+    } else {
+        if (!soloLetras($username)) {
+            $errores['username'] = "Solo se permiten letras en el campo nombre de usuario";
+        }
+    }
+    
+    if (strlen($firstname) == 0) {
+        $errores['firstname'] = "Nombre es un campo obligatorio";
+    } else {
+        if (!soloLetras($firstname)) {
+            $errores['firstname'] = "Solo se permiten letras en el campo nombre";
+        }
+    }
+    
+    if (strlen($lastname) == 0) {
+        $errores['lastname'] = "Apellido es un campo obligatorio";
+    } else {
+        if (!soloLetras($lastname)) {
+            $errores['lastname'] = "Solo se permiten letras en el campo apellido";
+        }
+    }
+    
+    if(strlen($email) == 0){
+        $errores['email'] = "Email es un campo obligatorio";
+    }
+    elseif(!validarEmail($email)){
+        $errores['email'] = "Email invalido";
+    }
+    
+
+
+//
+    return $errores;
+}
+
+
+function validarEmail($email){
+    
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+function validarContrasenas($password,$confirmPassword){
+   $errores = array();
+  if (strlen($password) < 5 || strlen($confirmPassword) < 5) {
+            $errores['contrasenas'] = "Ambas contrasenas deben tener al menos 5 caracteres";
+        } 
+    elseif($password != $confirmPassword){
+    $errores['contrasenas'] = "Las contrasenas no son iguales";
+}
+return $errores;
+}
+
 ?>
