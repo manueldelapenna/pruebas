@@ -11,17 +11,17 @@ function filterPerson() {
             direccion: $("#direccionActual").val()
         },
         success: function (data) {
-            console.log(data.result);
+
             var HTML = "";
             $.each(data.result, function (i, item) {
-                var CutFecha = item['fecha_nacimiento'].split("-");
+                
                 HTML += '<tr><td>' + item['id'] + '</td>';
-                HTML += '<td><div class="input-group"><input type="text" class="form-control" id="'+item['id']+'" name="persona" value="'+item['nombre']+'" disabled><span class="input-group-btn" id="editbutton-'+item['id']+'" style="display:none"> <button class="btn btn-success" type="button" onclick="cambiarPersona('+item['id']+')">Aceptar</button><button class="btn btn-warning" type="button" onclick="cancelarEdicion('+item['id']+',\''+item['nombre']+'\')">Cancelar</button> </span> </div></td>';
+                HTML += '<td><div class="input-group"><input type="text" class="form-control" id="' + item['id'] + '" name="persona" value="' + item['nombre'] + '" disabled><span class="input-group-btn" id="editbutton-' + item['id'] + '" style="display:none"> <button class="btn btn-success" type="button" onclick="cambiarPersona(' + item['id'] + ')">Aceptar</button><button class="btn btn-warning" type="button" onclick="cancelarEdicion(' + item['id'] + ',\'' + item['nombre'] + '\')">Cancelar</button> </span> </div></td>';
                 HTML += '<td>' + item['apellido'] + ' </td>';
                 HTML += '<td>' + item['edad'] + '</td>';
-                HTML += '<td>' + CutFecha[2] + '-' + CutFecha[1] + '-' + CutFecha[0] + '</td>';
+                HTML += '<td>' + parseDate(item['fecha_nacimiento'])+'</td>';
                 HTML += '<td>' + item['dni'] + '</td>';
-                HTML += '<td><a href="formVerPersona.php?id=' + item['id'] + '" class="btn btn-success">Ver</a></td>';
+                HTML += '<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick=verPersona(' + item['id'] + ')>Ver</button>';
                 HTML += '<td><input type="submit" name="modificar" value="Modificar" class="btn btn-primary" onclick="activarModiPersona(' + item['id'] + ')">';
                 HTML += '<td><input type="submit" name="eliminar" value="Eliminar" class="btn btn-danger" onclick="eliminarPersona(' + item['id'] + ')">';
                 HTML += '</td></tr>';
@@ -108,11 +108,11 @@ function activarModiPersona(id) {
 
 }
 
-function cancelarEdicion(id, name){
-    $('#'+id).val(name);
-    $('#editbutton-'+id).hide();
-    $('#'+id).prop('disabled', true); 
-    
+function cancelarEdicion(id, name) {
+    $('#' + id).val(name);
+    $('#editbutton-' + id).hide();
+    $('#' + id).prop('disabled', true);
+
 }
 
 function cambiarPersona(id) {
@@ -137,4 +137,44 @@ function cambiarPersona(id) {
 
 
     });
+}
+
+
+
+function verPersona(id) {
+
+    $.ajax({
+        url: "../web/api/verPersona.php",
+        type: 'GET',
+        data: {
+            id: id
+        },
+        success: function (data) {
+            var info = data.results;
+            console.log(data.results);
+            if (data.code == 200) {
+                var HTML = '';
+                HTML += '<label>ID: </label>' + info.id + '<br/>';
+                HTML += '<label>Nombre: </label>' + info.nombre + '<br/>';
+                HTML += '<label>Apellido: </label>' + info.apellido + '<br/>';
+                HTML += '<label>Edad: </label>' + info.edad + '<br/>';
+                HTML += '<label>DNI: </label>' + info.dni + '<br/>';
+                HTML += '<label>Fecha de Nacimiento: </label>' + parseDate(info.fecha_nacimiento) + '<br/>';
+            }
+
+            $('.modal-body').html(HTML);
+
+
+        }
+
+
+    });
+
+}
+;
+
+
+function parseDate(yearMonthDayFormatDate){
+    var CutFecha = yearMonthDayFormatDate.split("-");
+    return CutFecha[2] + '-' + CutFecha[1] + '-' + CutFecha[0];
 }

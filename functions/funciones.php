@@ -659,4 +659,20 @@ function validarContrasenas($password,$confirmPassword){
 return $errores;
 }
 
+function getPersona($id){
+    $pdo = conectar();
+    $statement = $pdo->prepare("SELECT *, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad 
+                 FROM personas
+                 WHERE id = :id"
+                );
+    $statement->bindParam(':id', $id);
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    return $result;
+    }
+
+    
+
+
 ?>
