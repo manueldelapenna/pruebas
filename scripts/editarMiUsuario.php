@@ -38,6 +38,7 @@ require_once("../functions/funciones.php");
         <div id="editarGrupo" class="col-md-5 col-md-offset-4 jumbotron">
 
             <div class="form-group" id="username-form-group"> 
+                <label>Usuario: </label>
                 <input type="text" class="form-control" value="<?php echo ucfirst($user) ?>" placeholder="Nombre de usuario" name="username"><br/>
                 <div class="help-block with-errors">
                     <ul class="list-unstyled">
@@ -48,6 +49,7 @@ require_once("../functions/funciones.php");
 
 
             <div class="form-group" id="firstname-form-group"> 
+                <label>Nombre: </label>
                 <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['firstname']) ?>" placeholder="Nombre" name="firstname"><br/>
                 <div class="help-block with-errors">
                     <ul class="list-unstyled">
@@ -57,6 +59,7 @@ require_once("../functions/funciones.php");
             </div>
 
             <div class="form-group" id="lastname-form-group"> 
+                <label>Apellido: </label>
                 <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['lastname']) ?>" placeholder="Apellido" name="lastname"><br/>
                 <div class="help-block with-errors">
                     <ul class="list-unstyled">
@@ -66,6 +69,7 @@ require_once("../functions/funciones.php");
             </div>
 
             <div class="form-group" id="email-form-group"> 
+                <label>Email: </label>
                 <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['email']) ?>" placeholder="Email" name="email"><br/>
                 <div class="help-block with-errors">
                     <ul class="list-unstyled">
@@ -80,12 +84,13 @@ require_once("../functions/funciones.php");
 
 
             <div id="passwordContainer" style="display:none">
-               <div class="form-group" id="password-form-group"> 
+               <div class="form-group" id="password-form-group">
+                   <label>Constrasena: </label>
                     <input type="password" id="password" class="form-control" placeholder="Nueva Contraseña" name="password">
                     <input type="checkbox" id="show-password"><br/>
                     
 
-                
+                    <label>Confirmar Contrasena: </label>
                     <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar Contraseña" name="confirmPassword">
                     <input type="checkbox" id="show-password2"><br/>
                     <div class="help-block with-errors">
