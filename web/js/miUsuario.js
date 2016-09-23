@@ -28,46 +28,23 @@ $(document).ready(function () {
 });
 
 function modificarUsuario() {
-  /*  if ($('input[name="username"]').val() == "") {
-        var username = $('input[name="copyUsername"]').val();
-    } else {
-        username = $('input[name="username"]').val();
-    }
 
-    if ($('input[name="firstname"]').val() == "") {
-        var firstname = $('input[name="copyFirstname"]').val();
-    } else {
-        firstname = $('input[name="firstname"]').val();
-    }
 
-    if ($('input[name="lastname"]').val() == "") {
-        var lastname = $('input[name="copyLastname"]').val();
-    } else {
-        lastname = $('input[name="lastname"]').val();
-    }
-    if ($('input[name="email"]').val() == "") {
-        var email = $('input[name="copyEmail"]').val();
-    } else {
-        email = $('input[name="email"]').val();
-    }*/
-        
-      var username = $('input[name="username"]').val();
-      var firstname = $('input[name="firstname"]').val();
-      var lastname = $('input[name="lastname"]').val();
-      var email = $('input[name="email"]').val();
+    var username = $('input[name="username"]').val();
+    var firstname = $('input[name="firstname"]').val();
+    var lastname = $('input[name="lastname"]').val();
+    var email = $('input[name="email"]').val();
     var id = $('input[name="id"]').val();
     var password = $('input[name="password"]').val();
     var confirmPassword = $('input[name="confirmPassword"]').val();
-    
-    console.log
-    
-    if($('#change-password').is(':checked')){
+
+    if ($('#change-password').is(':checked')) {
         var changePassword = 1;
-    }else{
+    } else {
         changePassword = 0;
     }
-    
-    var id = $('input[name="id"]').val();
+
+
 
     $.ajax({
         url: "../web/api/editarMiUsuario.php",
@@ -84,8 +61,13 @@ function modificarUsuario() {
         },
         success: function (data) {
 
-            alert(data.message);
-            console.log(data.errors);
+            clearErrors();
+            if (data.code == 200) {
+                alert(data.message);
+            } else {
+                showErrors(data.errors);
+            }
+           
         }
 
 
@@ -111,3 +93,17 @@ function cambiarPassword(id, password, confirmPassword) {
     });
 }
 
+function showErrors(errores) {
+
+    $.each(errores, function (i, item) {
+        $('#' + i + '-form-group').addClass('has-error');
+        $('#' + i + '-error').text(item);
+    }
+    )
+}
+;
+
+function clearErrors() {
+    $('.has-error').removeClass('has-error');
+    $('li').text('');
+}

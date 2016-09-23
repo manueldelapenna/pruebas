@@ -651,10 +651,10 @@ function validarEmail($email){
 function validarContrasenas($password,$confirmPassword){
    $errores = array();
   if (strlen($password) < 5 || strlen($confirmPassword) < 5) {
-            $errores['contrasenas'] = "Ambas contrasenas deben tener al menos 5 caracteres";
+            $errores['password'] = "Ambas contrasenas deben tener al menos 5 caracteres";
         } 
     elseif($password != $confirmPassword){
-    $errores['contrasenas'] = "Las contrasenas no son iguales";
+    $errores['password'] = "Las contrasenas no son iguales";
 }
 return $errores;
 }

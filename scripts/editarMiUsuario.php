@@ -36,33 +36,79 @@ require_once("../functions/funciones.php");
 
         <h2> <?php echo ucfirst($user) ?></h2>
         <div id="editarGrupo" class="col-md-5 col-md-offset-4 jumbotron">
-            
-            <input type="text" class="form-control" value="<?php echo ucfirst($user) ?>" name="username"><br/>
-            <input type="hidden" value="<?php echo $user ?>" name="copyUsername">
-            <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['firstname']) ?>" placeholder="Nombre" name="firstname"><br/>
-            <input type="hidden" value="<?php echo $all[0]['firstname'] ?>" name="copyFirstname">
-            <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['lastname']) ?>" placeholder="Apellido" name="lastname"><br/>
-            <input type="hidden" value="<?php echo $all[0]['lastname'] ?>" name="copyLastname">
-            <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['email']) ?>" placeholder="Email" name="email"><br/>
-            <input type="hidden" value="<?php echo $all[0]['email'] ?>" name="copyEmail">
-            <input type="checkbox" id="change-password">¿Desea Cambiar la contraseña?<br/>
-            <div id="passwordContainer" style="display:none">
-                <input type="password" id="password" class="form-control" placeholder="Nueva Contraseña" name="password">
-                <input type="checkbox" id="show-password"><br/>
-                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar Contraseña" name="confirmPassword">
-                <input type="checkbox" id="show-password2"><br/>
+
+            <div class="form-group" id="username-form-group"> 
+                <input type="text" class="form-control" value="<?php echo ucfirst($user) ?>" placeholder="Nombre de usuario" name="username"><br/>
+                <div class="help-block with-errors">
+                    <ul class="list-unstyled">
+                        <li id="username-error"></li>
+                    </ul>
+                </div>
+            </div> 
+
+
+            <div class="form-group" id="firstname-form-group"> 
+                <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['firstname']) ?>" placeholder="Nombre" name="firstname"><br/>
+                <div class="help-block with-errors">
+                    <ul class="list-unstyled">
+                        <li id="firstname-error"></li>
+                    </ul>
+                </div>
             </div>
+
+            <div class="form-group" id="lastname-form-group"> 
+                <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['lastname']) ?>" placeholder="Apellido" name="lastname"><br/>
+                <div class="help-block with-errors">
+                    <ul class="list-unstyled">
+                        <li id="lastname-error"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group" id="email-form-group"> 
+                <input type="text" class="form-control" value="<?php echo ucfirst($all[0]['email']) ?>" placeholder="Email" name="email"><br/>
+                <div class="help-block with-errors">
+                    <ul class="list-unstyled">
+                        <li id="email-error"></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <input type="checkbox" id="change-password">¿Desea Cambiar la contraseña?<br/>
+
+
+
+            <div id="passwordContainer" style="display:none">
+               <div class="form-group" id="password-form-group"> 
+                    <input type="password" id="password" class="form-control" placeholder="Nueva Contraseña" name="password">
+                    <input type="checkbox" id="show-password"><br/>
+                    
+
+                
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar Contraseña" name="confirmPassword">
+                    <input type="checkbox" id="show-password2"><br/>
+                    <div class="help-block with-errors">
+                        <ul class="list-unstyled">
+                            <li id="password-error"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
             <input type="hidden" class="form-control" value="<?php echo $idUser ?>" name="id"><br/>
             <input type="button" value="Modificar Usuario" class="btn btn-info" onclick="modificarUsuario()">
             <a id="volver" class="btn btn-info">Volver</a>
+            <div class="help-block with-errors"></div>
 
-        </div>       
+        </form>  
+    </div>       
 
-        <?php
-        $path = $rootpath . '/pruebas/_partials/footer.php';
-        include_once($path);
-        ?>
+    <?php
+    $path = $rootpath . '/pruebas/_partials/footer.php';
+    include_once($path);
+    ?>
 
 
-    </body>
+</body>
 </html>
